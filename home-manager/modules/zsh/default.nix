@@ -39,7 +39,8 @@ in
       ];
 
       shellAliases = rec {
-        # Shortcut to rebuild system
+        # Shortcuts to rebuild system
+	nr = "sudo nixos-rebuild";
         nrs = "sudo nixos-rebuild switch";
 
         discord = "nohup discord --use-gl=desktop &";
