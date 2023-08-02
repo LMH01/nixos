@@ -6,13 +6,17 @@
   		_1password-gui
   		alacritty
 		discord
+		dracula-theme
+		beauty-line-icon-theme
 		firefox
 		font-awesome
 		gitui
 		kate
 		neofetch
 		signal-desktop
+		unzip
 		xclip
+		zoxide
   	];
 
 	programs = {
