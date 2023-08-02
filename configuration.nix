@@ -56,7 +56,7 @@ in
         driSupport = true;
         driSupport32Bit = true;
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" "amdgpu" ];
   hardware.nvidia = {
   	modesetting.enable = true;
         open = false;
@@ -67,9 +67,13 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  # Enable the KDE Plasma Desktop Environment. - does not work when booth amd and nvidia drivers are installed on stable branch
+  #services.xserver.displayManager.sddm.enable = true; 
   services.xserver.desktopManager.plasma5.enable = true;
+  
+  # Enable the Gnome Desktop Environment - works with booth amd and nvidia drivers installed on stable branch
+  services.xserver.displayManager.gdm.enable = true; #is used instead of sddm because sddm is not displayed when nvidia and amd drivers are installed on an nvidia system
+  #services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
