@@ -117,7 +117,11 @@ in
   nixpkgs.config.allowUnfree = true;
 
   # Workaround until I figgure out why this line does not work in the zsh config file.
-  programs.zsh.promptInit = ''eval "$(starship init zsh)"'';
+  # For some reason zoxide does not work this way
+  programs.zsh.promptInit = ''
+  	eval "$(zoxide init zsh)"
+	eval "$(starship init zsh)"
+  '';
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
