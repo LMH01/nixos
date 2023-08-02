@@ -50,15 +50,15 @@ in
   # Nvidia settings
   hardware.opengl = {
   	enable = true;
-	driSupport = true;
-	driSupport32Bit = true;
+        driSupport = true;
+        driSupport32Bit = true;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
   	modesetting.enable = true;
-	open = false;
-	nvidiaSettings = true;
-	package = config.boot.kernelPackages.nvidiaPackages.stable;
+        open = false;
+        nvidiaSettings = true;
+        #package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enable the X11 windowing system.
@@ -121,6 +121,7 @@ in
   environment.systemPackages = with pkgs; [
      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+     #(pkgs.callPackage ./candy-icon-theme {})
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
