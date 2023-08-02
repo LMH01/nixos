@@ -11,8 +11,10 @@
 		firefox
 		font-awesome
 		gitui
+		hashcat
 		kate
 		neofetch
+		nvtop
 		signal-desktop
 		unzip
 		xclip
@@ -26,8 +28,8 @@
 	};
 
 	imports = [
-		modules/zsh
 		modules/git
+		modules/zsh
 	];
   };
 }
