@@ -16,6 +16,7 @@
   	neofetch
   	nvtop
   	signal-desktop
+	tree
   	unzip
   	xclip
   ];
