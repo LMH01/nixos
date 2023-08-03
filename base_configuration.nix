@@ -9,10 +9,7 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      <home-manager/nixos>
-      /home/${user}/.config/nixpkgs/home.nix
+    [
     ];
 
   # Bootloader.
@@ -103,6 +100,9 @@ in
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  
+  # Enable teamviewer service (temporary)
+  services.teamviewer.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -119,13 +119,6 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Workaround until I figgure out why this line does not work in the zsh config file.
-  # For some reason zoxide does not work this way
-  programs.zsh.promptInit = ''
-  	eval "$(zoxide init zsh)"
-	eval "$(starship init zsh)"
-  '';
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -162,4 +155,6 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
