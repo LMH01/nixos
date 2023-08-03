@@ -27,7 +27,7 @@
             home-manager = {
               useUserPackages = true;
               useGlobalPkgs = true;
-              users.louis = ./home-manager/home.nix;
+              users.louis = ./home-manager/profiles/portable.nix;
             };
           }
         ];

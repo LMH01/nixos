@@ -1,6 +1,7 @@
 { config, pkgs, ...}: {
-
+  
   home.stateVersion = "23.11";
+
   home.packages = with pkgs; [
   	_1password-gui
   	alacritty
@@ -31,7 +32,7 @@
   };
   
   imports = [
-  	modules/git
-  	modules/zsh
+  	../modules/git
+  	../modules/zsh
   ];
 }
