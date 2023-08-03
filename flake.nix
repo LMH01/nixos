@@ -44,8 +44,7 @@
         nixos_portable = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./base_configuration.nix
-            ./machines/nixos_portable/hardware-configuration.nix
+            ./machines/nixos_portable/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {

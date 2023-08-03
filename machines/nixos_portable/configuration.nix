@@ -8,9 +8,9 @@ let
   hostname = "nixos_portable";
 in
 {
-  imports =
-    [
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
