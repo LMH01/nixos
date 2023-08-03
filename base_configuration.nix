@@ -4,8 +4,8 @@
 
 { config, pkgs, ... }:
 let
-	user = "louis";
-	hostname = "nixos_portable";
+  user = "louis";
+  hostname = "nixos_portable";
 in
 {
   imports =
@@ -49,16 +49,16 @@ in
 
   # Nvidia settings
   hardware.opengl = {
-  	enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
   services.xserver.videoDrivers = [ "nvidia" "amdgpu" ];
   hardware.nvidia = {
-  	modesetting.enable = true;
-        open = false;
-        nvidiaSettings = true;
-        #package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    #package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enable the X11 windowing system.
@@ -67,7 +67,7 @@ in
   # Enable the KDE Plasma Desktop Environment. - does not work when booth amd and nvidia drivers are installed on stable branch
   #services.xserver.displayManager.sddm.enable = true; 
   services.xserver.desktopManager.plasma5.enable = true;
-  
+
   # Enable the Gnome Desktop Environment - works with booth amd and nvidia drivers installed on stable branch
   services.xserver.displayManager.gdm.enable = true; #is used instead of sddm because sddm is not displayed when nvidia and amd drivers are installed on an nvidia system
   #services.xserver.desktopManager.gnome.enable = true;
@@ -100,7 +100,7 @@ in
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-  
+
   # Enable teamviewer service (temporary)
   services.teamviewer.enable = true;
 
@@ -119,13 +119,13 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-     #(pkgs.callPackage ./candy-icon-theme {})
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    #(pkgs.callPackage ./candy-icon-theme {})
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

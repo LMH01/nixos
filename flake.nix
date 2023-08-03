@@ -40,22 +40,22 @@
       )
     //
     {
-    nixosConfigurations = {
-      nixos_portable = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./base_configuration.nix
-	  ./machines/nixos_portable/hardware-configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              users.louis = ./home-manager/profiles/portable.nix;
-            };
-          }
-        ];
+      nixosConfigurations = {
+        nixos_portable = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./base_configuration.nix
+            ./machines/nixos_portable/hardware-configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useUserPackages = true;
+                useGlobalPkgs = true;
+                users.louis = ./home-manager/profiles/portable.nix;
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }
