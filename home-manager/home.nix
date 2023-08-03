@@ -27,6 +27,10 @@
 		zsh.enable = true;
 	};
 
+	services = {
+		flameshot.enable = true;
+	};
+
 	imports = [
 		modules/git
 		modules/zsh
