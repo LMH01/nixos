@@ -1,0 +1,41 @@
+---
+kind: pipeline
+type: exec
+name: flake info
+
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  depth: 1
+
+steps:
+  - name: show flake show
+    commands:
+      - nix flake show
+
+  - name: show flake info
+    commands:
+      - nix flake info
+
+  - name: run flake check
+    commands:
+      - nix flake check
+
+---
+kind: pipeline
+type: exec
+name: build amd64 hosts
+
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  depth: 1
+
+steps:
+  - name: build nixos_portable
+    commands:
+      - nix build '.#nixosConfigurations.nixos_portable.config.system.build.toplevel'
