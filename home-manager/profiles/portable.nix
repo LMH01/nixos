@@ -8,6 +8,8 @@
     discord
     dracula-theme
     beauty-line-icon-theme
+    bottom
+    fastfetch
     firefox
     font-awesome
     gitui
