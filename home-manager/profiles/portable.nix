@@ -37,6 +37,7 @@
 
   imports = [
     ../modules/git
+    ../modules/vscode
     ../modules/zsh
   ];
 }
