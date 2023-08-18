@@ -39,8 +39,11 @@ in
     ];
 
     shellAliases = rec {
-      # Shortcut to rebuild system
-      nrs = "sudo nixos-rebuild switch";
+      # switching within a flake repository
+      frb = "${pkgs.nixos-rebuild}/bin/nixos-rebuild --use-remote-sudo switch --flake";
+
+      # always execute nixos-rebuild with sudo for switching
+      nixos-rebuild = "${pkgs.nixos-rebuild}/bin/nixos-rebuild --use-remote-sudo";
 
       discord = "nohup discord --use-gl=desktop &";
     };
