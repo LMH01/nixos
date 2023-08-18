@@ -8,7 +8,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = { self, ... }@inputs:
@@ -20,6 +19,7 @@
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; overlays = [ ]; });
     in
     {
+
       formatter = forAllSystems
         (system: nixpkgsFor.${system}.nixpkgs-fmt);
 
@@ -38,20 +38,12 @@
             specialArgs = { flake-self = self; } // inputs;
 
             modules = [
-              home-manager.nixosModules.home-manager
               (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
-              {
-                home-manager = {
-                  useUserPackages = true;
-                  useGlobalPkgs = true;
-                  users.louis = ./home-manager/profiles/portable.nix;
-                };
-              }
             ];
 
           };
         })
         (builtins.attrNames (builtins.readDir ./machines)));
-    };
 
+    };
 }
