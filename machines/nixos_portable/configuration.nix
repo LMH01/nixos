@@ -2,7 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ self, ... }:
+{ pkgs, lib, config, home-manager, ... }:
 let
   user = "louis";
   hostname = "nixos_portable";
@@ -10,7 +11,14 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    home-manager.nixosModules.home-manager
   ];
+
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+    users.louis = ../../home-manager/profiles/portable.nix;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
