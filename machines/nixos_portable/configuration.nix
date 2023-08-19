@@ -13,6 +13,7 @@
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
+    self.nixosModules.openssh
     self.nixosModules.users
   ];
 
@@ -21,6 +22,7 @@
       louis.enable = true;
       root.enable = true;
     };
+    openssh.enable = true;
   };
 
   # Home Manager configuration
@@ -59,12 +61,6 @@
   networking.networkmanager.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
