@@ -16,12 +16,21 @@
       supportedSystems =
         [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; overlays = [ ]; });
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; overlays = [ self.overlays.default ]; });
     in
     {
 
       formatter = forAllSystems
         (system: nixpkgsFor.${system}.nixpkgs-fmt);
+
+      overlays.default = final: prev:
+        (import ./pkgs inputs) final prev;
+
+      packages = forAllSystems (system: {
+        inherit (nixpkgsFor.${system}.lmh01)
+          candy-icon-theme
+          ;
+      });
 
       # Output all modules in ./modules to flake. Modules should be in
       # individual subdirectories and contain a default.nix file

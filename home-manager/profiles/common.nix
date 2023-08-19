@@ -13,6 +13,10 @@ with lib;
     nixpkgs = {
       # Allow "unfree" licenced packages
       config = { allowUnfree = true; };
+      overlays = [
+        # our packages
+        flake-self.overlays.default
+      ];
     };
 
     # Include man-pages

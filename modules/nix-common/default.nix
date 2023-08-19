@@ -1,7 +1,13 @@
-{ pkgs, nixpkgs, ... }: {
+{ pkgs, nixpkgs, flake-self, ... }: {
 
   # Allow unfree licenced packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      # our packages
+      flake-self.overlays.default
+    ];
+  };
 
   nix = {
     # Set the $NIX_PATH entry for nixpkgs. This is necessary in
