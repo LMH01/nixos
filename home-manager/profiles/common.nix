@@ -1,6 +1,12 @@
 { lib, pkgs, flake-self, config, ... }:
 with lib;
 {
+
+  imports = with flake-self.homeManagerModules; [
+    git
+    zsh
+  ];
+
   config = {
 
     # Home-manager nixpkgs config
@@ -26,5 +32,7 @@ with lib;
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
+
   };
+
 }

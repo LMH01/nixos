@@ -59,8 +59,7 @@
           imports = [
             ./home-manager/profiles/common.nix
             ./home-manager/profiles/portable.nix
-          ] ++
-          (builtins.attrValues self.homeManagerModules);
+          ];
         };
       };
 
