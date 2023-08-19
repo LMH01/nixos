@@ -1,6 +1,4 @@
-{ config, pkgs, ... }: {
-
-  home.stateVersion = "23.11";
+{ system-config, pkgs, ... }: {
 
   home.packages = with pkgs; [
     _1password-gui
@@ -35,9 +33,4 @@
     flameshot.enable = true;
   };
 
-  imports = [
-    ../modules/git
-    ../modules/vscode
-    ../modules/zsh
-  ];
 }

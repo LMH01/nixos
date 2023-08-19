@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { self, ... }:
-{ pkgs, lib, config, home-manager, ... }:
+{ pkgs, lib, config, flake-self, home-manager, ... }:
 let
   user = "louis";
   hostname = "nixos_portable";
@@ -18,10 +18,19 @@ in
     self.nixosModules.nix-common
   ];
 
+  # Home Manager configuration
   home-manager = {
+    # DON'T set useGlobalPackages! It's not necessary in newer
+    # home-manager versions and does not work with configs using
+    # nixpkgs.config
     useUserPackages = true;
-    useGlobalPkgs = true;
-    users.louis = ../../home-manager/profiles/portable.nix;
+    extraSpecialArgs = {
+      inherit flake-self;
+      # Pass system configuration (top-level "config") to home-manager modules,
+      # so we can access it's values for conditional statements
+      system-config = config;
+    };
+    users.louis = flake-self.homeConfigurations.portable;
   };
 
   # Bootloader.

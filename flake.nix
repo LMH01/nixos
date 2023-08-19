@@ -54,5 +54,22 @@
         })
         (builtins.attrNames (builtins.readDir ./machines)));
 
+      homeConfigurations = {
+        portable = { pkgs, lib, ... }: {
+          imports = [
+            ./home-manager/profiles/common.nix
+            ./home-manager/profiles/portable.nix
+          ] ++
+          (builtins.attrValues self.homeManagerModules);
+        };
+      };
+
+      homeManagerModules = builtins.listToAttrs (map
+        (name: {
+          inherit name;
+          value = import (./home-manager/modules + "/${name}");
+        })
+        (builtins.attrNames (builtins.readDir ./home-manager/modules)));
+
     };
 }
