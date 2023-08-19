@@ -33,6 +33,8 @@ in
     users.louis = flake-self.homeConfigurations.portable;
   };
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
