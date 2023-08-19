@@ -10,7 +10,7 @@
       driSupport32Bit = true;
     };
     nvidia.modesetting.enable = true;
-    powerManagement.enable = true;
+    nvidia.powerManagement.enable = true;
   };
 
   # when docker is enabled, enable nvidia-docker

@@ -4,10 +4,6 @@
 
 { self, ... }:
 { pkgs, lib, config, flake-self, home-manager, ... }:
-let
-  user = "louis";
-  hostname = "nixos_portable";
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -17,7 +13,15 @@ in
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
+    self.nixosModules.users
   ];
+
+  lmh01 = {
+    users = {
+      louis.enable = true;
+      root.enable = true;
+    };
+  };
 
   # Home Manager configuration
   home-manager = {
@@ -34,6 +38,7 @@ in
     users.louis = flake-self.homeConfigurations.portable;
   };
 
+  # being able to build aarm64 stuff
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # Bootloader.
@@ -43,7 +48,7 @@ in
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "${hostname}"; # Define your hostname.
+  networking.hostName = "nixos_portable";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -97,16 +102,6 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
-    isNormalUser = true;
-    description = "${user}";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = "${pkgs.zsh}/bin/zsh";
-    packages = with pkgs; [
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
