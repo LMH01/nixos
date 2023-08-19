@@ -23,10 +23,8 @@
   ];
 
   programs = {
-    git.enable = true;
     starship.enable = true;
     zoxide.enable = true;
-    zsh.enable = true;
   };
 
   services = {
