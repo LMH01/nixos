@@ -19,7 +19,7 @@
     # --list` should be empty for all users afterwards
     nixPath = [ "nixpkgs=${nixpkgs}" ];
 
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
 
     extraOptions = ''
       # If set to true, Nix will fall back to building from source if a binary substitute fails.
