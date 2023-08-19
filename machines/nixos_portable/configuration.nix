@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { self, ... }:
-{ pkgs, lib, config, home-manager, ... }:
+{ pkgs, lib, config, flake-self, home-manager, ... }:
 let
   user = "louis";
   hostname = "nixos_portable";
@@ -12,13 +12,28 @@ in
   imports = [
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
+
+    # my own modules
+    self.nixosModules.locale
+    self.nixosModules.nix-common
   ];
 
+  # Home Manager configuration
   home-manager = {
+    # DON'T set useGlobalPackages! It's not necessary in newer
+    # home-manager versions and does not work with configs using
+    # nixpkgs.config
     useUserPackages = true;
-    useGlobalPkgs = true;
-    users.louis = ../../home-manager/profiles/portable.nix;
+    extraSpecialArgs = {
+      inherit flake-self;
+      # Pass system configuration (top-level "config") to home-manager modules,
+      # so we can access it's values for conditional statements
+      system-config = config;
+    };
+    users.louis = flake-self.homeConfigurations.portable;
   };
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -36,24 +51,6 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.UTF-8";
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT = "de_DE.UTF-8";
-    LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
-    LC_PAPER = "de_DE.UTF-8";
-    LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
-  };
 
   # Nvidia settings
   hardware.opengl = {
@@ -79,15 +76,6 @@ in
   # Enable the Gnome Desktop Environment - works with booth amd and nvidia drivers installed on stable branch
   services.xserver.displayManager.gdm.enable = true; #is used instead of sddm because sddm is not displayed when nvidia and amd drivers are installed on an nvidia system
   #services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
-
-  # Configure console keymap
-  console.keyMap = "de";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -125,9 +113,6 @@ in
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -163,6 +148,4 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }

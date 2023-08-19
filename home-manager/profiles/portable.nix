@@ -1,43 +1,44 @@
-{ config, pkgs, ... }: {
+{ lib, pkgs, flake-self, config, system-config, ... }:
+with lib;
+{
 
-  home.stateVersion = "23.11";
-
-  home.packages = with pkgs; [
-    _1password-gui
-    alacritty
-    discord
-    dracula-theme
-    beauty-line-icon-theme
-    bottom
-    fastfetch
-    firefox
-    font-awesome
-    gitui
-    hashcat
-    kate
-    neofetch
-    nvtop
-    signal-desktop
-    tldr
-    tree
-    unzip
-    xclip
+  imports = with flake-self.homeManagerModules; [
+    vscode
   ];
 
-  programs = {
-    git.enable = true;
-    starship.enable = true;
-    zoxide.enable = true;
-    zsh.enable = true;
+  config = {
+
+    home.packages = with pkgs; [
+      _1password-gui
+      alacritty
+      discord
+      dracula-theme
+      beauty-line-icon-theme
+      bottom
+      fastfetch
+      firefox
+      font-awesome
+      gitui
+      hashcat
+      kate
+      neofetch
+      nvtop
+      signal-desktop
+      tldr
+      tree
+      unzip
+      xclip
+    ];
+
+    programs = {
+      starship.enable = true;
+      zoxide.enable = true;
+    };
+
+    services = {
+      flameshot.enable = true;
+    };
+
   };
 
-  services = {
-    flameshot.enable = true;
-  };
-
-  imports = [
-    ../modules/git
-    ../modules/vscode
-    ../modules/zsh
-  ];
-}
+};
