@@ -12,6 +12,9 @@ in
   imports = [
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
+
+    # my own modules
+    self.nixosModules.locale
   ];
 
   home-manager = {
@@ -37,24 +40,6 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.UTF-8";
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT = "de_DE.UTF-8";
-    LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
-    LC_PAPER = "de_DE.UTF-8";
-    LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
-  };
-
   # Nvidia settings
   hardware.opengl = {
     enable = true;
@@ -79,15 +64,6 @@ in
   # Enable the Gnome Desktop Environment - works with booth amd and nvidia drivers installed on stable branch
   services.xserver.displayManager.gdm.enable = true; #is used instead of sddm because sddm is not displayed when nvidia and amd drivers are installed on an nvidia system
   #services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
-
-  # Configure console keymap
-  console.keyMap = "de";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
