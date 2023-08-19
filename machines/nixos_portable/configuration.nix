@@ -16,6 +16,7 @@ in
     # my own modules
     self.nixosModules.locale
     self.nixosModules.nix-common
+    self.nixosModules.nvidia
   ];
 
   # Home Manager configuration
@@ -52,13 +53,7 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Nvidia settings
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-  services.xserver.videoDrivers = [ "nvidia" "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
