@@ -28,10 +28,7 @@ with lib;
       tree
       unzip
       xclip
-    ] ++ lib.optionals (system-config.nixpkgs.hostPlatform == "x86_64-linux") [
-      # why do you not build?
-      blender
-    ];
+    ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = {
       starship.enable = true;
