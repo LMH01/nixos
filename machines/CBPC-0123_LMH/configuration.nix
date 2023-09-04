@@ -15,6 +15,7 @@
     self.nixosModules.nvidia
     self.nixosModules.openssh
     self.nixosModules.users
+    self.nixosModules.rust
   ];
 
   lmh01 = {
@@ -24,6 +25,7 @@
     };
     openssh.enable = true;
     nvidia.enable = true;
+    rust.enable = true;
   };
 
   # Home Manager configuration
