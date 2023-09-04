@@ -27,5 +27,8 @@ in
 
     environment.systemPackages = with pkgs; [ nvtop ];
 
+    # fix electron problems with nvidia
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   };
 }
