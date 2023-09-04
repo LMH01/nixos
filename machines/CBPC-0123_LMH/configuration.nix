@@ -61,8 +61,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # services.xserver.videoDrivers = [ "nvidia" ];
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
