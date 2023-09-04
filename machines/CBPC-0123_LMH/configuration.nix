@@ -23,6 +23,7 @@
       root.enable = true;
     };
     openssh.enable = true;
+    nvidia.enable = true;
   };
 
   # Home Manager configuration
