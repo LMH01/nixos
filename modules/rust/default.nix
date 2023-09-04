@@ -10,7 +10,7 @@ in
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs; [ cargo rustc ];
+    environment.systemPackages = with pkgs; [ cargo rustc clippy ];
 
   };
 }
