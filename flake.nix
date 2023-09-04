@@ -69,6 +69,12 @@
             ./home-manager/profiles/portable.nix
           ];
         };
+        CBPC-0123_LMH = { pkgs, lib, ... }: {
+          imports = [
+            ./home-manager/profiles/common.nix
+            ./home-manager/profiles/CBPC-0123_LMH.nix
+          ];
+        };
       };
 
       homeManagerModules = builtins.listToAttrs (map

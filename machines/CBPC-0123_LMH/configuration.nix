@@ -38,7 +38,7 @@
       # so we can access it's values for conditional statements
       system-config = config;
     };
-    users.louis = flake-self.homeConfigurations.portable;
+    users.louis = flake-self.homeConfigurations.CBPC-0123_LMH;
   };
 
   # being able to build aarm64 stuff

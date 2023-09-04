@@ -1,6 +1,7 @@
-{ lib, pkgs, flake-self, config, ... }:
+{ lib, pkgs, flake-self, config, system-config, ... }:
 with lib;
 {
+  # This file contains stuff that should be setup the same on all my systems
 
   imports = with flake-self.homeManagerModules; [
     git
@@ -8,6 +9,27 @@ with lib;
   ];
 
   config = {
+
+    # Packages to install on all systems
+    home.packages = with pkgs; [
+      bottom
+      fastfetch
+      gitui
+      tldr
+      tree
+      unzip
+    ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
+    
+    # Programs to install on all systems
+    programs = {
+      starship.enable = true;
+      zoxide.enable = true;
+    };
+
+    # Services to start on all systems
+    services = {
+
+    };
 
     # Home-manager nixpkgs config
     nixpkgs = {

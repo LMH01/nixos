@@ -19,7 +19,7 @@ with lib;
       hashcat
       kate
       neofetch
-      nvtop
+      nvtop# TODO move nvtop into nvidia module and remove from protable.nix
       signal-desktop
       xclip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
