@@ -19,7 +19,6 @@ with lib;
       hashcat
       kate
       neofetch
-      nvtop
       signal-desktop
       xclip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
