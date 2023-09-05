@@ -1,4 +1,4 @@
-{ config, system-config, pkgs, lib, ... }: {
+{ config, system-config, pkgs, ... }: {
 
   programs.vscode = {
     enable = true;
@@ -15,7 +15,7 @@
       usernamehw.errorlens
       vadimcn.vscode-lldb
       vscodevim.vim
-    ] ++ lib.optionals system-config.lmh01.rust.enable [rust-lang.rust-analyzer];
+    ];
 
     userSettings = {
       "workbench.colorTheme" = "Dracula";
