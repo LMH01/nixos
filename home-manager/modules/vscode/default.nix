@@ -25,6 +25,7 @@
       "[nix]" = {
         "editor.defaultFormatter" = "B4dM4n.nixpkgs-fmt";
       };
+      "files.autoSave" = "afterDelay";
     };
   };
 
