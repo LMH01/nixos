@@ -8,7 +8,6 @@
     extensions = with pkgs.vscode-extensions; [
       b4dm4n.vscode-nixpkgs-fmt
       dracula-theme.theme-dracula
-      james-yu.latex-workshop
       jnoortheen.nix-ide
       redhat.java
       streetsidesoftware.code-spell-checker
