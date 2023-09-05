@@ -13,24 +13,24 @@ with lib;
     home.packages = with pkgs; [
       _1password-gui
       alacritty
+      beauty-line-icon-theme
       discord
       dracula-theme
-      beauty-line-icon-theme
       firefox
       font-awesome
       kate
+      obsidian
       signal-desktop
       xclip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     # Programs to install on all desktop systems
-    programs = {
-
-    };
+    programs = { };
 
     # Services to enable on all systems
     services = {
       flameshot.enable = true;
+      syncthing.enable = true;
     };
 
   };
