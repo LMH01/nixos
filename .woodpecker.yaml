@@ -16,7 +16,7 @@
     },
     {
       "commands": [
-        "nix build '.#nixos_portable' -o 'result-nixos_portable'"
+        "nix build '.#nixosConfigurations.nixos_portable.config.system.build.toplevel' -o 'result-nixos_portable'"
       ],
       "image": "bash",
       "name": "Build nixos_portable"
@@ -33,7 +33,7 @@
     },
     {
       "commands": [
-        "nix build '.#CBPC-0123_LMH' -o 'result-cbpc-0123_lmh'"
+        "nix build '.#nixosConfigurations.CBPC-0123_LMH.config.system.build.toplevel' -o 'result-cbpc-0123_lmh'"
       ],
       "image": "bash",
       "name": "Build CBPC-0123_LMH"
@@ -47,6 +47,6 @@
       "secrets": [
         "attic_key"
       ]
-    },
+    }
   ]
 }
