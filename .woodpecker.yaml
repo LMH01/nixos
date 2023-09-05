@@ -1,0 +1,52 @@
+{
+  "labels": {
+    "backend": "local"
+  },
+  "platform": "linux/amd64",
+  "steps": [
+    {
+      "commands": [
+        "attic login lounge-rocks https://cache.lounge.rocks $ATTIC_KEY --set-default"
+      ],
+      "image": "bash",
+      "name": "Setup Attic",
+      "secrets": [
+        "attic_key"
+      ]
+    },
+    {
+      "commands": [
+        "nix build '.#nixos_portable' -o 'result-nixos_portable'"
+      ],
+      "image": "bash",
+      "name": "Build nixos_portable"
+    },
+    {
+      "commands": [
+        "attic push lounge-rocks:nix-cache 'result-nixos_portable'"
+      ],
+      "image": "bash",
+      "name": "Push nixos_portable to Attic",
+      "secrets": [
+        "attic_key"
+      ]
+    },
+    {
+      "commands": [
+        "nix build '.#CBPC-0123_LMH' -o 'result-cbpc-0123_lmh'"
+      ],
+      "image": "bash",
+      "name": "Build CBPC-0123_LMH"
+    },
+    {
+      "commands": [
+        "attic push lounge-rocks:nix-cache 'result-cbpc-0123_lmh'"
+      ],
+      "image": "bash",
+      "name": "Push CBPC-0123_LMH to Attic",
+      "secrets": [
+        "attic_key"
+      ]
+    },
+  ]
+}
