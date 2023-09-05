@@ -21,6 +21,7 @@ with lib;
       kate
       obsidian
       signal-desktop
+      texlive.combined.scheme-full
       xclip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
