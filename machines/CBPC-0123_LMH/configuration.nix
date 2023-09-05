@@ -103,6 +103,9 @@
     #  wget
     #(pkgs.callPackage ./candy-icon-theme {})
   ];
+  
+  # Set hardware clock to local time to prevent time issues with windows
+  time.hardwareClockInLocalTime = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
