@@ -33,6 +33,9 @@
     '';
 
     settings = {
+      # binary cache -> build by DroneCI
+      substituters = [ "https://cache.lounge.rocks/nix-cache" ];
+      trusted-public-keys = [ "nix-cache:4FILs79Adxn/798F8qk2PC1U8HaTlaPqptwNJrXNA1g=" ];
       # Enable flakes
       experimental-features = [ "nix-command" "flakes" ];
       # Save space by hardlinking store files
