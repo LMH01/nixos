@@ -35,7 +35,7 @@ with lib;
     };
 
     lmh01.programs = {
-      
+      latex.enable = true;
     };
   };
 
