@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, system-config, pkgs, lib, ... }: {
 
   programs.vscode = {
     enable = true;
@@ -11,13 +11,12 @@
       james-yu.latex-workshop
       jnoortheen.nix-ide
       redhat.java
-      rust-lang.rust-analyzer
       streetsidesoftware.code-spell-checker
       tamasfe.even-better-toml
       usernamehw.errorlens
       vadimcn.vscode-lldb
       vscodevim.vim
-    ];
+    ] ++ lib.optionals system-config.lmh01.rust.enable [rust-lang.rust-analyzer];
 
     userSettings = {
       "workbench.colorTheme" = "Dracula";
