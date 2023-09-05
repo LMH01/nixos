@@ -16,6 +16,13 @@
     },
     {
       "commands": [
+        "nix flake check"
+      ],
+      "image": "bash",
+      "name": "Check flake"
+    },
+    {
+      "commands": [
         "nix build '.#nixosConfigurations.nixos_portable.config.system.build.toplevel' -o 'result-nixos_portable'"
       ],
       "image": "bash",
