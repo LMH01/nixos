@@ -7,6 +7,7 @@ with lib;
 
     home.packages = with pkgs; [
       hashcat
+      steam
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = {
