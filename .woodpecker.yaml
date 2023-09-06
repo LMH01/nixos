@@ -6,6 +6,20 @@
   "steps": [
     {
       "commands": [
+        "nix flake check"
+      ],
+      "image": "bash",
+      "name": "Nix flake check"
+    },
+    {
+      "commands": [
+        "nix flake show"
+      ],
+      "image": "bash",
+      "name": "Nix flake show"
+    },
+    {
+      "commands": [
         "attic login lounge-rocks https://cache.lounge.rocks $ATTIC_KEY --set-default"
       ],
       "image": "bash",
@@ -16,10 +30,20 @@
     },
     {
       "commands": [
-        "nix flake check"
+        "nix build '.#nixosConfigurations.CBPC-0123_LMH.config.system.build.toplevel' -o 'result-CBPC-0123_LMH'"
       ],
       "image": "bash",
-      "name": "Check flake"
+      "name": "Build CBPC-0123_LMH"
+    },
+    {
+      "commands": [
+        "attic push lounge-rocks:nix-cache 'result-CBPC-0123_LMH'"
+      ],
+      "image": "bash",
+      "name": "Push CBPC-0123_LMH to Attic",
+      "secrets": [
+        "attic_key"
+      ]
     },
     {
       "commands": [
@@ -34,23 +58,6 @@
       ],
       "image": "bash",
       "name": "Push nixos_portable to Attic",
-      "secrets": [
-        "attic_key"
-      ]
-    },
-    {
-      "commands": [
-        "nix build '.#nixosConfigurations.CBPC-0123_LMH.config.system.build.toplevel' -o 'result-cbpc-0123_lmh'"
-      ],
-      "image": "bash",
-      "name": "Build CBPC-0123_LMH"
-    },
-    {
-      "commands": [
-        "attic push lounge-rocks:nix-cache 'result-cbpc-0123_lmh'"
-      ],
-      "image": "bash",
-      "name": "Push CBPC-0123_LMH to Attic",
       "secrets": [
         "attic_key"
       ]
