@@ -9,6 +9,7 @@
       b4dm4n.vscode-nixpkgs-fmt
       dracula-theme.theme-dracula
       jnoortheen.nix-ide
+      ms-python.python
       redhat.java
       streetsidesoftware.code-spell-checker
       tamasfe.even-better-toml
