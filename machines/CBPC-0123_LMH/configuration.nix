@@ -13,6 +13,7 @@
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
+    self.nixosModules.openrgb
     self.nixosModules.openssh
     self.nixosModules.users
   ];
@@ -24,6 +25,7 @@
     };
     openssh.enable = true;
     nvidia.enable = true;
+    openrgb.enable = true;
   };
 
   # Home Manager configuration
