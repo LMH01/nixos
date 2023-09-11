@@ -40,10 +40,7 @@
         "attic push lounge-rocks:nix-cache 'result-CBPC-0123_LMH'"
       ],
       "image": "bash",
-      "name": "Push CBPC-0123_LMH to Attic",
-      "secrets": [
-        "attic_key"
-      ]
+      "name": "Push CBPC-0123_LMH to Attic"
     },
     {
       "commands": [
@@ -57,10 +54,7 @@
         "attic push lounge-rocks:nix-cache 'result-nixos_portable'"
       ],
       "image": "bash",
-      "name": "Push nixos_portable to Attic",
-      "secrets": [
-        "attic_key"
-      ]
+      "name": "Push nixos_portable to Attic"
     }
   ]
 }

@@ -56,7 +56,6 @@ writeText "pipeline" (builtins.toJSON {
                       image = "bash";
                       commands =
                         [ "attic push lounge-rocks:nix-cache 'result-${host}'" ];
-                      secrets = [ "attic_key" ];
                     }
                   ])
                 (builtins.attrNames flake-self.nixosConfigurations)));
