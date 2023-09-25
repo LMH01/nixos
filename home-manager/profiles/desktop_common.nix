@@ -4,6 +4,7 @@ with lib;
 {
 
   imports = with flake-self.homeManagerModules; [
+    i3
     latex
     rust
     vscode
@@ -36,6 +37,7 @@ with lib;
     };
 
     lmh01.programs = {
+      i3.enable = true;
       latex.enable = true;
       rust.enable = true;
     };
