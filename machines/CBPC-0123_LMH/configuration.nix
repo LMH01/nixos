@@ -16,7 +16,8 @@
     self.nixosModules.openrgb
     self.nixosModules.openssh
     self.nixosModules.users
-    self.nixosModules.wayland
+    #self.nixosModules.wayland
+    self.nixosModules.xserver
   ];
 
   lmh01 = {
@@ -27,7 +28,8 @@
     openssh.enable = true;
     nvidia.enable = true;
     openrgb.enable = true;
-    wayland.enable = true;
+    #wayland.enable = true;
+    xserver.enable = true;
   };
 
   # Home Manager configuration
