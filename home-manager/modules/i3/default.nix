@@ -1,8 +1,12 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, flake-self, ... }:
 with lib;
 let cfg = config.lmh01.programs.i3;
 in
 {
+
+  imports = with flake-self.homeManagerModules; [
+    i3status-rust
+  ];
 
   options.lmh01.programs.i3.enable = mkEnableOption "activate i3";
 
@@ -11,7 +15,6 @@ in
     home.packages = with pkgs; [
       arandr
       flameshot
-      i3status-rust
       konsole
       playerctl # musik controlls for pipewire/pulse
       rofi
@@ -22,6 +25,9 @@ in
       network-manager-applet.enable = true;
       pasystray.enable = true;
     };
+
+    # i3 status rust
+    lmh01.programs.i3status-rust.enable = true;
 
     xsession.enable = true;
     xsession.scriptPath = ".hm-xsession";
@@ -39,11 +45,12 @@ in
 
         terminal = "${pkgs.konsole}/bin/konsole";
 
-        bars = [{
-          position = "top";
-          # TODO Replace with i3status-rust
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-        }];
+        bars = [
+          {
+            position = "top";
+            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
+          }
+        ];
 
         keybindings =
           let modifier = config.xsession.windowManager.i3.config.modifier;
