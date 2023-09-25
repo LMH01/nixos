@@ -9,10 +9,11 @@ in
   config = mkIf cfg.enable {
 
     home.packages = with pkgs; [
-      i3status-rust
       arandr
-      rofi
+      i3status-rust
       konsole
+      playerctl # musik controlls for pipewire/pulse
+      rofi
     ];
 
     services = {
@@ -32,7 +33,7 @@ in
         # Set modifier to WIN
         modifier = "Mod4";
 
-        menu = "${pkgs.rofi}/bin/rofi";
+        menu = "${pkgs.rofi}/bin/rofi -show";
 
         terminal = "${pkgs.konsole}/bin/konsole";
 
@@ -51,7 +52,7 @@ in
 
             "${modifier}+Shift+Escape" = "exec xkill";
 
-            "${modifier}+t" =
+            "Mod1+space" =
               "exec ${pkgs.rofi}/bin/rofi -show run -lines 7 -eh 1 -bw 0  -fullscreen -padding 200";
 
             "${modifier}+Shift+x" = "exec xscreensaver-command -lock";
