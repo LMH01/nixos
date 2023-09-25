@@ -10,6 +10,7 @@ in
 
     home.packages = with pkgs; [
       arandr
+      flameshot
       i3status-rust
       konsole
       playerctl # musik controlls for pipewire/pulse
@@ -17,6 +18,7 @@ in
     ];
 
     services = {
+      dunst.enable = true; # notification daemon
       network-manager-applet.enable = true;
       pasystray.enable = true;
     };
@@ -48,14 +50,8 @@ in
           in
           lib.mkOptionDefault {
 
-            "${modifier}+d" = "exec dmenu_run";
-
-            "${modifier}+Shift+Escape" = "exec xkill";
-
             "Mod1+space" =
               "exec ${pkgs.rofi}/bin/rofi -show run -lines 7 -eh 1 -bw 0  -fullscreen -padding 200";
-
-            "${modifier}+Shift+x" = "exec xscreensaver-command -lock";
 
             "${modifier}+Shift+Tab" = "workspace prev";
 
@@ -78,13 +74,8 @@ in
 
             "XF86AudioStop" = "exec playerctl stop";
 
-            "XF86MonBrightnessDown" =
-              "exec xbacklight -dec 20"; # decrease screen brightness
-
-            "XF86MonBrightnessUp" =
-              "exec xbacklight -inc 20"; # increase screen brightness
-
-            "Print" = "exec gnome-screenshot -c -i";
+            "Print" = "exec flameshot gui";
+            "${modifier}+Shift+s" = "exec flameshot gui";
           };
 
       };
