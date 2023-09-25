@@ -6,6 +6,7 @@ with lib;
   imports = with flake-self.homeManagerModules; [
     latex
     rust
+    sway
     vscode
   ];
 
@@ -38,6 +39,7 @@ with lib;
     lmh01.programs = {
       latex.enable = true;
       rust.enable = true;
+      #sway.enable = true;
     };
   };
 
