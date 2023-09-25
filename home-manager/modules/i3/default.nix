@@ -21,11 +21,12 @@ in
     };
 
     xsession.enable = true;
+    xsession.scriptPath = ".hm-xsession";
 
     xsession.windowManager.i3 = {
       enable = true;
 
-      #package = pkgs.i3-gaps;
+      package = pkgs.i3-gaps;
 
       config = {
         # Set modifier to WIN
