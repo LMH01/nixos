@@ -6,6 +6,7 @@ in
 
   imports = with flake-self.homeManagerModules; [
     i3status-rust
+    rofi
   ];
 
   options.lmh01.programs.i3.enable = mkEnableOption "activate i3";
@@ -17,7 +18,6 @@ in
       flameshot
       konsole
       playerctl # musik controlls for pipewire/pulse
-      rofi
     ];
 
     services = {
@@ -28,6 +28,8 @@ in
 
     # i3 status rust
     lmh01.programs.i3status-rust.enable = true;
+    # rofi
+    lmh01.programs.rofi.enable = true;
 
     xsession.enable = true;
     xsession.scriptPath = ".hm-xsession";
@@ -41,7 +43,7 @@ in
         # Set modifier to WIN
         modifier = "Mod4";
 
-        menu = "${pkgs.rofi}/bin/rofi -show";
+        menu = "${pkgs.rofi}/bin/rofi -show combi";
 
         terminal = "${pkgs.konsole}/bin/konsole";
 
@@ -57,8 +59,8 @@ in
           in
           lib.mkOptionDefault {
 
-            "Mod1+space" =
-              "exec ${pkgs.rofi}/bin/rofi -show run -lines 7 -eh 1 -bw 0  -fullscreen -padding 200";
+            "Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
+            "${modifier}+Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show emoji";
 
             "${modifier}+Shift+Tab" = "workspace prev";
 
