@@ -6,6 +6,7 @@
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
+      arrterian.nix-env-selector
       b4dm4n.vscode-nixpkgs-fmt
       dracula-theme.theme-dracula
       jnoortheen.nix-ide
