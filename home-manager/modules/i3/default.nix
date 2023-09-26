@@ -63,9 +63,6 @@ in
 
         startup = [
           {
-            # TODO Currently the wallpaper has to be copied to that location manually, 
-            # it would be a good idea to create a package that sets the wallpaper automatically.
-            # Then the image file could also be moved into that package
             command = "${pkgs.feh}/bin/feh --bg-fill ${./wallpaper.png}";
             always = false;
             notification = false;
