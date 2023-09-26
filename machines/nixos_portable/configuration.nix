@@ -15,6 +15,7 @@
     self.nixosModules.nvidia
     self.nixosModules.openssh
     self.nixosModules.users
+    self.nixosModules.xserver
   ];
 
   lmh01 = {
@@ -23,6 +24,7 @@
       root.enable = true;
     };
     openssh.enable = true;
+    xserver.enable = true;
   };
 
   # Home Manager configuration

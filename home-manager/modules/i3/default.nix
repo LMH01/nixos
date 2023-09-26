@@ -66,7 +66,7 @@ in
             # TODO Currently the wallpaper has to be copied to that location manually, 
             # it would be a good idea to create a package that sets the wallpaper automatically.
             # Then the image file could also be moved into that package
-            command = "${pkgs.feh}/bin/feh --bg-fill ~/.wallpaper.png .wallpaper.png";
+            command = "${pkgs.feh}/bin/feh --bg-fill ${./wallpaper.png}"; 
             always = false;
             notification = false;
           }
@@ -102,9 +102,9 @@ in
             "XF86AudioStop" = "exec playerctl stop";
 
             "Print" = "exec flameshot gui";
-            "${modifier}+Shift+s" = "exec flameshot gui";
+            "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
-            "${modifier}+l" = "exec i3lock -i ~/.wallpaper.png";
+            "${modifier}+l" = "exec i3lock -i ${./wallpaper.png}";
           };
 
       };
