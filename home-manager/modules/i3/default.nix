@@ -66,7 +66,7 @@ in
             # TODO Currently the wallpaper has to be copied to that location manually, 
             # it would be a good idea to create a package that sets the wallpaper automatically.
             # Then the image file could also be moved into that package
-            command = "${pkgs.feh}/bin/feh --bg-fill ${./wallpaper.png}"; 
+            command = "${pkgs.feh}/bin/feh --bg-fill ${./wallpaper.png}";
             always = false;
             notification = false;
           }
@@ -100,6 +100,10 @@ in
               "exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume";
 
             "XF86AudioStop" = "exec playerctl stop";
+
+            # TODO Move to only laptop config
+            "XF86MonBrightnessUp" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
+            "XF86MonBrightnessDown" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
 
             "Print" = "exec flameshot gui";
             "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
