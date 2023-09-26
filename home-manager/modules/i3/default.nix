@@ -47,6 +47,8 @@ in
 
         terminal = "${pkgs.konsole}/bin/konsole";
 
+        defaultWorkspace = "workspace number 1";
+
         bars = [
           {
             fonts = ["FontAwesome 11"];
