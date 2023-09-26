@@ -1,6 +1,6 @@
 { lib, pkgs, config, flake-self, ... }:
 with lib;
-let 
+let
   cfg = config.lmh01.programs.i3;
   suspend-pc = pkgs.writeShellScriptBin "suspend-pc" /* sh */
     ''
@@ -76,7 +76,8 @@ in
         ];
 
         keybindings =
-          let modifier = config.xsession.windowManager.i3.config.modifier;
+          let
+            inherit (config.xsession.windowManager.i3.config) modifier left down up right menu terminal;
           in
           lib.mkOptionDefault {
 
