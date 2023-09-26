@@ -79,44 +79,45 @@ in
           let
             inherit (config.xsession.windowManager.i3.config) modifier left down up right menu terminal;
           in
-          lib.mkOptionDefault {
+          lib.mkOptionDefault
+            {
+              "Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
+              "${modifier}+Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show emoji";
 
-            "Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
-            "${modifier}+Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show emoji";
+              "${modifier}+Shift+Tab" = "workspace prev";
 
-            "${modifier}+Shift+Tab" = "workspace prev";
+              "${modifier}+Tab" = "workspace next";
 
-            "${modifier}+Tab" = "workspace next";
+              "XF86AudioLowerVolume" =
+                "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
 
-            "XF86AudioLowerVolume" =
-              "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
+              "XF86AudioMute" =
+                "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
 
-            "XF86AudioMute" =
-              "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
+              "XF86AudioNext" = "exec playerctl next";
 
-            "XF86AudioNext" = "exec playerctl next";
+              "XF86AudioPlay" = "exec playerctl play-pause";
 
-            "XF86AudioPlay" = "exec playerctl play-pause";
+              "XF86AudioPrev" = "exec playerctl previous";
 
-            "XF86AudioPrev" = "exec playerctl previous";
+              "XF86AudioRaiseVolume" =
+                "exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume";
 
-            "XF86AudioRaiseVolume" =
-              "exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume";
+              "XF86AudioStop" = "exec playerctl stop";
 
-            "XF86AudioStop" = "exec playerctl stop";
+              "Print" = "exec flameshot gui";
+              "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
-            # TODO Move to only laptop config
+              "${modifier}+l" = "exec i3lock -i ${./wallpaper.png}";
+            }
+          //
+          (mkIf (config.lmh01.options.type == "laptop") {
             "XF86MonBrightnessUp" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
             "XF86MonBrightnessDown" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
-
-            "Print" = "exec flameshot gui";
-            "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
-
-            "${modifier}+l" = "exec i3lock -i ${./wallpaper.png}";
-          };
-
+          })
+          //
+          (mkIf (config.lmh01.options.type == "desktop") { });
       };
-
     };
   };
 }
