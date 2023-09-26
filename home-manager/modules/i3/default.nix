@@ -15,7 +15,9 @@ in
 
     home.packages = with pkgs; [
       arandr
+      feh
       flameshot
+      i3lock
       konsole
       playerctl # musik controlls for pipewire/pulse
     ];
@@ -57,6 +59,17 @@ in
           }
         ];
 
+        startup = [
+          {
+            # TODO Currently the wallpaper has to be copied to that location manually, 
+            # it would be a good idea to create a package that sets the wallpaper automatically.
+            # Then the image file could also be moved into that package
+            command = "${pkgs.feh}/bin/feh --bg-fill ~/.wallpaper.png .wallpaper.png"; 
+            always = false;
+            notification = false;
+          }
+        ];
+
         keybindings =
           let modifier = config.xsession.windowManager.i3.config.modifier;
           in
@@ -88,6 +101,8 @@ in
 
             "Print" = "exec flameshot gui";
             "${modifier}+Shift+s" = "exec flameshot gui";
+
+            "${modifier}+l" = "exec i3lock -i ~/.wallpaper.png";
           };
 
       };
