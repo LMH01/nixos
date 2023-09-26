@@ -25,6 +25,7 @@
     };
     openssh.enable = true;
     xserver.enable = true;
+    options.type = "laptop";
   };
 
   # Home Manager configuration

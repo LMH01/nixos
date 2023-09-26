@@ -74,17 +74,13 @@ in
             ]
 
             (mkIf (config.lmh01.options.type == "laptop") [
-              # this example is untested!
+              {
+                block = "backlight";
+                invert_icons = true;
+              }
               {
                 block = "battery";
-                format = " $icon {$percentage} {$remaining}";
-                interval = 5;
-                critical = 10;
-                critical_color = "critical";
-                warning = 20;
-                warning_color = "warning";
-                charging_color = "good";
-                discharging_color = "info";
+                driver = "sysfs";
               }
             ])
 
