@@ -49,7 +49,7 @@ in
 
         bars = [
           {
-            fonts = ["Iosevka 11"];
+            fonts = ["FontAwesome 11"];
             position = "top";
             statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
           }
