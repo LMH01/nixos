@@ -30,45 +30,67 @@ in
         top = {
           icons = "awesome5";
           theme = builtins.toFile "dracula-custom.toml" theme_content;
-          blocks = [
-            {
-              block = "focused_window";
-              format = " $title.str(max_w:50)|";
-            }
-            {
-              block = "music";
-              format = "$icon {$combo.str(max_w:25,rot_interval:0.5) $prev $play $next }";
-            }
-            {
-              block = "disk_space";
-              info_type = "used";
-              format = " {$icon} {$used}/{$total}";
-              warning = 80;
-              alert = 95;
-            }
-            {
-              block = "memory";
-              format = " $icon {$mem_used}/{$mem_total}({$mem_used_percents})";
-              format_alt = " $icon {$swap_used}/{$swap_total}({$swap_used_percents})";
-              interval = 5;
-              warning_mem = 80;
-              warning_swap = 80;
-              critical_mem = 95;
-              critical_swap = 95;
-            }
-            {
-              block = "cpu";
-              interval = 1;
-              format = " $icon {$barchart} {$utilization}";
-            }
-            {
-              block = "sound";
-              max_vol = 100;
-            }
-            {
-              block = "time";
-              interval = 60;
-            }
+          blocks = mkMerge [
+            [
+              # for all system types
+              {
+                block = "focused_window";
+                format = " $title.str(max_w:50)|";
+              }
+              {
+                block = "music";
+                format = "$icon {$combo.str(max_w:25,rot_interval:0.5) $prev $play $next }";
+              }
+              {
+                block = "disk_space";
+                info_type = "used";
+                format = " {$icon} {$used}/{$total}";
+                warning = 80;
+                alert = 95;
+              }
+              {
+                block = "memory";
+                format = " $icon {$mem_used}/{$mem_total}({$mem_used_percents})";
+                format_alt = " $icon {$swap_used}/{$swap_total}({$swap_used_percents})";
+                interval = 5;
+                warning_mem = 80;
+                warning_swap = 80;
+                critical_mem = 95;
+                critical_swap = 95;
+              }
+              {
+                block = "cpu";
+                interval = 1;
+                format = " $icon {$barchart} {$utilization}";
+              }
+              {
+                block = "sound";
+                max_vol = 100;
+              }
+              {
+                block = "time";
+                interval = 60;
+              }
+            ]
+
+            (mkIf (config.lmh01.options.type == "laptop") [
+              # this example is untested!
+              {
+                block = "battery";
+                format = " $icon {$percentage} {$remaining}";
+                interval = 5;
+                critical = 10;
+                critical_color = "critical";
+                warning = 20;
+                warning_color = "warning";
+                charging_color = "good";
+                discharging_color = "info";
+              }
+            ])
+
+            (mkIf (config.lmh01.options.type == "desktop") [
+            ])
+
           ];
         };
       };
