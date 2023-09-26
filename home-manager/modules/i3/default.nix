@@ -1,6 +1,11 @@
 { lib, pkgs, config, flake-self, ... }:
 with lib;
-let cfg = config.lmh01.programs.i3;
+let 
+  cfg = config.lmh01.programs.i3;
+  suspend-pc = pkgs.writeShellScriptBin "suspend-pc" /* sh */
+    ''
+      i3lock -i ${./wallpaper.png} && systemctl suspend
+    '';
 in
 {
 
@@ -20,6 +25,7 @@ in
       i3lock
       konsole
       playerctl # musik controlls for pipewire/pulse
+      suspend-pc
     ]
     ++ lib.optionals (config.lmh01.options.type == "desktop") [ ]
     ++ lib.optionals (config.lmh01.options.type == "laptop") [ ];
