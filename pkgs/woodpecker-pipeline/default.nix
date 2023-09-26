@@ -43,6 +43,10 @@ writeText "pipeline" (builtins.toJSON {
                   if (flake-self.nixosConfigurations.${host}.pkgs.stdenv.hostPlatform.system
                     != arch) then
                     [ ]
+                  else if
+                  # Skip hosts with this option set
+                    flake-self.nixosConfigurations.${host}.config.lmh01.options.CISkip then
+                    [ ]
                   else [
                     {
                       name = "Build ${host}";

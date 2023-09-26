@@ -57,6 +57,7 @@
 
             modules = [
               (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
+              self.nixosModules.options
             ];
 
           };

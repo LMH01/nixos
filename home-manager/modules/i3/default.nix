@@ -20,7 +20,9 @@ in
       i3lock
       konsole
       playerctl # musik controlls for pipewire/pulse
-    ];
+    ]
+    ++ lib.optionals (config.lmh01.options.type == "desktop") [ ]
+    ++ lib.optionals (config.lmh01.options.type == "laptop") [ ];
 
     services = {
       dunst.enable = true; # notification daemon
@@ -53,7 +55,7 @@ in
 
         bars = [
           {
-            fonts = ["FontAwesome 11"];
+            fonts = [ "FontAwesome 11" ];
             position = "top";
             statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
           }

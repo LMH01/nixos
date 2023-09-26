@@ -1,7 +1,14 @@
 { lib, pkgs, flake-self, config, system-config, ... }:
 with lib;
 {
-  # This file contains stuff that should be setup the same on all my systems
+
+  options.lmh01.options = {
+    type = mkOption {
+      type = types.enum [ "desktop" "laptop" "server" ];
+      default = system-config.lmh01.options.type;
+      example = "server";
+    };
+  };
 
   imports = with flake-self.homeManagerModules; [
     git
@@ -9,6 +16,8 @@ with lib;
   ];
 
   config = {
+
+    # This file contains stuff that should be setup the same on all my systems
 
     # Packages to install on all systems
     home.packages = with pkgs; [
@@ -19,7 +28,7 @@ with lib;
       tree
       unzip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
-    
+
     # Programs to install on all systems
     programs = {
       starship.enable = true;
@@ -27,9 +36,7 @@ with lib;
     };
 
     # Services to start on all systems
-    services = {
-
-    };
+    services = { };
 
     # Home-manager nixpkgs config
     nixpkgs = {
