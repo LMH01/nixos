@@ -20,7 +20,9 @@ in
       i3lock
       konsole
       playerctl # musik controlls for pipewire/pulse
-    ];
+    ]
+    ++ lib.optionals (config.lmh01.options.type == "desktop") [ ]
+    ++ lib.optionals (config.lmh01.options.type == "laptop") [ ];
 
     services = {
       dunst.enable = true; # notification daemon
@@ -53,7 +55,7 @@ in
 
         bars = [
           {
-            fonts = ["FontAwesome 11"];
+            fonts = [ "FontAwesome 11" ];
             position = "top";
             statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
           }
@@ -64,7 +66,7 @@ in
             # TODO Currently the wallpaper has to be copied to that location manually, 
             # it would be a good idea to create a package that sets the wallpaper automatically.
             # Then the image file could also be moved into that package
-            command = "${pkgs.feh}/bin/feh --bg-fill ~/.wallpaper.png .wallpaper.png"; 
+            command = "${pkgs.feh}/bin/feh --bg-fill ~/.wallpaper.png .wallpaper.png";
             always = false;
             notification = false;
           }
