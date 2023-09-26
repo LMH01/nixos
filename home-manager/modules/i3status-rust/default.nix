@@ -20,13 +20,7 @@ let
 in
 {
 
-  options.lmh01.programs.i3status-rust = {
-    enable = mkEnableOption "activate i3status-rust";
-    type = {
-      default = "desktop";
-      type = builtins.enum [ "desktop" "laptop" ]; # used to select if the battery block should be displayed
-    };
-  };
+  options.lmh01.programs.i3status-rust.enable = mkEnableOption "activate i3status-rust";
 
   config = mkIf cfg.enable {
 
