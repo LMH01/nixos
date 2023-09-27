@@ -5,7 +5,7 @@ in
 {
 
   options.lmh01.xserver.enable = mkEnableOption "activate xserver";
-
+  
 
   config = mkIf cfg.enable {
 
@@ -35,7 +35,7 @@ in
 
     # Enable pulseaudio compatible api for audio volume control in i3
     services.pipewire.pulse.enable = true;
-
+    
     environment.systemPackages = with pkgs; [
       pulseaudio
     ];

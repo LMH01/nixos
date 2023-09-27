@@ -1,6 +1,6 @@
 { lib, pkgs, config, flake-self, ... }:
 with lib;
-let
+let 
   cfg = config.lmh01.programs.i3;
   suspend-pc = pkgs.writeShellScriptBin "suspend-pc" /* sh */
     ''
@@ -76,48 +76,46 @@ in
         ];
 
         keybindings =
-          let
-            inherit (config.xsession.windowManager.i3.config) modifier left down up right menu terminal;
+          let modifier = config.xsession.windowManager.i3.config.modifier;
           in
-          lib.mkOptionDefault
-            {
-              "Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
-              "${modifier}+Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show emoji";
+          lib.mkOptionDefault {
 
-              "${modifier}+Shift+Tab" = "workspace prev";
+            "Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
+            "${modifier}+Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show emoji";
 
-              "${modifier}+Tab" = "workspace next";
+            "${modifier}+Shift+Tab" = "workspace prev";
 
-              "XF86AudioLowerVolume" =
-                "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
+            "${modifier}+Tab" = "workspace next";
 
-              "XF86AudioMute" =
-                "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
+            "XF86AudioLowerVolume" =
+              "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
 
-              "XF86AudioNext" = "exec playerctl next";
+            "XF86AudioMute" =
+              "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
 
-              "XF86AudioPlay" = "exec playerctl play-pause";
+            "XF86AudioNext" = "exec playerctl next";
 
-              "XF86AudioPrev" = "exec playerctl previous";
+            "XF86AudioPlay" = "exec playerctl play-pause";
 
-              "XF86AudioRaiseVolume" =
-                "exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume";
+            "XF86AudioPrev" = "exec playerctl previous";
 
-              "XF86AudioStop" = "exec playerctl stop";
+            "XF86AudioRaiseVolume" =
+              "exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume";
 
-              "Print" = "exec flameshot gui";
-              "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
+            "XF86AudioStop" = "exec playerctl stop";
 
-              "${modifier}+l" = "exec i3lock -i ${./wallpaper.png}";
-            }
-          //
-          (mkIf (config.lmh01.options.type == "laptop") {
+            # TODO Move to only laptop config
             "XF86MonBrightnessUp" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
             "XF86MonBrightnessDown" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
-          })
-          //
-          (mkIf (config.lmh01.options.type == "desktop") { });
+
+            "Print" = "exec flameshot gui";
+            "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
+
+            "${modifier}+l" = "exec i3lock -i ${./wallpaper.png}";
+          };
+
       };
+
     };
   };
 }

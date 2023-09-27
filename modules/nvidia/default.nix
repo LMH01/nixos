@@ -19,18 +19,18 @@ in
         driSupport32Bit = true;
       };
       nvidia = {
-        open = true;
-        modesetting.enable = true;
-        powerManagement.enable = true;
-        nvidiaSettings = true;
+      	open = true;
+      	modesetting.enable = true;
+      	powerManagement.enable = true;
+	      nvidiaSettings = true;
       };
     };
 
     # when docker is enabled, enable nvidia-docker
     virtualisation.docker.enableNvidia = lib.mkIf config.virtualisation.docker.enable true;
 
-    environment.systemPackages = with pkgs; [
-      nvtop
+    environment.systemPackages = with pkgs; [ 
+      nvtop 
     ];
 
     # fix electron problems with nvidia
