@@ -71,7 +71,7 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true; 
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Enable CUPS to print documents.
@@ -107,7 +107,7 @@
     #  wget
     #(pkgs.callPackage ./candy-icon-theme {})
   ];
-  
+
   # Set hardware clock to local time to prevent time issues with windows
   time.hardwareClockInLocalTime = true;
 

@@ -11,13 +11,9 @@ with lib;
       steam
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
-    programs = {
-      
-    };
+    programs = { };
 
-    services = {
-
-    };
+    services = { };
 
   };
 

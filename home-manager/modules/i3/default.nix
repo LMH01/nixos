@@ -1,6 +1,6 @@
 { lib, pkgs, config, flake-self, ... }:
 with lib;
-let 
+let
   cfg = config.lmh01.programs.i3;
   suspend-pc = pkgs.writeShellScriptBin "suspend-pc" /* sh */
     ''
