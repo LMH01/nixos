@@ -12,9 +12,10 @@ in
     # (i heared that it is a bad idea to install gcc directly this way)
     home.packages = with pkgs; [
       cargo
-      rustc
       clippy
       gcc
+      rustc
+      rustfmt
     ];
 
     programs.vscode.extensions = with pkgs.vscode-extensions; [ rust-lang.rust-analyzer ];
