@@ -39,7 +39,7 @@ in
               }
               {
                 block = "music";
-                format = "$icon {$combo.str(max_w:25,rot_interval:0.5) $prev $play $next }";
+                format = "$icon {$combo.str(max_w:25,rot_interval:0.5) $prev $play $next } | $icon No Music";
               }
               {
                 block = "disk_space";
