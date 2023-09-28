@@ -35,11 +35,11 @@ in
               # for all system types
               {
                 block = "focused_window";
-                format = " $title.str(max_w:50)|";
+                format = " $title |";
               }
               {
                 block = "music";
-                format = "$icon {$combo.str(max_w:25,rot_interval:0.5) $prev $play $next } | $icon No Music";
+                format = "$icon {$combo.str(max_w:75,rot_interval:0.5) $prev $play $next } | $icon No Music";
               }
               {
                 block = "disk_space";
