@@ -23,7 +23,9 @@ with lib;
     home.packages = with pkgs; [
       bottom
       fastfetch
+      gdb
       gitui
+      lldb
       tldr
       tree
       unzip
