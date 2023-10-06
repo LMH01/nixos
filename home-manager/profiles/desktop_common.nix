@@ -21,6 +21,7 @@ with lib;
       discord
       dracula-theme
       firefox
+      fira-code
       font-awesome
       kate
       obsidian
