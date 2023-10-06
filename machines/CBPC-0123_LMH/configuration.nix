@@ -56,6 +56,9 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  # Enable ntfs support
+  boot.supportedFilesystems = [ "ntfs" ];
 
   networking.hostName = "CBPC-0123_LMH";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
