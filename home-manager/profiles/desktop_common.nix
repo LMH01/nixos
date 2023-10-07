@@ -27,6 +27,7 @@ with lib;
       obsidian
       signal-desktop
       xclip
+      #(pkgs.callPackage ../../pkgs/alpha_tui {})
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     # Programs to install on all desktop systems
