@@ -26,6 +26,8 @@ with lib;
       gdb
       gitui
       lldb
+      man-pages
+      man-pages-posix
       tldr
       tree
       unzip
