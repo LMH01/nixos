@@ -7,6 +7,7 @@
     enableExtensionUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
       arrterian.nix-env-selector
+      llvm-vs-code-extensions.vscode-clangd # TODO Move into own module or better move into shell.nix
       b4dm4n.vscode-nixpkgs-fmt
       dracula-theme.theme-dracula
       gruntfuggly.todo-tree
