@@ -44,8 +44,8 @@ in
 
       # always execute nixos-rebuild with sudo for switching
       nixos-rebuild = "${pkgs.nixos-rebuild}/bin/nixos-rebuild --use-remote-sudo";
-
-      discord = "nohup discord --use-gl=desktop &";
+      
+      nsh = "nix-shell";
     };
   };
 
