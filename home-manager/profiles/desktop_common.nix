@@ -17,6 +17,7 @@ with lib;
     home.packages = with pkgs; [
       _1password-gui
       alacritty
+      anki
       beauty-line-icon-theme
       discord
       dracula-theme
