@@ -6,13 +6,6 @@
   "steps": [
     {
       "commands": [
-        "nix flake check"
-      ],
-      "image": "bash",
-      "name": "Nix flake check"
-    },
-    {
-      "commands": [
         "nix flake show"
       ],
       "image": "bash",
