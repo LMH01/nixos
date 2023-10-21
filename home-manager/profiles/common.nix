@@ -1,3 +1,4 @@
+# Base stuff that should be setup the same on all my systems
 { lib, pkgs, flake-self, config, system-config, ... }:
 with lib;
 {
@@ -16,8 +17,6 @@ with lib;
   ];
 
   config = {
-
-    # This file contains stuff that should be setup the same on all my systems
 
     # Packages to install on all systems
     home.packages = with pkgs; [
@@ -40,7 +39,9 @@ with lib;
     };
 
     # Services to start on all systems
-    services = { };
+    services = { 
+      syncthing.enable = true; # Has be be configgured manually on initial install
+    };
 
     # Home-manager nixpkgs config
     nixpkgs = {

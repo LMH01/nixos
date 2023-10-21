@@ -1,4 +1,4 @@
-# This file contains stuff that should only be setup on my main desktop pc
+# Laptop only stuff
 { lib, pkgs, flake-self, config, system-config, ... }:
 with lib;
 {
@@ -6,9 +6,7 @@ with lib;
   config = {
 
     home.packages = with pkgs; [
-      hashcat
-      prismlauncher # minecraft launcher
-      steam
+
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = { };

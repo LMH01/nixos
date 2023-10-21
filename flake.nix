@@ -70,20 +70,21 @@
         portable = { pkgs, lib, ... }: {
           imports = [
             ./home-manager/profiles/common.nix
-            ./home-manager/profiles/desktop_common.nix
+            ./home-manager/profiles/gui_common.nix
             ./home-manager/profiles/portable.nix
           ];
         };
         CBPC-0123_LMH = { pkgs, lib, ... }: {
           imports = [
             ./home-manager/profiles/common.nix
-            ./home-manager/profiles/desktop_common.nix
-            ./home-manager/profiles/CBPC-0123_LMH.nix
+            ./home-manager/profiles/gui_common.nix
+            ./home-manager/profiles/desktop.nix
           ];
         };
         server = { pkgs, lib, ... }: {
           imports = [
             ./home-manager/profiles/common.nix
+            ./home-manager/profiles/server.nix
           ];
         };
       };

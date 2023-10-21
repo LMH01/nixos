@@ -1,4 +1,4 @@
-# This file contains stuff that should be setup the same on all my desktop systems
+# Shared stuff for all my systems that use a graphical user interface (= my laptop and desktop systems)
 { lib, pkgs, flake-self, config, system-config, ... }:
 with lib;
 {
@@ -37,7 +37,6 @@ with lib;
     # Services to enable on all systems
     services = {
       flameshot.enable = true;
-      syncthing.enable = true;
     };
 
     lmh01.programs = {
