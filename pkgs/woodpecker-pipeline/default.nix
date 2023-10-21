@@ -64,6 +64,9 @@ writeText "pipeline" (builtins.toJSON {
                   ])
                 (builtins.attrNames flake-self.nixosConfigurations)));
           });
-        }) [ "x86_64-linux" ])
+        }) [
+        "x86_64-linux"
+        "aarch64-linux"
+      ])
     ]);
 })
