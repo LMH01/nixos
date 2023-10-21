@@ -14,6 +14,7 @@
     self.nixosModules.nix-common
     self.nixosModules.openssh
     self.nixosModules.users
+    self.nixosModules.docker
   ];
 
   ### build sd-image
@@ -45,6 +46,7 @@
     };
     openssh.enable = true;
     options.type = "server";
+    docker.enable = true;
   };
 
   # Home Manager configuration
