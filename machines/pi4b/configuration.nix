@@ -65,6 +65,10 @@
   
   networking.networkmanager.enable = true;
 
+  networking.firewall.allowedTCPPorts = [ 
+    8123 # used by home assistant
+  ];
+
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
 }
