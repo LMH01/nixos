@@ -8,6 +8,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = { self, ... }@inputs:
@@ -77,6 +79,11 @@
             ./home-manager/profiles/common.nix
             ./home-manager/profiles/desktop_common.nix
             ./home-manager/profiles/CBPC-0123_LMH.nix
+          ];
+        };
+        server = { pkgs, lib, ... }: {
+          imports = [
+            ./home-manager/profiles/common.nix
           ];
         };
       };
