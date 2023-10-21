@@ -61,7 +61,9 @@
     users.louis = flake-self.homeConfigurations.server;
   };
 
-  networking.hostName = "pi4b";
+  networking.hostName = "pi4b-louis";
+  
+  networking.networkmanager.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
