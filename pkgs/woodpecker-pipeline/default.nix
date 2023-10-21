@@ -1,5 +1,5 @@
 # nix build .#woodpecker-pipeline && cat result| jq '.configs[].data' -r | jq > .woodpecker.yaml
-{ pkgs, flake-self, inputs }:
+{ pkgs, lib, flake-self, inputs }:
 with pkgs;
 writeText "pipeline" (builtins.toJSON {
   configs =
@@ -37,7 +37,7 @@ writeText "pipeline" (builtins.toJSON {
             # platform will be deprecated in the future!
             platform = woodpecker-platforms."${arch}";
             steps = pkgs.lib.lists.flatten
-              ([ nixFlakeCheck nixFlakeShow atticSetupStep ] ++ (map
+              (lib.optionals ("${arch}" == "x86_64-linux") [ nixFlakeCheck ] ++ [ nixFlakeShow atticSetupStep ] ++ (map
                 (host:
                   # only build hosts for the arch we are currently building
                   if (flake-self.nixosConfigurations.${host}.pkgs.stdenv.hostPlatform.system
