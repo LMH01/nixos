@@ -19,6 +19,9 @@
     # --list` should be empty for all users afterwards
     nixPath = [ "nixpkgs=${nixpkgs}" ];
 
+    # allow the use of `nix run nixpkgs#hello` instead of nix run 'github:nixos/nixpkgs#hello'
+    registry.nixpkgs.flake = nixpkgs;
+
     package = pkgs.nixVersions.stable;
 
     extraOptions = ''
