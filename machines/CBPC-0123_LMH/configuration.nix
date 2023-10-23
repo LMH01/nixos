@@ -10,13 +10,14 @@
     home-manager.nixosModules.home-manager
 
     # my own modules
+    #self.nixosModules.wayland
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
     self.nixosModules.openrgb
     self.nixosModules.openssh
+    self.nixosModules.syncthing
     self.nixosModules.users
-    #self.nixosModules.wayland
     self.nixosModules.xserver
   ];
 
@@ -25,10 +26,11 @@
       louis.enable = true;
       root.enable = true;
     };
-    openssh.enable = true;
+    #wayland.enable = true;
     nvidia.enable = true;
     openrgb.enable = true;
-    #wayland.enable = true;
+    openssh.enable = true;
+    syncthing.enable = true;
     xserver.enable = true;
   };
 

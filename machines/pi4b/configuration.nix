@@ -10,11 +10,12 @@
 
     home-manager.nixosModules.home-manager
 
+    self.nixosModules.docker
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.openssh
+    self.nixosModules.syncthing
     self.nixosModules.users
-    self.nixosModules.docker
   ];
 
   ### build sd-image
@@ -41,9 +42,10 @@
       louis.enable = true;
       root.enable = true;
     };
+    docker.enable = true;
     openssh.enable = true;
     options.type = "server";
-    docker.enable = true;
+    syncthing.enable = true;
   };
 
   # Home Manager configuration

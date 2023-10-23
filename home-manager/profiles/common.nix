@@ -39,9 +39,7 @@ with lib;
     };
 
     # Services to start on all systems
-    services = { 
-      syncthing.enable = true; # Has be be configgured manually on initial install
-    };
+    services = { };
 
     # Home-manager nixpkgs config
     nixpkgs = {

@@ -14,6 +14,7 @@
     self.nixosModules.nix-common
     self.nixosModules.nvidia
     self.nixosModules.openssh
+    self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.xserver
   ];
@@ -24,8 +25,9 @@
       root.enable = true;
     };
     openssh.enable = true;
-    xserver.enable = true;
     options.type = "laptop";
+    syncthing.enable = true;
+    xserver.enable = true;
   };
 
   # Home Manager configuration
