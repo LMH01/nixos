@@ -61,6 +61,7 @@
     users.louis = flake-self.homeConfigurations.server;
   };
 
+  hardware.raspberry-pi."4".poe-hat.enable = true;
   networking.hostName = "pi4b-louis";
   
   networking.networkmanager.enable = true;
