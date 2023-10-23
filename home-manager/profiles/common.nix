@@ -27,6 +27,7 @@ with lib;
       lldb
       man-pages
       man-pages-posix
+      restic
       tldr
       tree
       unzip
