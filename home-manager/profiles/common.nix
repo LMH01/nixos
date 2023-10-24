@@ -12,6 +12,7 @@ with lib;
   };
 
   imports = with flake-self.homeManagerModules; [
+    direnv
     git
     zsh
   ];
@@ -37,6 +38,10 @@ with lib;
     programs = {
       starship.enable = true;
       zoxide.enable = true;
+    };
+    
+    lmh01.programs = {
+      direnv.enable = true;
     };
 
     # Services to start on all systems
