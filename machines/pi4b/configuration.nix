@@ -10,6 +10,7 @@
 
     home-manager.nixosModules.home-manager
 
+    self.nixosModules.common
     self.nixosModules.docker
     self.nixosModules.locale
     self.nixosModules.nix-common

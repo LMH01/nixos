@@ -11,6 +11,7 @@
 
     # my own modules
     #self.nixosModules.wayland
+    self.nixosModules.common
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia

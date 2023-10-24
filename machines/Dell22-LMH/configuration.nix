@@ -6,17 +6,17 @@
 { pkgs, lib, config, flake-self, home-manager, ... }:
 {
   imports = [
-    ./hardware-configuration.nix
+    #./hardware-configuration.nix IMPORTANT DONT FORGET TO COMMENT IN AGAIN!!!
     home-manager.nixosModules.home-manager
 
     # my own modules
     self.nixosModules.common
     self.nixosModules.locale
     self.nixosModules.nix-common
-    self.nixosModules.nvidia
     self.nixosModules.openssh
     self.nixosModules.syncthing
     self.nixosModules.users
+    self.nixosModules.wayland
     self.nixosModules.xserver
   ];
 
@@ -25,6 +25,7 @@
       louis.enable = true;
       root.enable = true;
     };
+    wayland.enable = true;
     openssh.enable = true;
     options.type = "laptop";
     syncthing.enable = true;
@@ -43,7 +44,7 @@
       # so we can access it's values for conditional statements
       system-config = config;
     };
-    users.louis = flake-self.homeConfigurations.portable;
+    users.louis = flake-self.homeConfigurations.Dell22_LMH;
   };
 
   # being able to build aarm64 stuff
@@ -55,8 +56,11 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  # Enable ntfs support
+  boot.supportedFilesystems = [ "ntfs" ];
 
-  networking.hostName = "nixos_portable";
+  networking.hostName = "Dell22_LMH";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -66,18 +70,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment. - does not work when booth amd and nvidia drivers are installed on stable branch
-  #services.xserver.displayManager.sddm.enable = true; 
+  # Enable the KDE Plasma Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-
-  # Enable the Gnome Desktop Environment - works with booth amd and nvidia drivers installed on stable branch
-  services.xserver.displayManager.gdm.enable = true; #is used instead of sddm because sddm is not displayed when nvidia and amd drivers are installed on an nvidia system
-  #services.xserver.desktopManager.gnome.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -98,9 +96,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Enable teamviewer service (temporary)
-  services.teamviewer.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
