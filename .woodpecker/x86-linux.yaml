@@ -55,7 +55,7 @@
       ],
       "image": "bash",
       "name": "Push Dell22_LMH to Attic"
-    }
+    },
     {
       "commands": [
         "nix build '.#nixosConfigurations.nixos_portable.config.system.build.toplevel' -o 'result-nixos_portable'"
