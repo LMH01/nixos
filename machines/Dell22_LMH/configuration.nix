@@ -6,7 +6,7 @@
 { pkgs, lib, config, flake-self, home-manager, ... }:
 {
   imports = [
-    #./hardware-configuration.nix IMPORTANT DONT FORGET TO COMMENT IN AGAIN!!!
+    ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
 
     # my own modules
