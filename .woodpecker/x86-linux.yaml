@@ -44,6 +44,20 @@
     },
     {
       "commands": [
+        "nix build '.#nixosConfigurations.Dell22_LMH.config.system.build.toplevel' -o 'result-Dell22_LMH'"
+      ],
+      "image": "bash",
+      "name": "Build Dell22_LMH"
+    },
+    {
+      "commands": [
+        "attic push lounge-rocks:nix-cache 'result-Dell22_LMH'"
+      ],
+      "image": "bash",
+      "name": "Push Dell22_LMH to Attic"
+    }
+    {
+      "commands": [
         "nix build '.#nixosConfigurations.nixos_portable.config.system.build.toplevel' -o 'result-nixos_portable'"
       ],
       "image": "bash",
