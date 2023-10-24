@@ -10,6 +10,7 @@
     home-manager.nixosModules.home-manager
 
     # my own modules
+    self.nixosModules.amdgpu
     self.nixosModules.common
     self.nixosModules.locale
     self.nixosModules.nix-common
@@ -25,10 +26,11 @@
       louis.enable = true;
       root.enable = true;
     };
-    wayland.enable = true;
+    amdgpu.enable = true;
     openssh.enable = true;
     options.type = "laptop";
     syncthing.enable = true;
+    wayland.enable = true;
     xserver.enable = true;
   };
 
