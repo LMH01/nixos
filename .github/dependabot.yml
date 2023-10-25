@@ -8,6 +8,6 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     reviewers:
-      - "MayNiklas"
+      - "LMH01"
     schedule:
       interval: "weekly"
