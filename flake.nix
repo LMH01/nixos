@@ -10,6 +10,14 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    link = {
+      url = "github:alinkbetweennets/nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
   };
 
   outputs = { self, ... }@inputs:
@@ -86,7 +94,10 @@
             ./home-manager/profiles/common.nix
             ./home-manager/profiles/gui_common.nix
             ./home-manager/profiles/laptop.nix
+            #link.homeManagerModules.pentesting
           ];
+
+          #link.pentesting.enable = true; # Will comment in, when module is fixed, currently does not build because nur is not found
         };
         server = { pkgs, lib, ... }: {
           imports = [
