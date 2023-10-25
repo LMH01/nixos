@@ -4,6 +4,7 @@ with lib;
 {
 
   imports = with flake-self.homeManagerModules; [
+    ctf-tools
     i3
     latex
     rust
@@ -39,6 +40,7 @@ with lib;
       flameshot.enable = true;
     };
 
+    lmh01.ctf-tools.enable = true;
     lmh01.programs = {
       i3.enable = true;
       latex.enable = true;
