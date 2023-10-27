@@ -21,6 +21,7 @@ with lib;
 
     # Packages to install on all systems
     home.packages = with pkgs; [
+      bat
       bottom
       fastfetch
       gdb
