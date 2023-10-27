@@ -11,7 +11,7 @@ in
   config = mkIf cfg.enable {
 
     # make kernel load module early
-    boot.initrd.kernelModules = [ "amdgpu" ];
+    #boot.initrd.kernelModules = [ "amdgpu" ]; #disabled because it impacts boot time
 
     services.xserver.videoDrivers = [ "amdgpu" ];
 
