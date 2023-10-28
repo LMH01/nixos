@@ -27,6 +27,7 @@ with lib;
       font-awesome
       kate
       obsidian
+      openvpn
       signal-desktop
       xclip
       #(pkgs.callPackage ../../pkgs/alpha_tui {})
