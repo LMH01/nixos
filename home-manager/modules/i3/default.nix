@@ -83,6 +83,7 @@ in
 
               "Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
               "${modifier}+Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show emoji";
+              "${modifier}+Shift+x" = "kill";
 
               "${modifier}+Shift+Tab" = "workspace prev";
 
