@@ -18,6 +18,7 @@
     self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.xserver
+    self.nixosModules.oneko
   ];
 
   lmh01 = {
@@ -29,6 +30,7 @@
     options.type = "laptop";
     syncthing.enable = true;
     xserver.enable = true;
+    oneko.enable=true;
   };
 
   # Home Manager configuration
@@ -72,7 +74,7 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment. - does not work when booth amd and nvidia drivers are installed on stable branch
-  #services.xserver.displayManager.sddm.enable = true; 
+  #services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Enable the Gnome Desktop Environment - works with booth amd and nvidia drivers installed on stable branch
