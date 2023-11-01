@@ -12,6 +12,7 @@
     # my own modules
     self.nixosModules.amdgpu
     self.nixosModules.common
+    self.nixosModules.docker
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.openssh
@@ -27,6 +28,7 @@
       root.enable = true;
     };
     amdgpu.enable = true;
+    docker.enable = true;
     openssh.enable = true;
     options.type = "laptop";
     syncthing.enable = true;
