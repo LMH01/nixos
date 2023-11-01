@@ -101,6 +101,10 @@
     #media-session.enable = true;
   };
 
+  # temp for ctf
+    virtualisation.virtualbox.host.enable = true;
+   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
