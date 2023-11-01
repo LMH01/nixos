@@ -20,6 +20,7 @@
     self.nixosModules.users
     self.nixosModules.wayland
     self.nixosModules.xserver
+    self.nixosModules.oneko
   ];
 
   lmh01 = {
@@ -34,6 +35,7 @@
     syncthing.enable = true;
     wayland.enable = true;
     xserver.enable = true;
+    oneko.enable=true;
   };
 
   # Home Manager configuration
@@ -60,7 +62,7 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  
+
   # Enable ntfs support
   boot.supportedFilesystems = [ "ntfs" ];
 

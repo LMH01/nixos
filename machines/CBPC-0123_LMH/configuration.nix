@@ -20,6 +20,7 @@
     self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.xserver
+    self.nixosModules.oneko
   ];
 
   lmh01 = {
@@ -33,6 +34,7 @@
     openssh.enable = true;
     syncthing.enable = true;
     xserver.enable = true;
+    oneko.enable=true;
   };
 
   # Home Manager configuration
@@ -59,7 +61,7 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  
+
   # Enable ntfs support
   boot.supportedFilesystems = [ "ntfs" ];
 
