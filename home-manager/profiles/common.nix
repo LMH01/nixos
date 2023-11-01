@@ -14,6 +14,7 @@ with lib;
   imports = with flake-self.homeManagerModules; [
     direnv
     git
+    nvim
     zsh
   ];
 
@@ -43,6 +44,7 @@ with lib;
     
     lmh01.programs = {
       direnv.enable = true;
+      nvim.enable = true;
     };
 
     # Services to start on all systems
