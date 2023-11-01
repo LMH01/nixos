@@ -15,12 +15,13 @@
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
+    self.nixosModules.oneko
     self.nixosModules.openrgb
     self.nixosModules.openssh
     self.nixosModules.syncthing
     self.nixosModules.users
+    self.nixosModules.virtualisation
     self.nixosModules.xserver
-    self.nixosModules.oneko
   ];
 
   lmh01 = {
@@ -30,11 +31,12 @@
     };
     #wayland.enable = true;
     nvidia.enable = true;
+    oneko.enable = true;
     openrgb.enable = true;
     openssh.enable = true;
     syncthing.enable = true;
+    virtualisation.enable = true;
     xserver.enable = true;
-    oneko.enable=true;
   };
 
   # Home Manager configuration
