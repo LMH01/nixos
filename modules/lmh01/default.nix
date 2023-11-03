@@ -3,7 +3,7 @@
   options.lmh01 = {
     secrets = mkOption {
       type = types.str;
-      default = "/home/louis/.pwd";
+      default = "/home/louis/.secrets";
       description = "storage path for all secrets";
     };
   };
