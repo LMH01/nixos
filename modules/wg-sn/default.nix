@@ -10,11 +10,9 @@ in {
       firewall.allowedUDPPorts = [ 51820 ];
       firewall.checkReversePath = mkForce false;
 
-      interfaces.wg-sn = { mtu = 1412; };
-
-      wireguard.interfaces = {
+      wg-quick.interfaces = {
         wg-sn = {
-          ips = [ "10.0.1.2/24" "fdc9:281f:04d7:9eea::2/64" ];
+          address = [ "10.0.1.2/24" "fdc9:281f:04d7:9eea::2/64" ];
           privateKeyFile = "${config.lmh01.secrets}/wg-sn-louis.private";
           peers = [
             {
@@ -25,6 +23,7 @@ in {
               persistentKeepalive = 25;
             }
           ];
+          autostart = false;
         };
       };
 
