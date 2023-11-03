@@ -7,7 +7,7 @@ in {
     networking.firewall.allowedUDPPorts = [ 51820 ];
     networking.firewall.checkReversePath = mkForce false;
     networking.wireguard.interfaces = {
-      wg-link = {
+      wg-sn = {
         ips = [ "10.0.1.2/24" "fdc9:281f:04d7:9eea::2/64" ];
         privateKeyFile = "${config.lmh01.secrets}/wg-sn-louis.private";
         peers = [
