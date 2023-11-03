@@ -21,6 +21,8 @@
     self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.virtualisation
+    self.nixosModules.wg-sn
+    self.nixosModules.wireguard
     self.nixosModules.xserver
   ];
 
@@ -36,6 +38,8 @@
     openssh.enable = true;
     syncthing.enable = true;
     virtualisation.enable = true;
+    wg-sn.enable = true;
+    wireguard.enable = true;
     xserver.enable = true;
   };
 
