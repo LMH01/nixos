@@ -26,6 +26,7 @@ with lib;
       fira-code
       font-awesome
       kate
+      kleopatra
       obsidian
       openvpn
       signal-desktop
