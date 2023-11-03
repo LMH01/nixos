@@ -34,7 +34,6 @@ with lib;
       tldr
       tree
       unzip
-      wireguard-tools
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     # Programs to install on all systems
