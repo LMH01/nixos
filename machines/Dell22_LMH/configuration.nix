@@ -19,7 +19,7 @@
     self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.wayland
-    #self.nixosModules.wg-sn
+    self.nixosModules.wg-sn
     #self.nixosModules.wireguard
     self.nixosModules.xserver
     self.nixosModules.oneko
@@ -37,7 +37,7 @@
     syncthing.enable = true;
     wayland.enable = true;
     xserver.enable = true;
-    #wg-sn.enable = true;
+    wg-sn.enable = true;
     #wireguard.enable = true;
     oneko.enable=true;
   };
