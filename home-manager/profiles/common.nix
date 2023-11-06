@@ -33,6 +33,7 @@ with lib;
       restic
       tldr
       tree
+      sysz
       unzip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
