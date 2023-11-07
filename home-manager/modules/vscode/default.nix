@@ -19,6 +19,13 @@
       usernamehw.errorlens
       vadimcn.vscode-lldb
       vscodevim.vim
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      #{
+      #  name = "vscode-pets";
+      #  publisher = "tonybaloney";
+      #  version = "1.25.0";
+      #  sha256 = "2xzqR4KW1+RFJI0mttou/LSqE51Ozn4eBpbCRwzy5AQ=";
+      #}
     ];
 
     userSettings = {
