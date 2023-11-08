@@ -25,7 +25,7 @@ with lib;
     home.packages = with pkgs; [
       bat
       bottom
-      #fastfetch # Commented out because it causes the build to fail (something is broken)
+      fastfetch # Commented out because it causes the build to fail (something is broken)
       gdb
       gitui
       lldb
@@ -34,6 +34,7 @@ with lib;
       restic
       tldr
       tree
+      srm
       sysz
       unzip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
