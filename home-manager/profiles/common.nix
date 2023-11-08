@@ -15,6 +15,7 @@ with lib;
     direnv
     git
     nvim
+    starship
     zsh
   ];
 
@@ -39,13 +40,13 @@ with lib;
 
     # Programs to install on all systems
     programs = {
-      starship.enable = true;
       zoxide.enable = true;
     };
     
     lmh01.programs = {
       direnv.enable = true;
       nvim.enable = true;
+      starship.enable = true;
     };
 
     # Services to start on all systems
