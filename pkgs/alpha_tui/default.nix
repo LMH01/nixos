@@ -1,28 +1,26 @@
-{ lib, rustPlatform, fetchFromGitHub, pkg-config }:
+{ lib
+, rustPlatform
+, fetchFromGitHub
+}:
 
 rustPlatform.buildRustPackage rec {
-  pname = "alpha_tui";
-  version = "1.0.1";
+  pname = "alpha-tui";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "LMH01";
-    repo = pname;
+    repo = "alpha_tui";
     rev = "v${version}";
-    hash = "sha256-6WnZqiPxFL1oQIW7XTT4VCREJVp60ENNn8+uotRIaiI=";
+    hash = "sha256-U/278hufT3vvJ548To5CSeg29G0VBRSC6TuhpomQ1rQ=";
   };
 
-  cargoHash = "sha256-BRogDbUD0tl1eT6cLoFY/ddLmXsvm6CGpJ/MZnaSrzI=";
-
-  nativeBuildInputs = [ pkg-config ];
-
-  # Needed to get openssl-sys to use pkg-config.
-  OPENSSL_NO_VENDOR = 1;
+  cargoHash = "sha256-EaJKo2zEUU3vRvFAbD77aTPUWvGzzwKIQff2oq0yrag=";
 
   meta = with lib; {
-    description = "Compiler and runtime environment for Alpha-Notation written in Rust";
-    homepage = "https://github.com/LMH01/alpha_tui/";
-    changelog = "https://github.com/LMH01/alpha_tui/blob/${version}/docs/changelog.md";
+    description = "My attempt to write a compiler for the Alpha-Notation used in my SysInf lecture";
+    homepage = "https://github.com/LMH01/alpha_tui";
     license = licenses.gpl3Only;
     maintainers = with maintainers; [ LMH01 ];
+    mainProgram = "alpha-tui";
   };
 }

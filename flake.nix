@@ -39,6 +39,7 @@
         woodpecker-pipeline = nixpkgsFor.${system}.callPackage ./pkgs/woodpecker-pipeline { flake-self = self; inputs = inputs; };
         inherit (nixpkgsFor.${system}.lmh01)
           candy-icon-theme
+          alpha_tui
           ;
       });
 
