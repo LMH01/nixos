@@ -30,6 +30,7 @@ with lib;
       obsidian
       openvpn
       signal-desktop
+      thunderbird
       xclip
       #(pkgs.callPackage ../../pkgs/alpha_tui {})
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
