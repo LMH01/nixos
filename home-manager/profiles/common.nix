@@ -31,6 +31,8 @@ with lib;
       lldb
       man-pages
       man-pages-posix
+      nix-init
+      nix-top
       restic
       tldr
       tree
