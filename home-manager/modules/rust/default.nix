@@ -8,16 +8,24 @@ in
 
   config = mkIf cfg.enable {
 
-    # TODO see if this is feasable or if it is a better idea to use rust using a nix shell
-    # (i heared that it is a bad idea to install gcc directly this way)
+    # Certain Rust tools won't work without this
+    home.sessionVariables.RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+
+    # install rust toolchain
     home.packages = with pkgs; [
       cargo
+      clang
       clippy
       gcc
+      rust-analyzer
       rustc
       rustfmt
     ];
 
-    programs.vscode.extensions = with pkgs.vscode-extensions; [ rust-lang.rust-analyzer ];
+    programs.vscode.extensions = with pkgs.vscode-extensions; [
+      rust-lang.rust-analyzer
+      serayuzgur.crates
+    ];
+
   };
 }
