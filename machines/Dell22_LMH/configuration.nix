@@ -39,7 +39,7 @@
     xserver.enable = true;
     wg-sn.enable = true;
     wireguard.enable = true;
-    oneko.enable=true;
+    oneko.enable = true;
   };
 
   # Home Manager configuration
@@ -108,8 +108,8 @@
   };
 
   # temp for ctf
-    virtualisation.virtualbox.host.enable = true;
-   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -140,6 +140,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # swapfile
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = (1024 * 32);
+    }
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
