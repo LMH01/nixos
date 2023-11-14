@@ -36,6 +36,7 @@ with lib;
       restic
       tldr
       tree
+      smartmontools
       srm
       sysz
       unzip
