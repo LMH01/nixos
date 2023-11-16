@@ -122,6 +122,10 @@
     #(pkgs.callPackage ./candy-icon-theme {})
   ];
 
+  # TODO move to own module
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
