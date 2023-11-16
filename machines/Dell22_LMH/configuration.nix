@@ -11,6 +11,7 @@
 
     # my own modules
     self.nixosModules.amdgpu
+    self.nixosModules.bluetooth
     self.nixosModules.common
     self.nixosModules.docker
     self.nixosModules.locale
@@ -31,6 +32,7 @@
       root.enable = true;
     };
     amdgpu.enable = true;
+    bluetooth.enable = true;
     docker.enable = true;
     openssh.enable = true;
     options.type = "laptop";
@@ -121,10 +123,6 @@
     #  wget
     #(pkgs.callPackage ./candy-icon-theme {})
   ];
-
-  # TODO move to own module
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
