@@ -25,6 +25,7 @@ with lib;
     home.packages = with pkgs; [
       bat
       bottom
+      cifs-utils
       fastfetch # Commented out because it causes the build to fail (something is broken)
       gdb
       gitui
