@@ -12,6 +12,7 @@
     # my own modules
     #self.nixosModules.wayland
     self.nixosModules.common
+    self.nixosModules.docker
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
@@ -32,6 +33,7 @@
       root.enable = true;
     };
     #wayland.enable = true;
+    docker.enable = true;
     nvidia.enable = true;
     oneko.enable = true;
     openrgb.enable = true;
