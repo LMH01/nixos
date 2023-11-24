@@ -17,6 +17,7 @@
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.openssh
+    self.nixosModules.steam
     self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.wayland
@@ -36,6 +37,7 @@
     docker.enable = true;
     openssh.enable = true;
     options.type = "laptop";
+    steam.enable = true;
     syncthing.enable = true;
     wayland.enable = true;
     xserver.enable = true;
