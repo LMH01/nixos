@@ -19,6 +19,7 @@
     self.nixosModules.oneko
     self.nixosModules.openrgb
     self.nixosModules.openssh
+    self.nixosModules.steam
     self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.virtualisation
@@ -38,6 +39,7 @@
     oneko.enable = true;
     openrgb.enable = true;
     openssh.enable = true;
+    steam.enable = true;
     syncthing.enable = true;
     virtualisation.enable = true;
     wg-sn.enable = true;
