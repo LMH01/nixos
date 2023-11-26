@@ -4,8 +4,18 @@
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [
+
       # our packages
       flake-self.overlays.default
+
+      # pkgs.cudapkgs.<package> calls a package with cuda support
+      (final: prev: {
+        cudapkgs = import flake-self.inputs.nixpkgs {
+          system = "${pkgs.system}";
+          config = { allowUnfree = true; cudaSupport = true; };
+        };
+      })
+
     ];
   };
 
