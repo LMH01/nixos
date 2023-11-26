@@ -115,6 +115,9 @@
   # Enable teamviewer service (temporary)
   services.teamviewer.enable = true;
 
+  # Enable flatpak (mainly for Handbrake)
+  services.flatpak.enable = true;
+  
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
