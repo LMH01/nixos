@@ -12,6 +12,7 @@
 
     self.nixosModules.common
     self.nixosModules.docker
+    self.nixosModules.jellyfin
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.openssh
@@ -44,6 +45,7 @@
       root.enable = true;
     };
     docker.enable = true;
+    jellyfin.enable = true;
     openssh.enable = true;
     options.type = "server";
     syncthing.enable = true;
