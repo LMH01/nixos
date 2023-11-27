@@ -13,6 +13,7 @@
     #self.nixosModules.wayland
     self.nixosModules.common
     self.nixosModules.docker
+    self.nixosModules.libreoffice
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
@@ -35,6 +36,7 @@
     };
     #wayland.enable = true;
     docker.enable = true;
+    libreoffice.enable = true;
     nvidia.enable = true;
     oneko.enable = true;
     openrgb.enable = true;
