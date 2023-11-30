@@ -1,6 +1,15 @@
 { lib, pkgs, config, ... }:
 with lib;
-let cfg = config.lmh01.nvidia;
+let
+  cfg = config.lmh01.nvidia;
+
+  # packages that should be built with CUDA support on NVIDIA systems
+  cudaoverlay = (self: super: {
+    inherit (pkgs.cudapkgs)
+      handbrake
+      ;
+  });
+
 in
 {
 
@@ -10,6 +19,16 @@ in
 
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
+
+    nixpkgs = { overlays = [ cudaoverlay ]; };
+
+    # TODO:
+    # only should be set when louis is a home-manager user
+    home-manager.users = {
+      louis = {
+        nixpkgs = { overlays = [ cudaoverlay ]; };
+      };
+    };
 
     # Nvidia settings
     hardware = {

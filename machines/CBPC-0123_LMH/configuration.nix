@@ -13,12 +13,14 @@
     #self.nixosModules.wayland
     self.nixosModules.common
     self.nixosModules.docker
+    self.nixosModules.libreoffice
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.nvidia
     self.nixosModules.oneko
     self.nixosModules.openrgb
     self.nixosModules.openssh
+    self.nixosModules.steam
     self.nixosModules.syncthing
     self.nixosModules.users
     self.nixosModules.virtualisation
@@ -34,10 +36,12 @@
     };
     #wayland.enable = true;
     docker.enable = true;
+    libreoffice.enable = true;
     nvidia.enable = true;
     oneko.enable = true;
     openrgb.enable = true;
     openssh.enable = true;
+    steam.enable = true;
     syncthing.enable = true;
     virtualisation.enable = true;
     wg-sn.enable = true;
@@ -113,6 +117,9 @@
   # Enable teamviewer service (temporary)
   services.teamviewer.enable = true;
 
+  # Enable flatpak (mainly for Handbrake)
+  services.flatpak.enable = true;
+  
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
