@@ -31,6 +31,7 @@ with lib;
       openvpn
       signal-desktop
       thunderbird
+      vlc
       xclip
       
       #lmh01.alpha_tui
