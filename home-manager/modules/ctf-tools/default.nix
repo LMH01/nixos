@@ -38,6 +38,7 @@ in {
 
       # Static Analysis
       file
+      binwalk
     ];
   };
 }
