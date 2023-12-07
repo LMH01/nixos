@@ -30,6 +30,7 @@ with lib;
       fastfetch # Commented out because it causes the build to fail (something is broken)
       gdb
       gitui
+      glances
       lldb
       man-pages
       man-pages-posix
@@ -40,6 +41,7 @@ with lib;
       tree
       smartmontools
       srm
+      s-tui
       sysz
       unzip
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
