@@ -35,6 +35,9 @@ in {
       # Reversing
       ghidra
       pwndbg
+
+      # Static Analysis
+      file
     ];
   };
 }
