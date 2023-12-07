@@ -146,13 +146,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # swapfile
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = (1024 * 32);
-    }
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
