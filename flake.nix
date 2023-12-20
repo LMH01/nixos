@@ -28,6 +28,16 @@
         nixos-hardware.follows = "nixos-hardware";
       };
     };
+
+    ### Tools for managing NixOS
+
+    # lollypops deployment tool
+    # https://github.com/pinpox/lollypops
+    lollypops = {
+      url = "github:pinpox/lollypops";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
+    };
+
   };
 
   outputs = { self, ... }@inputs:
@@ -62,6 +72,12 @@
             ;
         });
 
+      apps = forAllSystems (system: {
+        lollypops = lollypops.apps.${system}.default {
+          configFlake = self;
+        };
+      });
+
       # Output all modules in ./modules to flake. Modules should be in
       # individual subdirectories and contain a default.nix file
       nixosModules = builtins.listToAttrs (map
@@ -86,6 +102,7 @@
             specialArgs = { flake-self = self; } // inputs;
 
             modules = [
+              lollypops.nixosModules.lollypops
               (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
               self.nixosModules.options
             ];
