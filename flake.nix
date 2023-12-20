@@ -18,6 +18,16 @@
     #    home-manager.follows = "home-manager";
     #  };
     #};
+
+    # used for `nix run .#build-outputs`
+    mayniklas = {
+      url = "github:MayNiklas/nixos";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        nixos-hardware.follows = "nixos-hardware";
+      };
+    };
   };
 
   outputs = { self, ... }@inputs:
@@ -35,13 +45,22 @@
       overlays.default = final: prev:
         (import ./pkgs inputs) final prev;
 
-      packages = forAllSystems (system: {
-        woodpecker-pipeline = nixpkgsFor.${system}.callPackage ./pkgs/woodpecker-pipeline { flake-self = self; inputs = inputs; };
-        inherit (nixpkgsFor.${system}.lmh01)
-          candy-icon-theme
-          alpha_tui
-          ;
-      });
+      packages = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system}; in {
+          woodpecker-pipeline = pkgs.callPackage ./pkgs/woodpecker-pipeline {
+            flake-self = self;
+            inputs = inputs;
+          };
+          build_outputs =
+            pkgs.callPackage mayniklas.packages.${system}.build_outputs.override {
+              inherit self;
+              output_path = "~/.keep-nix-outputs-LMH01";
+            };
+          inherit (nixpkgsFor.${system}.lmh01)
+            candy-icon-theme
+            alpha_tui
+            ;
+        });
 
       # Output all modules in ./modules to flake. Modules should be in
       # individual subdirectories and contain a default.nix file
