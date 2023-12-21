@@ -1,3 +1,4 @@
+# nix run .\#lollypops -- pi4b
 { self, ... }:
 { pkgs, lib, config, modulesPath, flake-self, home-manager, nixos-hardware, nixpkgs, ... }: {
 
@@ -68,12 +69,17 @@
 
   hardware.raspberry-pi."4".poe-hat.enable = true;
   networking.hostName = "pi4b-louis";
-  
+
   networking.networkmanager.enable = true;
 
-  networking.firewall.allowedTCPPorts = [ 
+  networking.firewall.allowedTCPPorts = [
     8123 # used by home assistant
   ];
+
+  lollypops.deployment = {
+    local-evaluation = true;
+    # ssh = { user = "root"; host = "<IP>"; };
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
