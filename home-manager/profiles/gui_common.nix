@@ -20,6 +20,7 @@ with lib;
       alacritty
       anki
       beauty-line-icon-theme
+      bonn-mensa
       discord
       dracula-theme
       fira-code

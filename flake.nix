@@ -29,6 +29,12 @@
       };
     };
 
+    # used to get current mensa meals
+    bonn-mensa = {
+      url = "github:alexanderwallau/bonn-mensa";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
+    };
+
     ### Tools for managing NixOS
 
     # lollypops deployment tool

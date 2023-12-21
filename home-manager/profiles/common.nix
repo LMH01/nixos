@@ -12,6 +12,12 @@ with lib;
   };
 
   imports = with flake-self.homeManagerModules; [
+    {
+      nixpkgs.overlays = [
+        flake-self.overlays.default
+        flake-self.inputs.bonn-mensa.overlays.default
+      ];
+    }
     direnv
     git
     nvim
@@ -50,7 +56,7 @@ with lib;
     programs = {
       zoxide.enable = true;
     };
-    
+
     lmh01.programs = {
       direnv.enable = true;
       nvim.enable = true;
