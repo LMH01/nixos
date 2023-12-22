@@ -20,6 +20,12 @@
       vadimcn.vscode-lldb
       vscodevim.vim
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "code-spell-checker-german";
+        publisher = "streetsidesoftware";
+        version = "2.3.0";
+        sha256 = "rAm3pcLn6HoWnhWeoK/0D9r5oY9TIQ23EMh35rurgDg=";
+      }
       #{
       #  name = "vscode-pets";
       #  publisher = "tonybaloney";
