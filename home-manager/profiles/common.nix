@@ -44,6 +44,10 @@ with lib;
       s-tui
       sysz
       unzip
+
+      mayniklas.gen-module # create a new module with a template
+      mayniklas.mtu-check # MTU of a network
+      mayniklas.vs-fix # fix for vscode remote SSH (replaces the node binary with a symlink into the nix store)
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     # Programs to install on all systems
@@ -67,6 +71,7 @@ with lib;
       overlays = [
         flake-self.overlays.default
         flake-self.inputs.bonn-mensa.overlays.default
+        flake-self.inputs.mayniklas.overlays.mayniklas
       ];
     };
 
