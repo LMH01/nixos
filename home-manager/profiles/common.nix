@@ -12,12 +12,6 @@ with lib;
   };
 
   imports = with flake-self.homeManagerModules; [
-    {
-      nixpkgs.overlays = [
-        flake-self.overlays.default
-        flake-self.inputs.bonn-mensa.overlays.default
-      ];
-    }
     direnv
     git
     nvim
@@ -71,8 +65,8 @@ with lib;
       # Allow "unfree" licenced packages
       config = { allowUnfree = true; };
       overlays = [
-        # our packages
         flake-self.overlays.default
+        flake-self.inputs.bonn-mensa.overlays.default
       ];
     };
 
