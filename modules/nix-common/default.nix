@@ -8,6 +8,8 @@
       # our packages
       flake-self.overlays.default
 
+      flake-self.inputs.mayniklas.overlays.mayniklas
+
       # pkgs.cudapkgs.<package> calls a package with cuda support
       (final: prev: {
         cudapkgs = import flake-self.inputs.nixpkgs {

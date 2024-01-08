@@ -34,7 +34,9 @@ with lib;
       thunderbird
       vlc
       xclip
-      
+
+      mayniklas.set-performance
+
       #lmh01.alpha_tui
       #(pkgs.callPackage ../../pkgs/alpha_tui {})
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
