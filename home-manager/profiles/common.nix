@@ -27,6 +27,7 @@ with lib;
       bottom
       calc
       cifs-utils
+      dnsutils
       fastfetch # Commented out because it causes the build to fail (something is broken)
       gdb
       gitui
