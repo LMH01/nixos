@@ -37,6 +37,7 @@ with lib;
       man-pages-posix
       nix-init
       nix-top
+      nix-tree
       restic
       tldr
       tree
