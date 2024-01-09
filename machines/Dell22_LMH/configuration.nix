@@ -19,6 +19,7 @@
     self.nixosModules.openssh
     self.nixosModules.steam
     self.nixosModules.syncthing
+    self.nixosModules.unbound
     self.nixosModules.users
     self.nixosModules.wayland
     self.nixosModules.wg-sn
@@ -39,6 +40,7 @@
     options.type = "laptop";
     steam.enable = true;
     syncthing.enable = true;
+    unbound.enable = true;
     wayland.enable = true;
     xserver.enable = true;
     wg-sn.enable = true;
@@ -83,6 +85,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # Enable unbound local dns when unbound is enabled
+  networking.networkmanager.insertNameservers = lib.mkIf config.lmh01.unbound.enable [ "127.0.0.1" ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
