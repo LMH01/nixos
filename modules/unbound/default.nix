@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, flake-self, ... }:
 with lib;
 let
   cfg = config.lmh01.unbound;
@@ -29,7 +29,10 @@ in
       enable = true;
       settings = {
         server = {
-          include = [ "\"${dns-overwrites-config}\"" ];
+          include = [
+            "\"${dns-overwrites-config}\""
+            "\"${flake-self.inputs.adblock-unbound.packages.${pkgs.system}.unbound-adblockStevenBlack}\""
+          ];
           interface = [ "127.0.0.1" ];
           access-control = [ "127.0.0.0/8 allow" ];
         };
