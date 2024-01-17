@@ -6,7 +6,8 @@ with lib;
   config = {
 
     home.packages = with pkgs; [
-
+      jdk21 # exclicitly new java version for prism launcher
+      prismlauncher # minecraft launcher
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = { };
