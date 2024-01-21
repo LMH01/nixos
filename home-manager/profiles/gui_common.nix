@@ -30,6 +30,7 @@ with lib;
       kleopatra
       obsidian
       openvpn
+      pympress
       signal-desktop
       thunderbird
       vlc
