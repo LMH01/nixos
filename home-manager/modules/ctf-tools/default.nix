@@ -43,6 +43,7 @@ in {
       # Android
       android-studio
       androidenv.androidPkgs_9_0.platform-tools # to get adb
+      jadx # .apk decompiling
     ];
   };
 }
