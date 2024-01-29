@@ -13,6 +13,7 @@
     #self.nixosModules.wayland
     self.nixosModules.common
     self.nixosModules.docker
+    self.nixosModules.gitlab-runner
     self.nixosModules.libreoffice
     self.nixosModules.locale
     self.nixosModules.nix-common
@@ -36,6 +37,7 @@
     };
     #wayland.enable = true;
     docker.enable = true;
+    gitlab-runner.enable = true;
     libreoffice.enable = true;
     nvidia.enable = true;
     oneko.enable = true;
