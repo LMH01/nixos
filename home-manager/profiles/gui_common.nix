@@ -26,6 +26,7 @@ with lib;
       fira-code
       firefox
       font-awesome
+      gimp
       kate
       kleopatra
       obsidian
