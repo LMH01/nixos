@@ -14,6 +14,7 @@
     self.nixosModules.bluetooth
     self.nixosModules.common
     self.nixosModules.docker
+    self.nixosModules.gitlab-runner
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.openssh
@@ -36,6 +37,7 @@
     amdgpu.enable = true;
     bluetooth.enable = true;
     docker.enable = true;
+    gitlab-runner.enable = true;
     openssh.enable = true;
     options.type = "laptop";
     steam.enable = true;
