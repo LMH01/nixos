@@ -29,6 +29,7 @@ with lib;
       gimp
       kate
       kleopatra
+      microsoft-edge
       obsidian
       openvpn
       pympress
