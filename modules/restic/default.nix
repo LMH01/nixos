@@ -17,6 +17,8 @@ in
       example = [ "/home/louis/.cache" ];
       description = "Paths to exclude from backup";
     };
+    # TODO option to perform a specific script before the backup is started
+    # TODO option to perform a specific script when the backup is completed
   };
   config = mkIf cfg.enable {
     services.restic.backups =
