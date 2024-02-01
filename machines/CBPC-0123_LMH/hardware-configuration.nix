@@ -42,6 +42,12 @@
       options = [ "subvol=.snapshots" "compress=zstd" ];
     };
 
+  fileSystems."/userdata" =
+    { device = "/dev/disk/by-uuid/608C11EE8C11BF88";
+      fsType = "ntfs-3g"; 
+      options = [ "rw" ];
+    };
+
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-uuid/E6D2-1644";
