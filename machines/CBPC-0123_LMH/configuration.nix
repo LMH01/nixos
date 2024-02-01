@@ -21,6 +21,7 @@
     self.nixosModules.oneko
     self.nixosModules.openrgb
     self.nixosModules.openssh
+    self.nixosModules.restic
     self.nixosModules.steam
     self.nixosModules.syncthing
     self.nixosModules.users
@@ -43,6 +44,12 @@
     oneko.enable = true;
     openrgb.enable = true;
     openssh.enable = true;
+    restic-client = {
+      enable = true;
+      backup-paths-sn = [
+        "/home/louis/Documents/other/python-fun"
+      ];
+    };
     steam.enable = true;
     syncthing.enable = true;
     virtualisation.enable = true;
