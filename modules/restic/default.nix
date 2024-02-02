@@ -114,7 +114,7 @@ in
           ];
           initialize = true;
         };
-        lb = { # not yet usable as credentials not not yet setup correctly
+        lb = {
           paths = cfg.backup-paths-lb;
           repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
           passwordFile = "${config.lmh01.secrets}/restic/lb/password";
@@ -130,7 +130,6 @@ in
           extraBackupArgs = [
             "--exclude-file=${restic-ignore-file}"
             "--one-file-system"
-            "--dry-run" # TODO comment out
             "--retry-lock ${cfg.backup-retry-time-lb}" # try to periodically relock the repository for 2 hours
             "-v"
           ];

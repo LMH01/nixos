@@ -23,13 +23,16 @@
     #wayland.enable = true;
     nvidia.enable = true;
     openrgb.enable = true;
-    #restic-client = {
-    #  enable = true;
-    #  backup-paths-sn = [
-    #    "/userdata/Userdata"
-    #  ];
-    #  # TODO maybe change frequency of that backup to one time per week
-    #};
+    restic-client = {
+      enable = true;
+      #backup-paths-sn = [ #disabled until tailscale works
+      #  "/userdata/Userdata"
+      #];
+      # TODO maybe change frequency of that backup to one time per week
+      backup-paths-lb = [
+        "userdata/Userdata/Dokumente"
+      ];
+    };
   };
 
   # Home Manager configuration
