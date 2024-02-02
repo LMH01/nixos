@@ -13,6 +13,8 @@
 
     self.nixosModules.server
     self.nixosModules.jellyfin
+    self.nixosModules.wg-sn
+    self.nixosModules.wireguard
   ];
 
   ### build sd-image
@@ -37,6 +39,8 @@
   lmh01 = {
     jellyfin.enable = true;
     options.type = "server";
+    wg-sn.enable = true;
+    wireguard.enable = true;
   };
 
   # Home Manager configuration
