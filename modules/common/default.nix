@@ -1,4 +1,5 @@
-# This file will contain stuff that I use on all my systems
+# this file contains the modules that
+# should be enabled on all my systems
 { lib, self, ... }:
 with lib;
 {

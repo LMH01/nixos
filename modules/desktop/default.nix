@@ -1,3 +1,5 @@
+# this file contains the modules that
+# should be enabled on all my dekstops
 { lib, self, ... }:
 with lib;
 {

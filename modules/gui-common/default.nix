@@ -1,3 +1,5 @@
+# this filecontains the modules that
+# should be enabled on all my systems with gui
 { lib, pkgs, config, self, ... }:
 with lib;
 let cfg = config.lmh01.gui-common;
