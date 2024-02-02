@@ -8,21 +8,19 @@
   imports = [
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
+    
+    # this machine is a desktop,
+    # import type specific modules
+    self.nixosModules.desktop
 
-    # my own modules
-    #self.nixosModules.wayland
-    self.nixosModules.gitlab-runner
-    self.nixosModules.gui-common
+    # my own modules, specific for this machine
     self.nixosModules.nvidia
     self.nixosModules.openrgb
     self.nixosModules.restic
-    self.nixosModules.steam
   ];
 
   lmh01 = {
     #wayland.enable = true;
-    gitlab-runner.enable = true;
-    gui-common.enable = true;
     nvidia.enable = true;
     openrgb.enable = true;
     restic-client = {
@@ -31,7 +29,6 @@
         "/home/louis/Documents/other/python-fun"
       ];
     };
-    steam.enable = true;
   };
 
   # Home Manager configuration

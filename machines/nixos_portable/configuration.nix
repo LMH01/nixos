@@ -8,17 +8,15 @@
   imports = [
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
+    
+    # this machine is a laptop,
+    # import type specific modules
+    self.nixosModules.laptop
 
     # my own modules
-    self.nixosModules.gui-common
     self.nixosModules.locale
     self.nixosModules.nvidia
   ];
-
-  lmh01 = {
-    gui-common.enable = true;
-    options.type = "laptop";
-  };
 
   # Home Manager configuration
   home-manager = {

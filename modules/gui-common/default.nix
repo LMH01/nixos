@@ -13,18 +13,12 @@ in
     self.nixosModules.virtualisation
   ];
 
-  options.lmh01.gui-common = { enable = mkEnableOption "activate common gui modules"; };
-
-  config = mkIf cfg.enable {
-
-    lmh01 = {
-      libreoffice.enable = true;
-      syncthing.enable = true;
-      wg-sn.enable = true;
-      wireguard.enable = true;
-      xserver.enable = true;
-      virtualisation.enable = true;
-    };
-
+  lmh01 = {
+    libreoffice.enable = true;
+    syncthing.enable = true;
+    wg-sn.enable = true;
+    wireguard.enable = true;
+    xserver.enable = true;
+    virtualisation.enable = true;
   };
 }

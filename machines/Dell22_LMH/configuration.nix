@@ -8,14 +8,16 @@
   imports = [
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
+    
+    # this machine is a laptop,
+    # import type specific modules
+    self.nixosModules.laptop
 
-    # my own modules
+    # my own modules, specific for this machine
     self.nixosModules.amdgpu
     self.nixosModules.bluetooth
     self.nixosModules.gitlab-runner
-    self.nixosModules.gui-common
     self.nixosModules.steam
-    self.nixosModules.unbound
     self.nixosModules.wayland
   ];
 
@@ -23,10 +25,7 @@
     amdgpu.enable = true;
     bluetooth.enable = true;
     gitlab-runner.enable = true;
-    gui-common.enable = true;
-    options.type = "laptop";
     steam.enable = true;
-    unbound.enable = true;
     wayland.enable = true;
   };
 
