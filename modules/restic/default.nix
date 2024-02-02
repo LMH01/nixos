@@ -20,6 +20,8 @@ in
     # TODO option to perform a specific script before the backup is started
     # TODO option to perform a specific script when the backup is completed
   };
+  # IMPORTANT
+  # Services are executed as root so make sure that the root user has access to the sftp server!
   config = mkIf cfg.enable {
     services.restic.backups =
       let
