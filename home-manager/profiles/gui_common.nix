@@ -37,7 +37,6 @@ with lib;
       thunderbird
       vlc
       xclip
-      xfce.thunar
 
       mayniklas.set-performance
 

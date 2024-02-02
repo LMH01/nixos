@@ -23,4 +23,7 @@ in
     xserver.enable = true;
     virtualisation.enable = true;
   };
+  
+  programs.thunar.enable = true;
+  programs.xfconf.enable = true; # required to make thunar settings persistant
 }
