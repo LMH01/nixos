@@ -5,13 +5,7 @@ in
 {
   options.lmh01.restic-client = {
     enable = mkEnableOption "restic backups";
-    backup-paths-sn = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      example = [ "/var/lib/gitea" ];
-      description = "Paths to backup to sn";
-    };
-    backup-timer-sn = mkOption {
+    backup-timer = mkOption {
       type = types.attrs;
       default = {
         OnCalendar = "01:00";
@@ -24,11 +18,17 @@ in
         RandomizedDelaySec = "6h";
       };
       description = lib.mdDoc ''
-        When to perform the backup to sn.
+        When to perform the backup to the backup locations.
 
         If the computer is turned off when the timer was supposed to fire,
         it is fired, when the computer is turned on the next time.
       ''; # TODO check if this is true
+    };
+    backup-paths-sn = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "/var/lib/gitea" ];
+      description = "Paths to backup to sn";
     };
     backup-prepare-sn = mkOption {
       type = with types; nullOr str;
@@ -54,6 +54,23 @@ in
         Set to 0m to disable retry.
       '';
     };
+    backup-paths-lb = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "/var/lib/gitea" ];
+      description = "Paths to backup to lb";
+    };
+    backup-retry-time-lb = mkOption {
+      type = types.str;
+      default = ''2h'';
+      description = lib.mdDoc ''
+        Retry to lock the repository if it is already locked, takes a value like 5m or 2h.
+        Will periodically retry the lock in this time frame.
+
+        Set to 0m to disable retry.
+      '';
+    };
+
     backup-paths-exclude = mkOption {
       type = types.listOf types.str;
       default = [ ];
@@ -80,21 +97,41 @@ in
           passwordFile = "${config.lmh01.secrets}/restic/sn/password";
           environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
 
-          # these values are given as example, I'm currently unsure how they work exactly
-          # they might be changed when I learn what they do exactly
           pruneOpts = [
             "--keep-daily 7"
             "--keep-weekly 5"
             "--keep-monthly 12"
             "--keep-yearly 75"
           ];
-          timerConfig = cfg.backup-timer-sn;
+          timerConfig = cfg.backup-timer;
           backupPrepareCommand = cfg.backup-prepare-sn;
           backupCleanupCommand = cfg.backup-cleanup-sn;
           extraBackupArgs = [
             "--exclude-file=${restic-ignore-file}"
             "--one-file-system"
             "--retry-lock ${cfg.backup-retry-time-sn}" # try to periodically relock the repository for 2 hours
+            "-v"
+          ];
+          initialize = true;
+        };
+        lb = { # not yet usable as credentials not not yet setup correctly
+          paths = cfg.backup-paths-lb;
+          repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+          #environmentFile = "${config.lmh01.secrets}/restic/lb/environment";
+
+          pruneOpts = [
+            "--keep-daily 7"
+            "--keep-weekly 5"
+            "--keep-monthly 12"
+            "--keep-yearly 75"
+          ];
+          timerConfig = cfg.backup-timer;
+          extraBackupArgs = [
+            "--exclude-file=${restic-ignore-file}"
+            "--one-file-system"
+            "--dry-run" # TODO comment out
+            "--retry-lock ${cfg.backup-retry-time-lb}" # try to periodically relock the repository for 2 hours
             "-v"
           ];
           initialize = true;
