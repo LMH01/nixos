@@ -26,7 +26,7 @@
     restic-client = {
       enable = true;
       backup-paths-sn = [
-        "/home/louis/Documents/other/python-fun"
+        "/userdata/Userdata"
       ];
     };
   };
