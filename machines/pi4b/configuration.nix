@@ -13,6 +13,7 @@
 
     self.nixosModules.server
     self.nixosModules.jellyfin
+    self.nixosModules.restic
     self.nixosModules.wg-sn
     self.nixosModules.wireguard
   ];
@@ -39,6 +40,23 @@
   lmh01 = {
     jellyfin.enable = true;
     options.type = "server";
+    restic-client = {
+      enable = true;
+      backup-paths-sn = [
+        "/home/louis/HomeAssistant"
+      ];
+      # stop home assistant before backup
+      backup-prepare-sn = ''
+        echo "Shutting down Home Assistant to perform backup"
+        ${pkgs.docker}/bin/docker stop homeassistant
+      '';
+      backup-cleanup-sn = ''
+        echo "Starting Home Assistant"
+        ${pkgs.docker}/bin/docker start homeassistant
+      '';
+      # backup retry time is set to none, so that home assistant isn't offline, waiting for a backup
+      backup-retry-time-sn = ''0m'';
+    };
     wg-sn.enable = true;
     wireguard.enable = true;
   };

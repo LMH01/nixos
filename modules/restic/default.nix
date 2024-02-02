@@ -44,6 +44,16 @@ in
         A script that must run after finishing the backup process to sn.
       '';
     };
+    backup-retry-time-sn = mkOption {
+      type = types.str;
+      default = ''2h'';
+      description = lib.mdDoc ''
+        Retry to lock the repository if it is already locked, takes a value like 5m or 2h.
+        Will periodically retry the lock in this time frame.
+
+        Set to 0m to disable retry.
+      '';
+    };
     backup-paths-exclude = mkOption {
       type = types.listOf types.str;
       default = [ ];
@@ -84,8 +94,7 @@ in
           extraBackupArgs = [
             "--exclude-file=${restic-ignore-file}"
             "--one-file-system"
-            "--dry-run"
-            "--retry-lock 2h" # try to periodically relock the repository for 2 hours
+            "--retry-lock ${cfg.backup-retry-time-sn}" # try to periodically relock the repository for 2 hours
             "-v"
           ];
           initialize = true;
