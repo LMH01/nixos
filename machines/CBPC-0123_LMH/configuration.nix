@@ -11,39 +11,20 @@
 
     # my own modules
     #self.nixosModules.wayland
-    self.nixosModules.common
-    self.nixosModules.docker
     self.nixosModules.gitlab-runner
-    self.nixosModules.libreoffice
-    self.nixosModules.locale
-    self.nixosModules.nix-common
+    self.nixosModules.gui-common
     self.nixosModules.nvidia
-    self.nixosModules.oneko
     self.nixosModules.openrgb
-    self.nixosModules.openssh
     self.nixosModules.restic
     self.nixosModules.steam
-    self.nixosModules.syncthing
-    self.nixosModules.users
-    self.nixosModules.virtualisation
-    self.nixosModules.wg-sn
-    self.nixosModules.wireguard
-    self.nixosModules.xserver
   ];
 
   lmh01 = {
-    users = {
-      louis.enable = true;
-      root.enable = true;
-    };
     #wayland.enable = true;
-    docker.enable = true;
     gitlab-runner.enable = true;
-    libreoffice.enable = true;
+    gui-common.enable = true;
     nvidia.enable = true;
-    oneko.enable = true;
     openrgb.enable = true;
-    openssh.enable = true;
     restic-client = {
       enable = true;
       backup-paths-sn = [
@@ -51,11 +32,6 @@
       ];
     };
     steam.enable = true;
-    syncthing.enable = true;
-    virtualisation.enable = true;
-    wg-sn.enable = true;
-    wireguard.enable = true;
-    xserver.enable = true;
   };
 
   # Home Manager configuration

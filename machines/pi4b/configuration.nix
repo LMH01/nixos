@@ -12,13 +12,7 @@
     home-manager.nixosModules.home-manager
 
     self.nixosModules.common
-    self.nixosModules.docker
     self.nixosModules.jellyfin
-    self.nixosModules.locale
-    self.nixosModules.nix-common
-    self.nixosModules.openssh
-    self.nixosModules.syncthing
-    self.nixosModules.users
   ];
 
   ### build sd-image
@@ -41,15 +35,8 @@
   ###
 
   lmh01 = {
-    users = {
-      louis.enable = true;
-      root.enable = true;
-    };
-    docker.enable = true;
     jellyfin.enable = true;
-    openssh.enable = true;
     options.type = "server";
-    syncthing.enable = true;
   };
 
   # Home Manager configuration

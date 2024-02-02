@@ -12,42 +12,22 @@
     # my own modules
     self.nixosModules.amdgpu
     self.nixosModules.bluetooth
-    self.nixosModules.common
-    self.nixosModules.docker
     self.nixosModules.gitlab-runner
-    self.nixosModules.locale
-    self.nixosModules.nix-common
-    self.nixosModules.openssh
+    self.nixosModules.gui-common
     self.nixosModules.steam
-    self.nixosModules.syncthing
     self.nixosModules.unbound
-    self.nixosModules.users
     self.nixosModules.wayland
-    self.nixosModules.wg-sn
-    self.nixosModules.wireguard
-    self.nixosModules.xserver
-    self.nixosModules.oneko
   ];
 
   lmh01 = {
-    users = {
-      louis.enable = true;
-      root.enable = true;
-    };
     amdgpu.enable = true;
     bluetooth.enable = true;
-    docker.enable = true;
     gitlab-runner.enable = true;
-    openssh.enable = true;
+    gui-common.enable = true;
     options.type = "laptop";
     steam.enable = true;
-    syncthing.enable = true;
     unbound.enable = true;
     wayland.enable = true;
-    xserver.enable = true;
-    wg-sn.enable = true;
-    wireguard.enable = true;
-    oneko.enable = true;
   };
 
   # Home Manager configuration

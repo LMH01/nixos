@@ -10,27 +10,14 @@
     home-manager.nixosModules.home-manager
 
     # my own modules
-    self.nixosModules.common
+    self.nixosModules.gui-common
     self.nixosModules.locale
-    self.nixosModules.nix-common
     self.nixosModules.nvidia
-    self.nixosModules.openssh
-    self.nixosModules.syncthing
-    self.nixosModules.users
-    self.nixosModules.xserver
-    self.nixosModules.oneko
   ];
 
   lmh01 = {
-    users = {
-      louis.enable = true;
-      root.enable = true;
-    };
-    openssh.enable = true;
+    gui-common.enable = true;
     options.type = "laptop";
-    syncthing.enable = true;
-    xserver.enable = true;
-    oneko.enable=true;
   };
 
   # Home Manager configuration
