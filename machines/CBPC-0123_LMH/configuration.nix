@@ -28,6 +28,7 @@
       backup-paths-sn = [
         "/userdata/Userdata"
       ];
+      # TODO maybe change frequency of that backup to one time per week
     };
   };
 
