@@ -41,8 +41,16 @@
     options.type = "server";
     restic-client = {
       enable = true;
+      backup-paths-lb = [
+        "/home/louis/.secrets"
+        "/home/louis/.ssh"
+        "/home/louis/Obsidian"
+      ];
       backup-paths-sn = [
+        "/home/louis/.secrets"
+        "/home/louis/.ssh"
         "/home/louis/HomeAssistant"
+        "/home/louis/Obsidian"
       ];
       # stop home assistant before backup
       backup-prepare-sn = ''
