@@ -32,7 +32,8 @@
         # (I'm assuming here that this is enough to not fire the timer twice per day)
         OnUnitActiveSec = "12h";
         # randomize startup time that it is less likely that backups collide
-        RandomizedDelaySec = "15m";
+        # more time is probably not needed, because changes should be pretty small
+        RandomizedDelaySec = "5m";
         Persistent = true;
       };
       #backup-paths-sn = [ #disabled until tailscale works
