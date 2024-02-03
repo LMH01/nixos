@@ -25,6 +25,16 @@
     openrgb.enable = true;
     restic-client = {
       enable = true;
+      # backups should be performed when the pc is started, but only once per day
+      backup-timer = {
+        OnBootSec = "1m"; # start time one minute after pc has been started
+        # make sure that the timer only starts once per 12 hours
+        # (I'm assuming here that this is enough to not fire the timer twice per day)
+        OnUnitActiveSec = "12h";
+        # randomize startup time that it is less likely that backups collide
+        RandomizedDelaySec = "15m";
+        Persistent = true;
+      };
       #backup-paths-sn = [ #disabled until tailscale works
       #  "/userdata/Userdata"
       #];
