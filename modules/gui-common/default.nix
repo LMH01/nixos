@@ -8,7 +8,6 @@ in
   imports = [
     self.nixosModules.common
     self.nixosModules.libreoffice
-    self.nixosModules.syncthing
     #self.nixosModules.wg-sn
     self.nixosModules.wireguard
     self.nixosModules.xserver
@@ -17,7 +16,6 @@ in
 
   lmh01 = {
     libreoffice.enable = true;
-    syncthing.enable = true;
     #wg-sn.enable = true; # disabled until it is needed again
     wireguard.enable = true;
     xserver.enable = true;
