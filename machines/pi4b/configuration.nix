@@ -14,7 +14,6 @@
     self.nixosModules.server
     self.nixosModules.jellyfin
     self.nixosModules.restic
-    self.nixosModules.wg-sn
     self.nixosModules.wireguard
   ];
 
@@ -57,7 +56,6 @@
       # backup retry time is set to none, so that home assistant isn't offline, waiting for a backup
       backup-retry-time-sn = ''0m'';
     };
-    wg-sn.enable = true;
     wireguard.enable = true;
   };
 
