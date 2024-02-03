@@ -9,6 +9,7 @@ with lib;
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.openssh
+    self.nixosModules.tailscale
     self.nixosModules.users
   ];
 
@@ -19,5 +20,6 @@ with lib;
       louis.enable = true;
       root.enable = true;
     };
+    tailscale.enable = true;
   };
 }
