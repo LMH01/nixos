@@ -20,7 +20,6 @@ in {
         WOODPECKER_GITEA_URL = "https://${config.lmh01.gitea.domain}:3000";
         WOODPECKER_GITEA_SKIP_VERIFY = "true"; # skip verification because certificate is self signed
         WOODPECKER_SERVER_ADDR_TLS = ":8100";
-        WOODPECKER_LOG_LEVEL = "debug";
       };
       environmentFile = "${config.lmh01.secrets}/woodpecker/environment";
     };
