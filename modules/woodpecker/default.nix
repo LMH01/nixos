@@ -14,7 +14,7 @@ in {
     services.woodpecker-server = {
       enable = true;
       environment = {
-        WOODPECKER_HOST = "https://${cfg.domain}:8100";
+        WOODPECKER_HOST = "https://${cfg.domain}";
         WOODPECKER_OPEN = "true";
         WOODPECKER_GITEA = "true";
         WOODPECKER_GITEA_URL = "http://${config.lmh01.gitea.domain}:3000";
@@ -27,6 +27,7 @@ in {
     services.woodpecker-agents.agents.docker = {
       enable = true;
       environment = {
+        WOODPECKER_GITEA_URL = "http://${config.lmh01.gitea.domain}:3000";
         WOODPECKER_SERVER = "${cfg.domain}:9000";
         WOODPECKER_MAX_WORKFLOWS = "1";
         WOODPECKER_BACKEND = "docker";

@@ -61,10 +61,12 @@
       ];
     };
     wireguard.enable = true;
-    woodpecker = {
-      enable = true;
-      domain = "192.168.188.124";
-    };
+    # disabled until I have time to properly get it running
+    # (problems with git clone)
+    #woodpecker = {
+    #  enable = true;
+    #  domain = "192.168.188.124";
+    #};
   };
 
   # Home Manager configuration

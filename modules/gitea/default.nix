@@ -22,7 +22,7 @@ in {
       enable = true;
       stateDir = "${config.lmh01.storage}/gitea";
       settings.server = {
-        ROOT_URL = "https://${cfg.domain}";
+        ROOT_URL = "https://${cfg.domain}:3000";
         DOMAIN = cfg.domain;
         COOKIE_SECURE = true;
         HTTP_PORT = cfg.port;
