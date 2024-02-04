@@ -36,12 +36,14 @@
         RandomizedDelaySec = "5m";
         Persistent = true;
       };
-      #backup-paths-sn = [ #disabled until tailscale works
-      #  "/userdata/Userdata"
-      #];
+      backup-paths-sn = [
+        "/userdata/Userdata"
+        "/home/louis/.ssh"
+      ];
       # TODO maybe change frequency of that backup to one time per week
       backup-paths-lb = [
-        "userdata/Userdata/Dokumente"
+        "/userdata/Userdata/Dokumente"
+        "/home/louis/.ssh"
       ];
     };
   };
