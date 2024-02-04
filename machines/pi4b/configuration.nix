@@ -46,6 +46,7 @@
     options.type = "server";
     restic-client = {
       enable = true;
+      backup-home_assistant-sn = true;
       backup-paths-lb = [
         "/home/louis/.secrets"
         "/home/louis/.ssh"
@@ -54,20 +55,8 @@
       backup-paths-sn = [
         "/home/louis/.secrets"
         "/home/louis/.ssh"
-        "/home/louis/HomeAssistant"
         "/home/louis/Obsidian"
       ];
-      # stop home assistant before backup
-      backup-prepare-sn = ''
-        echo "Shutting down Home Assistant to perform backup"
-        ${pkgs.docker}/bin/docker stop homeassistant
-      '';
-      backup-cleanup-sn = ''
-        echo "Starting Home Assistant"
-        ${pkgs.docker}/bin/docker start homeassistant
-      '';
-      # backup retry time is set to none, so that home assistant isn't offline, waiting for a backup
-      backup-retry-time-sn = ''0m'';
     };
     wireguard.enable = true;
   };

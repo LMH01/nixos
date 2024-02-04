@@ -30,46 +30,15 @@ in
       example = [ "/var/lib/gitea" ];
       description = "Paths to backup to sn";
     };
-    backup-prepare-sn = mkOption {
-      type = with types; nullOr str;
-      default = null;
-      description = lib.mdDoc ''
-        A script that must run before starting the backup process to sn.
-      '';
-    };
-    backup-cleanup-sn = mkOption {
-      type = with types; nullOr str;
-      default = null;
-      description = lib.mdDoc ''
-        A script that must run after finishing the backup process to sn.
-      '';
-    };
-    backup-retry-time-sn = mkOption {
-      type = types.str;
-      default = ''2h'';
-      description = lib.mdDoc ''
-        Retry to lock the repository if it is already locked, takes a value like 5m or 2h.
-        Will periodically retry the lock in this time frame.
-
-        Set to 0m to disable retry.
-      '';
-    };
     backup-paths-lb = mkOption {
       type = types.listOf types.str;
       default = [ ];
       example = [ "/var/lib/gitea" ];
       description = "Paths to backup to lb";
     };
-    backup-retry-time-lb = mkOption {
-      type = types.str;
-      default = ''2h'';
-      description = lib.mdDoc ''
-        Retry to lock the repository if it is already locked, takes a value like 5m or 2h.
-        Will periodically retry the lock in this time frame.
 
-        Set to 0m to disable retry.
-      '';
-    };
+    # if enabled, home assistant directory (/home/louis/HomeAssistant) will be backed up to sn
+    backup-home_assistant-sn = mkEnableOption "enable home assistant backup to sn";
 
     backup-paths-exclude = mkOption {
       type = types.listOf types.str;
@@ -104,12 +73,10 @@ in
             "--keep-yearly 75"
           ];
           timerConfig = cfg.backup-timer;
-          backupPrepareCommand = cfg.backup-prepare-sn;
-          backupCleanupCommand = cfg.backup-cleanup-sn;
           extraBackupArgs = [
             "--exclude-file=${restic-ignore-file}"
             "--one-file-system"
-            "--retry-lock ${cfg.backup-retry-time-sn}" # try to periodically relock the repository for 2 hours
+            "--retry-lock 1h" # try to periodically relock the repository for 1 hour
             "-v"
           ];
           initialize = true;
@@ -130,7 +97,36 @@ in
           extraBackupArgs = [
             "--exclude-file=${restic-ignore-file}"
             "--one-file-system"
-            "--retry-lock ${cfg.backup-retry-time-lb}" # try to periodically relock the repository for 2 hours
+            "--retry-lock 1h" # try to periodically relock the repository for 1 hour
+            "-v"
+          ];
+          initialize = true;
+        };
+        home_assistant-sn = mkIf cfg.backup-home_assistant-sn {
+          paths = [ "/home/louis/HomeAssistant" ];
+          repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+          # stop home assistant before backup
+          backupPrepareCommand = ''
+            echo "Shutting down Home Assistant to perform backup"
+            ${pkgs.docker}/bin/docker stop homeassistant
+          '';
+          # start home assistant after backup is complete
+          backupCleanupCommand = ''
+            echo "Starting Home Assistant"
+            ${pkgs.docker}/bin/docker start homeassistant
+          '';
+          pruneOpts = [
+            "--keep-daily 7"
+            "--keep-weekly 5"
+            "--keep-monthly 12"
+            "--keep-yearly 75"
+          ];
+          timerConfig = cfg.backup-timer;
+          # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+          extraBackupArgs = [
+            "--exclude-file=${restic-ignore-file}"
+            "--one-file-system"
             "-v"
           ];
           initialize = true;
