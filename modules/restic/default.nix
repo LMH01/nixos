@@ -39,6 +39,7 @@ in
 
     # if enabled, home assistant directory (/home/louis/HomeAssistant) will be backed up to sn
     backup-home_assistant-sn = mkEnableOption "enable home assistant backup to sn";
+    backup-gitea-sn = mkEnableOption "enable gitea backup to sn";
 
     backup-paths-exclude = mkOption {
       type = types.listOf types.str;
@@ -115,6 +116,35 @@ in
           backupCleanupCommand = ''
             echo "Starting Home Assistant"
             ${pkgs.docker}/bin/docker start homeassistant
+          '';
+          pruneOpts = [
+            "--keep-daily 7"
+            "--keep-weekly 5"
+            "--keep-monthly 12"
+            "--keep-yearly 75"
+          ];
+          timerConfig = cfg.backup-timer;
+          # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+          extraBackupArgs = [
+            "--exclude-file=${restic-ignore-file}"
+            "--one-file-system"
+            "-v"
+          ];
+          initialize = true;
+        };
+        gitea-sn = mkIf cfg.backup-gitea-sn {
+          paths = [ "/var/lib/storage/gitea" ];
+          repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+          # stop home assistant before backup
+          backupPrepareCommand = ''
+            echo "Shutting down gitea to perform backup"
+            systemctl stop gitea
+          '';
+          # start home assistant after backup is complete
+          backupCleanupCommand = ''
+            echo "Starting gitea"
+            systemctl start gitea
           '';
           pruneOpts = [
             "--keep-daily 7"
