@@ -40,10 +40,14 @@
         "/userdata/Userdata"
         "/home/louis/.ssh"
       ];
-      # TODO maybe change frequency of that backup to one time per week
       backup-paths-lb = [
         "/userdata/Userdata/Dokumente"
         "/home/louis/.ssh"
+      ];
+      # unfortunately the nas drive can't be mounted automatically and sftp is not supported
+      # thus this backup will mostly not work automated
+      backup-paths-home_nas = [
+        "/userdata/Userdata"
       ];
     };
   };

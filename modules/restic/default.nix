@@ -36,6 +36,12 @@ in
       example = [ "/var/lib/gitea" ];
       description = "Paths to backup to lb";
     };
+    backup-paths-home_nas = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "/var/lib/gitea" ];
+      description = "Paths to backup to home_nas, does only work in home net";
+    };
 
     # if enabled, home assistant directory (/home/louis/HomeAssistant) will be backed up to sn
     backup-home_assistant-sn = mkEnableOption "enable home assistant backup to sn";
@@ -87,6 +93,28 @@ in
           repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
           passwordFile = "${config.lmh01.secrets}/restic/lb/password";
           #environmentFile = "${config.lmh01.secrets}/restic/lb/environment";
+
+          pruneOpts = [
+            "--keep-daily 7"
+            "--keep-weekly 5"
+            "--keep-monthly 12"
+            "--keep-yearly 75"
+          ];
+          timerConfig = cfg.backup-timer;
+          extraBackupArgs = [
+            "--exclude-file=${restic-ignore-file}"
+            "--one-file-system"
+            "--retry-lock 1h" # try to periodically relock the repository for 1 hour
+            "-v"
+          ];
+          initialize = true;
+        };
+        # only works when nas home is manually mounted to /mnt/nas_home
+        # (this is a restriction of the nas I have a home)
+        home_nas = {
+          paths = cfg.backup-paths-home_nas;
+          repositoryFile = "${config.lmh01.secrets}/restic/home_nas/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/home_nas/password";
 
           pruneOpts = [
             "--keep-daily 7"
