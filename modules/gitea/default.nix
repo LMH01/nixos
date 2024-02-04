@@ -33,6 +33,9 @@ in {
       settings.service = {
         DISABLE_REGISTRATION = true;
       };
+      settings.webhook = {
+        ALLOWED_HOST_LIST = "external,loopback";
+      };
     };
     networking.firewall.allowedTCPPorts = [
       cfg.port # used by home assistant
