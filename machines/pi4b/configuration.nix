@@ -16,6 +16,7 @@
     self.nixosModules.jellyfin
     self.nixosModules.restic
     self.nixosModules.wireguard
+    self.nixosModules.woodpecker
   ];
 
   ### build sd-image
@@ -60,6 +61,10 @@
       ];
     };
     wireguard.enable = true;
+    woodpecker = {
+      enable = true;
+      domain = "192.168.188.124";
+    };
   };
 
   # Home Manager configuration
