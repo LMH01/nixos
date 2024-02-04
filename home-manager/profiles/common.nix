@@ -38,6 +38,7 @@ with lib;
       nix-init
       nix-top
       nix-tree
+      openssl
       restic
       tldr
       tree
