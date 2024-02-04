@@ -11,6 +11,7 @@
 
     home-manager.nixosModules.home-manager
 
+    self.nixosModules.gitea
     self.nixosModules.server
     self.nixosModules.jellyfin
     self.nixosModules.restic
@@ -37,6 +38,10 @@
   ###
 
   lmh01 = {
+    gitea = {
+      enable = true;
+      domain = "192.168.188.124";
+    };
     jellyfin.enable = true;
     options.type = "server";
     restic-client = {
