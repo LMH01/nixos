@@ -46,9 +46,10 @@
       ];
       # unfortunately the nas drive can't be mounted automatically and sftp is not supported
       # thus this backup will mostly not work automated
-      backup-paths-home_nas = [
-        "/userdata/Userdata"
-      ];
+      #backup-paths-home_nas = [
+      #  "/userdata/Userdata"
+      #];
+      # commented out because drive can't be mounted automatically, I might build a workaround later
     };
   };
 
