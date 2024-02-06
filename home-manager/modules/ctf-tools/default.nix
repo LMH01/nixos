@@ -6,6 +6,8 @@ in {
   options.lmh01.ctf-tools.enable = mkEnableOption "activate capture the flag tools";
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      bless # hexeditor
+
       nmap
       rustscan # rust nmap alternative
       # DNS
