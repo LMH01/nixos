@@ -58,6 +58,7 @@
         "/home/louis/.secrets"
         "/home/louis/.ssh"
         "/home/louis/Obsidian"
+        "/mnt/nas_multimedia/Imagedata/Digital/OwnPics" # will only be backed up, when the drive is mounted manually
       ];
     };
     wireguard.enable = true;
