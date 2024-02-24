@@ -138,6 +138,14 @@
   # Set hardware clock to local time to prevent time issues with windows
   time.hardwareClockInLocalTime = true;
 
+  # specific display config for this pc
+  # because of limitations in scaling the resolution of the left monitor is set to a
+  # higher value then what can be displayed. This causes the offset to be 3200.
+  services.xserver.displayManager.sessionCommands = ''
+    xrandr --output DP-0 --mode 2560x1440 --scale 1.25x1.25 --pos 0x0
+    xrandr --output DP-2 --mode 3840x2160 --pos 3200x0
+  '';
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
