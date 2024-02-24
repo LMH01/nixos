@@ -11,7 +11,7 @@ in
 
     # Enable the X11 windowing system.
     services.xserver = {
-      layout = "de";
+      xkb.layout = "de";
       enable = true;
       autorun = true;
       libinput = {
