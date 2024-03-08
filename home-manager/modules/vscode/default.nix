@@ -7,11 +7,11 @@
     enableExtensionUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
       #arrterian.nix-env-selector
-      llvm-vs-code-extensions.vscode-clangd # TODO Move into own module or better move into shell.nix
       b4dm4n.vscode-nixpkgs-fmt
       dracula-theme.theme-dracula
       gruntfuggly.todo-tree
       jnoortheen.nix-ide
+      llvm-vs-code-extensions.vscode-clangd # TODO Move into own module or better move into shell.nix
       ms-python.python
       redhat.java
       streetsidesoftware.code-spell-checker
@@ -25,6 +25,12 @@
         publisher = "streetsidesoftware";
         version = "2.3.0";
         sha256 = "rAm3pcLn6HoWnhWeoK/0D9r5oY9TIQ23EMh35rurgDg=";
+      }
+      {
+        name = "vscode-openapi";
+        publisher = "42crunch";
+        version = "4.25.1";
+        sha256 = "+hKQUJp9c0oyhePFmQEXAqtqKL3fkQ1nhopUPnhRZc4=";
       }
       #{
       #  name = "vscode-pets";
