@@ -14,6 +14,7 @@
       llvm-vs-code-extensions.vscode-clangd # TODO Move into own module or better move into shell.nix
       ms-python.python
       redhat.java
+      redhat.vscode-yaml
       streetsidesoftware.code-spell-checker
       tamasfe.even-better-toml
       usernamehw.errorlens
