@@ -10,7 +10,7 @@ with lib;
   ];
 
   lmh01 = {
-    gitlab-runner.enable = true;
+    #gitlab-runner.enable = true;
     steam.enable = true;
     options.type = "desktop";
   };
