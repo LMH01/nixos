@@ -32,9 +32,11 @@ with lib;
       gdb
       gitui
       glances
+      httpie
       lldb
       man-pages
       man-pages-posix
+      mysql
       nix-init
       nix-top
       nix-tree
@@ -46,6 +48,7 @@ with lib;
       srm
       s-tui
       sysz
+      tokei
       unzip
 
       mayniklas.gen-module # create a new module with a template
