@@ -41,7 +41,7 @@
   lmh01 = {
     gitea = {
       enable = true;
-      domain = "192.168.188.124";
+      domain = "192.168.188.126";
     };
     jellyfin.enable = true;
     options.type = "server";
