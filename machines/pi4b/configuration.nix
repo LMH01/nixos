@@ -41,7 +41,7 @@
   lmh01 = {
     gitea = {
       enable = true;
-      domain = "192.168.188.126";
+      domain = "pi4b-louis.fritz.box";
     };
     jellyfin.enable = true;
     options.type = "server";
