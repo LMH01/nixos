@@ -43,6 +43,9 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Enable ntfs support
+  boot.supportedFilesystems = [ "ntfs" ];
+
   networking.hostName = "nixos_portable";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
