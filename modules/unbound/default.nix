@@ -33,7 +33,7 @@ in
             "\"${dns-overwrites-config}\""
             "\"${flake-self.inputs.adblock-unbound.packages.${pkgs.system}.unbound-adblockStevenBlack}\""
           ];
-          interface = [ "127.0.0.1" ];
+          interface = [ "::1" "127.0.0.1" ];
           access-control = [ "127.0.0.0/8 allow" ];
         };
         forward-zone = [
