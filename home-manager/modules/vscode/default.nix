@@ -13,6 +13,7 @@
       jnoortheen.nix-ide
       llvm-vs-code-extensions.vscode-clangd # TODO Move into own module or better move into shell.nix
       ms-python.python
+      ms-vscode-remote.remote-ssh
       redhat.java
       redhat.vscode-yaml
       streetsidesoftware.code-spell-checker
