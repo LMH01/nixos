@@ -61,6 +61,12 @@
       };
     };
 
+    # Visual Studio Code Server support in NixOS
+    # https://github.com/msteen/nixos-vscode-server
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
+    };
+
   };
 
   outputs = { self, ... }@inputs:
