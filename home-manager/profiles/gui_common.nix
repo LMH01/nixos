@@ -57,7 +57,7 @@ with lib;
       i3.enable = true;
       latex.enable = true;
       rust.enable = true;
-      sway.enable = true;
+      #sway.enable = true; currently a WIP
     };
   };
 
