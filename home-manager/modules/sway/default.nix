@@ -4,8 +4,7 @@ let
   cfg = config.lmh01.programs.sway;
   start-sway = pkgs.writeShellScriptBin "start-sway" /* sh */
     ''
-      export WLR_DRM_NO_MODIFIERS=1
-      dbus-launch --sh-syntax --exit-with-session ${pkgs.sway}/bin/sway
+      dbus-launch --sh-syntax --exit-with-session ${pkgs.sway}/bin/sway --unsupported-gpu
     '';
 in
 {
