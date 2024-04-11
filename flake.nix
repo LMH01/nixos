@@ -61,6 +61,10 @@
       };
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, ... }@inputs:
@@ -126,6 +130,7 @@
 
             modules = [
               lollypops.nixosModules.lollypops
+              disko.nixosModules.disko
               (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
               self.nixosModules.options
             ];
