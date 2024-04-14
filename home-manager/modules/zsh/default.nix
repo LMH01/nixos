@@ -44,7 +44,10 @@ in
 
       # always execute nixos-rebuild with sudo for switching
       nixos-rebuild = "${pkgs.nixos-rebuild}/bin/nixos-rebuild --use-remote-sudo";
-      
+
+      # quick nix develop -c zsh
+      nd = "${pkgs.nix}/bin/nix develop -c ${pkgs.zsh}/bin/zsh";
+
       nsh = "nix-shell";
     };
   };
