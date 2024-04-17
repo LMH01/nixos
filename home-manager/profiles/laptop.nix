@@ -12,7 +12,10 @@ with lib;
 
     programs = { };
 
-    services = { };
+    services = {
+      # TODO move into i3/sway config and enable there only if on laptop
+      blueman-applet.enable = true; # bluetooth tray
+     };
 
   };
 
