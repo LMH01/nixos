@@ -80,14 +80,17 @@ in
 
             # general keybindings not specific to laptop or desktop
             (lib.optionalAttrs true {
-
+                                           
               "Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
               "${modifier}+Mod1+space" = "exec ${pkgs.rofi}/bin/rofi -show emoji";
               "${modifier}+Shift+x" = "kill";
 
               "${modifier}+Shift+Tab" = "workspace prev";
-
               "${modifier}+Tab" = "workspace next";
+
+              # keybindings for split keyboard
+              "${modifier}+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
+              "${modifier}+f" = "kill";
 
               "XF86AudioLowerVolume" =
                 "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
