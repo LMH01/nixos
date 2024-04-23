@@ -90,7 +90,8 @@ in
 
               # keybindings for split keyboard
               "${modifier}+space" = "exec ${pkgs.rofi}/bin/rofi -show combi";
-              "${modifier}+f" = "kill";
+              "${modifier}+t" = "kill";
+              "${modifier}+BackSpace" = "exec ${terminal}";
 
               "XF86AudioLowerVolume" =
                 "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
