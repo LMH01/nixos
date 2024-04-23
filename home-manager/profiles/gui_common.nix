@@ -36,6 +36,7 @@ with lib;
       signal-desktop
       thunderbird
       vlc
+      vial
       xclip
 
       mayniklas.set-performance
