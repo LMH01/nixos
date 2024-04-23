@@ -9,7 +9,7 @@ with lib;
   ];
 
   lmh01 = {
-    unbound.enable = true;
+    #unbound.enable = true;
     options.type = "laptop";
   };
 }
