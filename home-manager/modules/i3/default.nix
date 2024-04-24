@@ -61,7 +61,10 @@ in
 
         bars = [
           {
-            fonts = [ "FontAwesome 11" ];
+            fonts = {
+              names = [ "FontAwesome" ];
+              size = 11.0;
+            };
             position = "top";
             statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
           }

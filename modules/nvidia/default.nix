@@ -49,7 +49,7 @@ in
     virtualisation.docker.enableNvidia = lib.mkIf config.virtualisation.docker.enable true;
 
     environment.systemPackages = with pkgs; [
-      nvtop
+      nvtopPackages.full
     ];
 
     # fix electron problems with nvidia
