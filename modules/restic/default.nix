@@ -192,7 +192,7 @@ in
         #  ];
         #  initialize = true;
         #};
-        home_assistant-lb = mkIf cfg.backup-home_assistant-sn {
+        home_assistant-lb = mkIf cfg.backup-home_assistant-lb {
           paths = [ "/home/louis/HomeAssistant" ];
           repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
           passwordFile = "${config.lmh01.secrets}/restic/lb/password";
@@ -221,7 +221,7 @@ in
           ];
           initialize = true;
         };
-        gitea-lb = mkIf cfg.backup-gitea-sn {
+        gitea-lb = mkIf cfg.backup-gitea-lb {
           paths = [ "/var/lib/storage/gitea" ];
           repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
           passwordFile = "${config.lmh01.secrets}/restic/lb/password";
