@@ -47,8 +47,8 @@
     options.type = "server";
     restic-client = {
       enable = true;
-      backup-home_assistant-sn = true;
-      backup-gitea-sn = true;
+      backup-home_assistant-lb = true;
+      backup-gitea-lb = true;
       backup-paths-lb = [
         "/home/louis/.secrets"
         "/home/louis/.ssh"

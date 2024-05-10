@@ -131,10 +131,69 @@ in
           ];
           initialize = true;
         };
-        home_assistant-sn = mkIf cfg.backup-home_assistant-sn {
+        # commented out until server is available again
+        #home_assistant-sn = mkIf cfg.backup-home_assistant-sn {
+        #  paths = [ "/home/louis/HomeAssistant" ];
+        #  repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        #  passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        #  # stop home assistant before backup
+        #  backupPrepareCommand = ''
+        #    echo "Shutting down Home Assistant to perform backup"
+        #    ${pkgs.docker}/bin/docker stop homeassistant
+        #  '';
+        #  # start home assistant after backup is complete
+        #  backupCleanupCommand = ''
+        #    echo "Starting Home Assistant"
+        #    ${pkgs.docker}/bin/docker start homeassistant
+        #  '';
+        #  pruneOpts = [
+        #    "--keep-daily 7"
+        #    "--keep-weekly 5"
+        #    "--keep-monthly 12"
+        #    "--keep-yearly 75"
+        #  ];
+        #  timerConfig = cfg.backup-timer;
+        #  # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+        #  extraBackupArgs = [
+        #    "--exclude-file=${restic-ignore-file}"
+        #    "--one-file-system"
+        #    "-v"
+        #  ];
+        #  initialize = true;
+        #};
+        #gitea-sn = mkIf cfg.backup-gitea-sn {
+        #  paths = [ "/var/lib/storage/gitea" ];
+        #  repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        #  passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        #  # stop home assistant before backup
+        #  backupPrepareCommand = ''
+        #    echo "Shutting down gitea to perform backup"
+        #    systemctl stop gitea
+        #  '';
+        #  # start home assistant after backup is complete
+        #  backupCleanupCommand = ''
+        #    echo "Starting gitea"
+        #    systemctl start gitea
+        #  '';
+        #  pruneOpts = [
+        #    "--keep-daily 7"
+        #    "--keep-weekly 5"
+        #    "--keep-monthly 12"
+        #    "--keep-yearly 75"
+        #  ];
+        #  timerConfig = cfg.backup-timer;
+        #  # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+        #  extraBackupArgs = [
+        #    "--exclude-file=${restic-ignore-file}"
+        #    "--one-file-system"
+        #    "-v"
+        #  ];
+        #  initialize = true;
+        #};
+        home_assistant-lb = mkIf cfg.backup-home_assistant-sn {
           paths = [ "/home/louis/HomeAssistant" ];
-          repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-          passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+          repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/lb/password";
           # stop home assistant before backup
           backupPrepareCommand = ''
             echo "Shutting down Home Assistant to perform backup"
@@ -160,10 +219,10 @@ in
           ];
           initialize = true;
         };
-        gitea-sn = mkIf cfg.backup-gitea-sn {
+        gitea-lb = mkIf cfg.backup-gitea-sn {
           paths = [ "/var/lib/storage/gitea" ];
-          repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-          passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+          repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/lb/password";
           # stop home assistant before backup
           backupPrepareCommand = ''
             echo "Shutting down gitea to perform backup"
