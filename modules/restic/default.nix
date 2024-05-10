@@ -46,6 +46,8 @@ in
     # if enabled, home assistant directory (/home/louis/HomeAssistant) will be backed up to sn
     backup-home_assistant-sn = mkEnableOption "enable home assistant backup to sn";
     backup-gitea-sn = mkEnableOption "enable gitea backup to sn";
+    backup-home_assistant-lb = mkEnableOption "enable home assistant backup to lb";
+    backup-gitea-lb = mkEnableOption "enable gitea backup to lb";
 
     backup-paths-exclude = mkOption {
       type = types.listOf types.str;
