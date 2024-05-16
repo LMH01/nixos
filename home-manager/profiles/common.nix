@@ -16,6 +16,7 @@ with lib;
     git
     nvim
     starship
+    tmux
     zsh
   ];
 
