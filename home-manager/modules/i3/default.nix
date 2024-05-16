@@ -4,7 +4,7 @@ let
   cfg = config.lmh01.programs.i3;
   suspend-pc = pkgs.writeShellScriptBin "suspend-pc" /* sh */
     ''
-      i3lock -i ${./wallpaper.png} && systemctl suspend
+      i3lock -i ${./wallpaper2.png} && systemctl suspend
     '';
 in
 {
@@ -72,7 +72,7 @@ in
 
         startup = [
           {
-            command = "${pkgs.feh}/bin/feh --bg-fill ${./wallpaper.png}";
+            command = "${pkgs.feh}/bin/feh --bg-fill ${./wallpaper2.png}";
             always = false;
             notification = false;
           }
@@ -116,7 +116,7 @@ in
               "Print" = "exec flameshot gui";
               "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
-              "${modifier}+l" = "exec i3lock -i ${./wallpaper.png}";
+              "${modifier}+l" = "exec i3lock -i ${./wallpaper2.png}";
 
             })
 
