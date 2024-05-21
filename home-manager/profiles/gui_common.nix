@@ -31,6 +31,7 @@ with lib;
       kleopatra
       obsidian
       openvpn
+      postman
       pympress
       signal-desktop
       thunderbird
