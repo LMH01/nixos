@@ -37,7 +37,8 @@
         Persistent = true;
       };
       backup-paths-sn = [
-        "/userdata/Userdata"
+        # commented out until i was able to manually create a backup first
+        #"/userdata/Userdata"
         "/home/louis/.ssh"
       ];
       backup-paths-lb = [
