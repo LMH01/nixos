@@ -44,7 +44,8 @@ in {
 
       # Android
       android-studio
-      androidenv.androidPkgs_9_0.platform-tools # to get adb
+      # currently broken, so commented out for now
+      #androidenv.androidPkgs_9_0.platform-tools # to get adb 
       jadx # .apk decompiling
     ];
   };
