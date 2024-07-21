@@ -53,11 +53,11 @@
     "adblockStevenBlack": {
       "flake": false,
       "locked": {
-        "lastModified": 1718400368,
-        "narHash": "sha256-kTzb3pRcvRkJgb7tRdtjT2jzlx3RqA8B25hPeRRk37A=",
+        "lastModified": 1721522228,
+        "narHash": "sha256-qM7pLw81jjPh8IWAHO8KguwSKrU/97g9aMtIvmsh8SA=",
         "owner": "StevenBlack",
         "repo": "hosts",
-        "rev": "7f5a0b2ca382cbe5d3e83ff2013301ad3462a9bd",
+        "rev": "2eaa823eac9129bade167cf89549829b1e11bddb",
         "type": "github"
       },
       "original": {
@@ -69,11 +69,11 @@
     "adblockStevenBlack_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1717861551,
-        "narHash": "sha256-8wolGw60hKNa++YO57FXL8/g5U84VgINoQAZ3ppe0ME=",
+        "lastModified": 1720105772,
+        "narHash": "sha256-tahf6mdtmZofwMZfMsuDAqCR/V1qZt6vV+o6t4YTKG0=",
         "owner": "StevenBlack",
         "repo": "hosts",
-        "rev": "846f528dfc591a647a36462ec1f8bf3453fa0c35",
+        "rev": "bfefd08fd5dfbc175e82e5c339b0f4ab124c500e",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1718270974,
-        "narHash": "sha256-XgoXEZPJqXq9XUE47Uyy7EBVNo5lXvFw6icVVfcY0qw=",
+        "lastModified": 1718700399,
+        "narHash": "sha256-i116s0RvIWhc16uTm9BRJzy7p78BJiaC5FAAHgZ/BdY=",
         "owner": "alexanderwallau",
         "repo": "bonn-mensa",
-        "rev": "d00932604fb50d5b4fd7693d06266a3914a306ef",
+        "rev": "546f9c79bf092f1aef5eef02e8bb92f2b7efce2f",
         "type": "github"
       },
       "original": {
@@ -153,11 +153,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1718242063,
-        "narHash": "sha256-n3AWItJ4a94GT0cray/eUV7tt3mulQ52L+lWJN9d1E8=",
+        "lastModified": 1721417620,
+        "narHash": "sha256-6q9b1h8fI3hXg2DG6/vrKWCeG8c5Wj2Kvv22RCgedzg=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "832a9f2c81ff3485404bd63952eadc17bf7ccef2",
+        "rev": "bec6e3cde912b8acb915fecdc509eda7c973fb42",
         "type": "github"
       },
       "original": {
@@ -174,11 +174,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717915259,
-        "narHash": "sha256-VsGPboaleIlPELHY5cNTrXK4jHVmgUra8uC6h7KVC5c=",
+        "lastModified": 1720056646,
+        "narHash": "sha256-BymcV4HWtx2VFuabDCM4/nEJcfivCx0S02wUCz11mAY=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "1bbdb06f14e2621290b250e631cf3d8948e4d19b",
+        "rev": "64679cd7f318c9b6595902b47d4585b1d51d5f9e",
         "type": "github"
       },
       "original": {
@@ -328,11 +328,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1718243258,
-        "narHash": "sha256-abBpj2VU8p6qlRzTU8o22q68MmOaZ4v8zZ4UlYl5YRU=",
+        "lastModified": 1721534365,
+        "narHash": "sha256-XpZOkaSJKdOsz1wU6JfO59Rx2fqtcarQ0y6ndIOKNpI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8d5e27b4807d25308dfe369d5a923d87e7dbfda3",
+        "rev": "635563f245309ef5320f80c7ebcb89b2398d2949",
         "type": "github"
       },
       "original": {
@@ -444,11 +444,11 @@
         "wallpaper-generator": "wallpaper-generator"
       },
       "locked": {
-        "lastModified": 1718196662,
-        "narHash": "sha256-gMddTzHbCoSNaNIz3ybGadtfG6u1ookg9efvWUMYhe8=",
+        "lastModified": 1720261402,
+        "narHash": "sha256-nzJjVu6zIjrUAUA6ETDEycb92fEQxKuDpycC2H2j5dU=",
         "owner": "MayNiklas",
         "repo": "nixos",
-        "rev": "cd637982b2c69ec93e9595acfacaf10f49724835",
+        "rev": "8ae3b3959bc61bcf6b7da007ad3e7fc9aca2734f",
         "type": "github"
       },
       "original": {
@@ -464,11 +464,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1715803356,
-        "narHash": "sha256-wvsg/UMM/jekzgbggH56KLZJzRmwrB9ErevaXXyWyqc=",
+        "lastModified": 1719475157,
+        "narHash": "sha256-8zW6eWvE9T03cMpo/hY8RRZIsSCfs1zmsJOkEZzuYwM=",
         "owner": "Mic92",
         "repo": "nix-fast-build",
-        "rev": "cfff239d93716e92f6467f8953d8f8c12da1892a",
+        "rev": "030e586195c97424844965d2ce680140f6565c02",
         "type": "github"
       },
       "original": {
@@ -479,11 +479,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1718459188,
-        "narHash": "sha256-umwY+ivE98n/6EwEtobOlqf1t9VddhPIIZ6rVmFXlHg=",
+        "lastModified": 1721413321,
+        "narHash": "sha256-0GdiQScDceUrVGbxYpV819LHesK3szHOhJ09e6sgES4=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "0cd562157274df3783840bdcb0ce6d9c4cf4aa29",
+        "rev": "ab165a8a6cd12781d76fe9cbccb9e975d0fb634f",
         "type": "github"
       },
       "original": {
@@ -539,16 +539,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1714562304,
-        "narHash": "sha256-Mr3U37Rh6tH0FbaDFu0aZDwk9mPAe7ASaqDOGgLqqLU=",
+        "lastModified": 1719269760,
+        "narHash": "sha256-FWzbmvxTyohbLisIDCAvW0ISz/cu7Mrh8JMykSRoI8s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bcd44e224fd68ce7d269b4f44d24c2220fd821e7",
+        "rev": "4c547b66635455ad061d4beecaf1805810dc0428",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
+        "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -600,11 +600,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1718318537,
-        "narHash": "sha256-4Zu0RYRcAY/VWuu6awwq4opuiD//ahpc2aFHg2CWqFY=",
+        "lastModified": 1721379653,
+        "narHash": "sha256-8MUgifkJ7lkZs3u99UDZMB4kbOxvMEXQZ31FO3SopZ0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e9ee548d90ff586a6471b4ae80ae9cfcbceb3420",
+        "rev": "1d9c2c9b3e71b9ee663d11c5d298727dace8d374",
         "type": "github"
       },
       "original": {
@@ -841,6 +841,7 @@
       "original": {
         "owner": "pinpox",
         "repo": "wallpaper-generator",
+        "rev": "6461fa794745fb18f2b04f58015e9a2871ca7099",
         "type": "github"
       }
     }
