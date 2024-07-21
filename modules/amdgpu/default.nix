@@ -22,8 +22,9 @@ in
     ];
 
     # vulkan
+    hardware.graphics.driSupport = true;
     # For 32 bit applications
-    hardware.opengl.driSupport32Bit = true;
+    hardware.graphics.enable32Bit = true;
 
     # For 32 bit applications 
     # Only available on unstable

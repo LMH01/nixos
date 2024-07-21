@@ -14,10 +14,6 @@ in
       xkb.layout = "de";
       enable = true;
       autorun = true;
-      libinput = {
-        enable = true;
-        touchpad.accelProfile = "flat";
-      };
 
       desktopManager = {
         xterm.enable = false;
@@ -31,6 +27,11 @@ in
         }];
       };
 
+    };
+
+    services.libinput = {
+      enable = true;
+      touchpad.accelProfile = "flat";
     };
 
     # Enable pulseaudio compatible api for audio volume control in i3

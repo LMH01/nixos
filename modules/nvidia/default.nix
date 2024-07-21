@@ -32,9 +32,9 @@ in
 
     # Nvidia settings
     hardware = {
-      opengl = {
+      graphics = {
         enable = true;
-        driSupport32Bit = true;
+        enable32Bit = true;
       };
       nvidia = {
         open = false; # with the open driver the screen will keep black after waking the pc from suspend
