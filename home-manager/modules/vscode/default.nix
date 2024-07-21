@@ -9,6 +9,7 @@
       #arrterian.nix-env-selector
       b4dm4n.vscode-nixpkgs-fmt
       dracula-theme.theme-dracula
+      fill-labs.dependi
       gruntfuggly.todo-tree
       jnoortheen.nix-ide
       llvm-vs-code-extensions.vscode-clangd # TODO Move into own module or better move into shell.nix
