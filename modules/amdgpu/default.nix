@@ -15,20 +15,20 @@ in
 
     services.xserver.videoDrivers = [ "amdgpu" ];
 
-    hardware.opengl.extraPackages = with pkgs; [
+    hardware.graphics.extraPackages = with pkgs; [
       rocm-opencl-icd
       rocm-opencl-runtime
       amdvlk 
     ];
 
     # vulkan
-    hardware.graphics.driSupport = true;
+    hardware.graphics.enable = true;
     # For 32 bit applications
     hardware.graphics.enable32Bit = true;
 
     # For 32 bit applications 
     # Only available on unstable
-    hardware.opengl.extraPackages32 = with pkgs; [
+    hardware.graphics.extraPackages32 = with pkgs; [
       driversi686Linux.amdvlk
     ];
   };
