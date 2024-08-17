@@ -46,7 +46,8 @@ in {
       android-studio
       # currently broken, so commented out for now
       #androidenv.androidPkgs_9_0.platform-tools # to get adb 
-      jadx # .apk decompiling
+      #temopraryly disalbed as the package is currently (17.08.24) broken
+      #jadx # .apk decompiling
     ];
   };
 }
