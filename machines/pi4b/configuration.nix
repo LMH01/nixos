@@ -47,8 +47,6 @@
     options.type = "server";
     restic-client = {
       enable = true;
-      backup-home_assistant-lb = true;
-      backup-gitea-lb = true;
       backup-paths-lb = [
         "/home/louis/.secrets"
         "/home/louis/.ssh"
@@ -69,6 +67,143 @@
     #  domain = "192.168.188.124";
     #};
   };
+
+  # additional restic backups, used just on this system
+  services.restic.backups =
+    let
+      backup-timer = {
+        OnCalendar = "01:00";
+        Persistent = true;
+        RandomizedDelaySec = "4h";
+      };
+    in
+    {
+      # Home assistant and gitea are backuped to two locations.
+      # If either service is backed up, the data will be backuped to booth locations, by starting the backup to 
+      # the second location when backup to the first location is done.
+      # The check stage is thus disabled for the backup to the first location to not block exection of the second
+      # backup when the repo is locked.
+      # To make sure that booth repos are checked after a backup run is completed, the check stage for the second
+      # backup is executed normally. The second backup target is different in booth backups to make sure that booth
+      # locations are checked.
+      home_assistant-sn =
+        {
+          paths = [ "/home/louis/HomeAssistant" ];
+          repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+          environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+          # stop home assistant before backup
+          backupPrepareCommand = ''
+            echo "Shutting down Home Assistant to perform backup"
+            ${pkgs.docker}/bin/docker stop homeassistant
+          '';
+          # as homeassistant should also be backuped to another location,
+          # and it is already down we are staring the other backup now
+          backupCleanupCommand = ''
+            systemctl start restic-backups-home_assistant-lb
+          '';
+          pruneOpts = [
+            "--keep-daily 7"
+            "--keep-weekly 5"
+            "--keep-monthly 12"
+            "--keep-yearly 75"
+          ];
+          # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+          # and that backup to other location is executed
+          checkOpts = [
+            "--no-lock"
+          ];
+          timerConfig = backup-timer;
+          # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+          extraBackupArgs = [
+            "--one-file-system"
+            "-v"
+          ];
+          initialize = true;
+        };
+      gitea-lb = {
+        paths = [ "/var/lib/storage/gitea" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        # stop gitea before backup
+        backupPrepareCommand = ''
+          echo "Shutting down gitea to perform backup"
+          systemctl stop gitea
+        '';
+        # as gitea should also be backuped to another location,
+        # and it is already down we are staring the other backup now
+        backupCleanupCommand = ''
+          systemctl start restic-backups-gitea-sn
+        '';
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+          "--keep-yearly 75"
+        ];
+        # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+        # and that backup to other location is executed
+        checkOpts = [
+          "--no-lock"
+        ];
+        # disable auto start because this backup is only started when gitea-sn is done
+        timerConfig = backup-timer;
+        # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+        extraBackupArgs = [
+          "--one-file-system"
+          "-v"
+        ];
+        initialize = true;
+      };
+      home_assistant-lb = {
+        paths = [ "/home/louis/HomeAssistant" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        # start home assistant after backup is complete
+        backupCleanupCommand = ''
+          echo "Starting Home Assistant"
+          ${pkgs.docker}/bin/docker start homeassistant
+        '';
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+          "--keep-yearly 75"
+        ];
+        # disable auto start because this backup is only started when home_assistant-sn is done
+        timerConfig = null;
+        # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+        extraBackupArgs = [
+          "--one-file-system"
+          "-v"
+        ];
+        initialize = true;
+      };
+      gitea-sn = {
+        paths = [ "/var/lib/storage/gitea" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        # start gitea after backup is complete
+        backupCleanupCommand = ''
+          echo "Starting gitea"
+          systemctl start gitea
+        '';
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+          "--keep-yearly 75"
+        ];
+        timerConfig = null;
+        # retry-lock is disabled for this backup, so that home assistant isn't down for too long
+        extraBackupArgs = [
+          "--one-file-system"
+          "-v"
+        ];
+        initialize = true;
+      };
+    };
 
   # Home Manager configuration
   home-manager = {

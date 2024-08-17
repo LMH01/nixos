@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
-    
+
     # this machine is a desktop,
     # import type specific modules
     self.nixosModules.desktop
@@ -123,7 +123,7 @@
 
   # Enable flatpak (mainly for Handbrake)
   services.flatpak.enable = true;
-  
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
