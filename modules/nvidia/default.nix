@@ -45,7 +45,7 @@ in
     };
 
     # when docker is enabled, enable nvidia-docker
-    virtualisation.docker.enableNvidia = lib.mkIf config.virtualisation.docker.enable true;
+    hardware.nvidia-container-toolkit.enable = lib.mkIf config.virtualisation.docker.enable true;
 
     environment.systemPackages = with pkgs; [
       nvtopPackages.full
