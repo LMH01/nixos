@@ -19,7 +19,7 @@ in
 
     history = {
       expireDuplicatesFirst = true;
-      ignoreSpace = false;
+      ignoreSpace = true;
       save = 15000;
       share = true;
     };
