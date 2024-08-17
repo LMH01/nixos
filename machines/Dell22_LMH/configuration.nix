@@ -24,7 +24,6 @@
   lmh01 = {
     amdgpu.enable = true;
     bluetooth.enable = true;
-    gitlab-runner.enable = true;
     steam.enable = true;
     wayland.enable = true;
   };
