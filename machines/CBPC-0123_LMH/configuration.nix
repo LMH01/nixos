@@ -118,7 +118,7 @@
   };
 
   # Enable teamviewer service (temporary)
-  services.teamviewer.enable = true;
+  #services.teamviewer.enable = true;
 
   # Enable flatpak (mainly for Handbrake)
   services.flatpak.enable = true;
