@@ -20,6 +20,7 @@ with lib;
       alacritty
       anki
       beauty-line-icon-theme
+      beekeeper-studio
       bonn-mensa
       discord
       dracula-theme
@@ -29,14 +30,15 @@ with lib;
       gimp
       kate
       kleopatra
+      mongodb-compass
       obsidian
       openvpn
       postman
       pympress
       signal-desktop
       thunderbird
-      vlc
       vial
+      vlc
       xclip
 
       mayniklas.set-performance
