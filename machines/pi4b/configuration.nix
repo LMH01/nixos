@@ -15,6 +15,7 @@
     self.nixosModules.server
     self.nixosModules.jellyfin
     self.nixosModules.restic
+    self.nixosModules.webdav
     self.nixosModules.wireguard
     self.nixosModules.woodpecker
   ];
@@ -59,6 +60,7 @@
         "/mnt/nas_multimedia/Imagedata/Digital/OwnPics" # will only be backed up, when the drive is mounted manually
       ];
     };
+    webdav.enable = true;
     wireguard.enable = true;
     # disabled until I have time to properly get it running
     # (problems with git clone)
@@ -227,6 +229,7 @@
 
   networking.firewall.allowedTCPPorts = [
     8123 # used by home assistant
+    8076 # used by webdav
   ];
 
   lollypops.deployment = {
