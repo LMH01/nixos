@@ -205,6 +205,65 @@
         ];
         initialize = true;
       };
+      webdav-sn =
+        {
+          paths = [ "/var/lib/webdav" ];
+          repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+          passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+          environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+          # stop webdav before backup
+          backupPrepareCommand = ''
+            echo "Shutting down webdav to perform backup"
+            systemctl stop webdav
+          '';
+          # as webdav should also be backuped to another location,
+          # and it is already down we are staring the other backup now
+          backupCleanupCommand = ''
+            systemctl start restic-backups-webdav-lb
+          '';
+          pruneOpts = [
+            "--keep-daily 7"
+            "--keep-weekly 5"
+            "--keep-monthly 12"
+            "--keep-yearly 75"
+          ];
+          # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+          # and that backup to other location is executed
+          checkOpts = [
+            "--no-lock"
+          ];
+          timerConfig = backup-timer;
+          # retry-lock is disabled for this backup, so that webdav isn't down for too long
+          extraBackupArgs = [
+            "--one-file-system"
+            "-v"
+          ];
+          initialize = true;
+        };
+      webdav-lb = {
+        paths = [ "/var/lib/webdav" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        # start webdav after backup is complete
+        backupCleanupCommand = ''
+          echo "Starting webdav"
+          systemctl start webdav
+        '';
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+          "--keep-yearly 75"
+        ];
+        # disable auto start because this backup is only started when webdav-sn is done
+        timerConfig = null;
+        # retry-lock is disabled for this backup, so that webdav isn't down for too long
+        extraBackupArgs = [
+          "--one-file-system"
+          "-v"
+        ];
+        initialize = true;
+      };
     };
 
   # Home Manager configuration
