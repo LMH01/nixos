@@ -289,6 +289,13 @@
   networking.firewall.allowedTCPPorts = [
     8123 # used by home assistant
     8076 # used by webdav
+    53 # used by pihole
+    11500 # pihole admin interface
+  ];
+
+  networking.firewall.allowedUDPPorts = [
+    53 # used by pihole
+    11500 # pihole admin interface
   ];
 
   lollypops.deployment = {
