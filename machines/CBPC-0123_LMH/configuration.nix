@@ -145,6 +145,12 @@
     xrandr --output DP-2 --mode 3840x2160 --pos 3200x0
   '';
 
+  # programs that I only need on this machine
+  programs.streamdeck-ui = {
+    enable = true;
+    autoStart = true; # optional
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
