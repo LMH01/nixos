@@ -9,6 +9,7 @@ with lib;
       hashcat
       prismlauncher # minecraft launcher
       steam
+      obs-studio
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = { };
