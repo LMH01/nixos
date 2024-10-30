@@ -44,7 +44,7 @@
     ];
 
     userSettings = {
-      "workbench.colorTheme" = "Dracula Theme";
+      "workbench.colorTheme" = "Dracula";
       "nix.enableLanguageServer" = "true";
       "nix.serverPath" = "${pkgs.nil}/bin/nil";
       "[nix]" = {
