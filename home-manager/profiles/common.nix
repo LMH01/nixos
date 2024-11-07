@@ -37,7 +37,6 @@ with lib;
       lldb
       man-pages
       man-pages-posix
-      mysql
       nix-init
       nix-top
       nix-tree

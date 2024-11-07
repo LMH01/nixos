@@ -16,8 +16,8 @@ in
     services.xserver.videoDrivers = [ "amdgpu" ];
 
     hardware.graphics.extraPackages = with pkgs; [
-      rocm-opencl-icd
-      rocm-opencl-runtime
+      clinfo
+      rocmPackages.clr.icd
       amdvlk 
     ];
 
