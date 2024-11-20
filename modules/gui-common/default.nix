@@ -26,4 +26,8 @@ in
   
   programs.thunar.enable = true;
   programs.xfconf.enable = true; # required to make thunar settings persistant
+
+  fonts.packages = with pkgs; [
+    fira-sans
+  ];
 }
