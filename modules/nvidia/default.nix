@@ -41,6 +41,8 @@ in
         modesetting.enable = true;
         powerManagement.enable = true;
         nvidiaSettings = true;
+        # temporarily change to beta drivers to fix build
+        package = config.boot.kernelPackages.nvidiaPackages.beta;
       };
     };
 
