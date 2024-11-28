@@ -63,27 +63,27 @@ in
         };
       in
       {
-        sn = {
-          paths = cfg.backup-paths-sn;
-          repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-          passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-          environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        #sn = {
+        #  paths = cfg.backup-paths-sn;
+        #  repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        #  passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        #  environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
 
-          pruneOpts = [
-            "--keep-daily 7"
-            "--keep-weekly 5"
-            "--keep-monthly 12"
-            "--keep-yearly 75"
-          ];
-          timerConfig = cfg.backup-timer;
-          extraBackupArgs = [
-            "--exclude-file=${restic-ignore-file}"
-            "--one-file-system"
-            "--retry-lock 1h" # try to periodically relock the repository for 1 hour
-            "-v"
-          ];
-          initialize = true;
-        };
+        #  pruneOpts = [
+        #    "--keep-daily 7"
+        #    "--keep-weekly 5"
+        #    "--keep-monthly 12"
+        #    "--keep-yearly 75"
+        #  ];
+        #  timerConfig = cfg.backup-timer;
+        #  extraBackupArgs = [
+        #    "--exclude-file=${restic-ignore-file}"
+        #    "--one-file-system"
+        #    "--retry-lock 1h" # try to periodically relock the repository for 1 hour
+        #    "-v"
+        #  ];
+        #  initialize = true;
+        #};
         lb = {
           paths = cfg.backup-paths-lb;
           repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
