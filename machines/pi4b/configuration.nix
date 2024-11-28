@@ -95,20 +95,24 @@
       ];
       # commands to run when serice backups are started
       serviceBackupPrepareCommand = ''
-        docker stop immich_server
-        docker stop immich_machine_learning
-        docker stop immich_redis
-        docker stop immich_postgres
+        ${pkgs.docker}/bin/docker stop immich_server
+        ${pkgs.docker}/bin/docker stop immich_machine_learning
+        ${pkgs.docker}/bin/docker stop immich_redis
+        ${pkgs.docker}/bin/docker stop immich_postgres
+        echo "Stopping gitea"
         systemctl stop gitea
+        echo "Stopping webdav"
         systemctl stop webdav
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
-        docker start immich_server
-        docker start immich_machine_learning
-        docker start immich_redis
-        docker start immich_postgres
+        ${pkgs.docker}/bin/docker start immich_server
+        ${pkgs.docker}/bin/docker start immich_machine_learning
+        ${pkgs.docker}/bin/docker start immich_redis
+        ${pkgs.docker}/bin/docker start immich_postgres
+        echo "Starting gitea"
         systemctl start gitea
+        echo "Starting webdav"
         systemctl start webdav
       '';
     in
