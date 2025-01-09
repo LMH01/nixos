@@ -43,39 +43,18 @@
       #}
     ];
 
-    #userSettings = {
-    #  "workbench.colorTheme" = "Dracula";
-    #  "nix.enableLanguageServer" = "true";
-    #  "nix.serverPath" = "${pkgs.nil}/bin/nil";
-    #  "[nix]" = {
-    #    "editor.defaultFormatter" = "B4dM4n.nixpkgs-fmt";
-    #  };
-    #  "files.autoSave" = "afterDelay";
-    #  # TODO set this option only, if java is enabled
-    #  # (make java option for that and enable java extensions only when that is enabled)
-    #  "java.jdt.ls.java.home" = "${pkgs.openjdk21}/lib/openjdk";
-    #};
-
-    userSettings = (lib.attrsets.mergeAttrsList [
-      (lib.optionalAttrs true {
-        "nix.enableLanguageServer" = "true";
-        "nix.serverPath" = "${pkgs.nil}/bin/nil";
-        "[nix]" = {
-          "editor.defaultFormatter" = "B4dM4n.nixpkgs-fmt";
-        };
-        "files.autoSave" = "afterDelay";
-        # TODO set this option only, if java is enabled
-        # (make java option for that and enable java extensions only when that is enabled)
-        "java.jdt.ls.java.home" = "${pkgs.openjdk21}/lib/openjdk";
-      })
-      # for some reason the theme is named differently between these two devices
-      (lib.optionalAttrs (config.lmh01.options.type == "desktop") {
-        "workbench.colorTheme" = "Dracula";
-      })
-      (lib.optionalAttrs (config.lmh01.options.type == "laptop") { 
-        "workbench.colorTheme" = "Dracula Theme";
-      })
-    ]);
+    userSettings = {
+      "workbench.colorTheme" = "Dracula";
+      "nix.enableLanguageServer" = "true";
+      "nix.serverPath" = "${pkgs.nil}/bin/nil";
+      "[nix]" = {
+        "editor.defaultFormatter" = "B4dM4n.nixpkgs-fmt";
+      };
+      "files.autoSave" = "afterDelay";
+      # TODO set this option only, if java is enabled
+      # (make java option for that and enable java extensions only when that is enabled)
+      "java.jdt.ls.java.home" = "${pkgs.openjdk21}/lib/openjdk";
+    };
   };
 
 }
