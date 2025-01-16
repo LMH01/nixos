@@ -47,6 +47,7 @@ with lib;
       tree
       smartmontools
       srm
+      sshfs
       s-tui
       sysz
       tokei
