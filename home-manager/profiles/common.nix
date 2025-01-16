@@ -42,6 +42,7 @@ with lib;
       nix-tree
       openssl
       restic
+      rsync
       tldr
       tree
       smartmontools
