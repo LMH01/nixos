@@ -107,6 +107,7 @@
         ${pkgs.docker}/bin/docker stop immich_machine_learning
         ${pkgs.docker}/bin/docker stop immich_redis
         ${pkgs.docker}/bin/docker stop immich_postgres
+        ${pkgs.docker}/bin/docker stop audiobookshelf
         echo "Stopping gitea"
         systemctl stop gitea
         echo "Stopping webdav"
@@ -118,6 +119,7 @@
         ${pkgs.docker}/bin/docker start immich_machine_learning
         ${pkgs.docker}/bin/docker start immich_redis
         ${pkgs.docker}/bin/docker start immich_postgres
+        ${pkgs.docker}/bin/docker start audiobookshelf
         echo "Starting gitea"
         systemctl start gitea
         echo "Starting webdav"
