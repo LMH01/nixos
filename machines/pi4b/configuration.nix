@@ -88,8 +88,16 @@
         "--one-file-system"
         "-v"
       ];
-      serviceBackupPaths = [
+      serviceBackupPathsLb = [
         "/home/louis/Documents/immich"
+        "/home/louis/Documents/audiobookshelf/config"
+        "/home/louis/Documents/audiobookshelf/metadata"
+        "/var/lib/storage/gitea"
+        "/var/lib/webdav"
+      ];
+      serviceBackupPathsSn = [
+        "/home/louis/Documents/immich"
+        "/home/louis/Documents/audiobookshelf"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -117,112 +125,25 @@
       '';
     in
     {
-      # sn is currently not available to backup to so the backups are commented out for now
       # All Services are backed up to two locations.
-      # The home assistant backup is separate from all other backups, in order to be able to start home assistant as quickly as possible again
-      # The backup services-sn and services-lb is used to backup all other services running on this system.
-      # Before these backups are started all affected services are shutdown until the whole backup is complete.
-      #home_assistant-sn = {
-      #  paths = [ "/home/louis/HomeAssistant" ];
-      #  repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-      #  passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-      #  environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
-      #  # stop home assistant before backup
-      #  backupPrepareCommand = ''
-      #    echo "Shutting down Home Assistant to perform backup"
-      #    ${pkgs.docker}/bin/docker stop homeassistant
-      #  '';
-      #  # as homeassistant should also be backuped to another location,
-      #  # and it is already down we are staring the other backup now
-      #  backupCleanupCommand = ''
-      #    systemctl start restic-backups-home_assistant-lb
-      #  '';
-      #  pruneOpts = pruneOpts;
-      #  # on check phase dont lock repo, to make check not fail if other backup is currenlty running
-      #  # and that backup to other location is executed
-      #  checkOpts = [
-      #    "--no-lock"
-      #  ];
-      #  timerConfig = backupTimer;
-      #  extraBackupArgs = extraBackupArgs;
-      #  initialize = true;
-      #};
-      #home_assistant-lb = {
-      #  paths = [ "/home/louis/HomeAssistant" ];
-      #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-      #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-      #  # start home assistant after backup is complete
-      #  backupCleanupCommand = ''
-      #    echo "Starting Home Assistant"
-      #    ${pkgs.docker}/bin/docker start homeassistant
-      #  '';
-      #  pruneOpts = pruneOpts;
-      #  # disable auto start because this backup is only started when home_assistant-sn is done
-      #  timerConfig = null;
-      #  extraBackupArgs = extraBackupArgs;
-      #  initialize = true;
-      #};
-      #
-      # services are first backed up to lb and then to sn
-      #services-lb = {
-      #  paths = serviceBackupPaths;
-      #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-      #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-      #  backupPrepareCommand = serviceBackupPrepareCommand;
-      #  backupCleanupCommand = ''
-      #    systemctl start restic-backups-services-sn
-      #  '';
-      #  pruneOpts = pruneOpts;
-      #  # on check phase dont lock repo, to make check not fail if other backup is currenlty running
-      #  # and that backup to other location is executed
-      #  checkOpts = [
-      #    "--no-lock"
-      #  ];
-      #  timerConfig = backupTimer;
-      #  extraBackupArgs = extraBackupArgs;
-      #  initialize = true;
-      #};
-      #services-sn = {
-      #  paths = serviceBackupPaths;
-      #  repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-      #  passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-      #  environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
-      #  backupCleanupCommand = serviceBackupCleanupCommand;
-      #  pruneOpts = pruneOpts;
-      #  # disable auto start because this backup is only started when services-lb is done
-      #  timerConfig = null;
-      #  extraBackupArgs = extraBackupArgs;
-      #  initialize = true;
-      #};
-
-      # these backups only backup to lb and are not dependent on backups to sn
-      home_assistant-lb-single = {
+      # The backup flow is as follows:
+      # Home Assistant shutdown -> Home Assistant backup to sn -> Home Assistant backup to lb -> Home Assistant start
+      # -> Shutdown all other services -> backup all other services to sn -> backup all other services to lb -> start all other services
+      home_assistant-sn = {
         paths = [ "/home/louis/HomeAssistant" ];
-        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        # stop home assistant before backup
         backupPrepareCommand = ''
           echo "Shutting down Home Assistant to perform backup"
           ${pkgs.docker}/bin/docker stop homeassistant
         '';
-        # start home assistant after backup is complete
+        # as homeassistant should also be backuped to another location,
+        # and it is already down we are staring the other backup now
         backupCleanupCommand = ''
-          echo "Starting Home Assistant"
-          ${pkgs.docker}/bin/docker start homeassistant
+          systemctl start restic-backups-home_assistant-lb
         '';
-        pruneOpts = pruneOpts;
-        # disable auto start because this backup is only started when home_assistant-sn is done
-        timerConfig = backupTimer;
-        extraBackupArgs = extraBackupArgs;
-        initialize = true;
-      };
-
-      # services are first backed up to lb and then to sn
-      services-lb-single = {
-        paths = serviceBackupPaths;
-        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-        backupPrepareCommand = serviceBackupPrepareCommand;
-        backupCleanupCommand = serviceBackupCleanupCommand;
         pruneOpts = pruneOpts;
         # on check phase dont lock repo, to make check not fail if other backup is currenlty running
         # and that backup to other location is executed
@@ -233,6 +154,95 @@
         extraBackupArgs = extraBackupArgs;
         initialize = true;
       };
+      home_assistant-lb = {
+        paths = [ "/home/louis/HomeAssistant" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        # start home assistant after backup is complete
+        backupCleanupCommand = ''
+          echo "Starting Home Assistant"
+          ${pkgs.docker}/bin/docker start homeassistant
+          systemctl start restic-backups-services-lb
+        '';
+        pruneOpts = pruneOpts;
+        # disable auto start because this backup is only started when home_assistant-sn is done
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+      
+      # services are first backed up to lb and then to sn
+      services-lb = {
+        paths = serviceBackupPathsLb;
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        backupPrepareCommand = serviceBackupPrepareCommand;
+        backupCleanupCommand = ''
+          systemctl start restic-backups-services-sn
+        '';
+        pruneOpts = pruneOpts;
+        # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+        # and that backup to other location is executed
+        checkOpts = [
+          "--no-lock"
+        ];
+        # disable auto start because this backup is only started when home_assistant-lb is done
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+      services-sn = {
+        paths = serviceBackupPathsSn;
+        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        backupCleanupCommand = serviceBackupCleanupCommand;
+        pruneOpts = pruneOpts;
+        # disable auto start because this backup is only started when services-lb is done
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+
+      # commented out for now as sn is available again
+      # these backups only backup to lb and are not dependent on backups to sn
+      #home_assistant-lb-single = {
+      #  paths = [ "/home/louis/HomeAssistant" ];
+      #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+      #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+      #  backupPrepareCommand = ''
+      #    echo "Shutting down Home Assistant to perform backup"
+      #    ${pkgs.docker}/bin/docker stop homeassistant
+      #  '';
+      #  # start home assistant after backup is complete
+      #  backupCleanupCommand = ''
+      #    echo "Starting Home Assistant"
+      #    ${pkgs.docker}/bin/docker start homeassistant
+      #  '';
+      #  pruneOpts = pruneOpts;
+      #  # disable auto start because this backup is only started when home_assistant-sn is done
+      #  timerConfig = backupTimer;
+      #  extraBackupArgs = extraBackupArgs;
+      #  initialize = true;
+      #};
+
+      ## services are first backed up to lb and then to sn
+      #services-lb-single = {
+      #  paths = serviceBackupPathsLb;
+      #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+      #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+      #  backupPrepareCommand = serviceBackupPrepareCommand;
+      #  backupCleanupCommand = serviceBackupCleanupCommand;
+      #  pruneOpts = pruneOpts;
+      #  # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+      #  # and that backup to other location is executed
+      #  checkOpts = [
+      #    "--no-lock"
+      #  ];
+      #  timerConfig = backupTimer;
+      #  extraBackupArgs = extraBackupArgs;
+      #  initialize = true;
+      #};
 
     };
 
