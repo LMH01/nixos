@@ -38,6 +38,10 @@ in
     ];
 
     shellAliases = {
+      # always copy with progress
+      cp = "${pkgs.rsync}/bin/rsync --info=progress2";
+      c = "cp";
+
       # switching within a flake repository
       frb = "${pkgs.nixos-rebuild}/bin/nixos-rebuild --use-remote-sudo switch --flake";
 
@@ -48,6 +52,7 @@ in
       nd = "${pkgs.nix}/bin/nix develop -c ${pkgs.zsh}/bin/zsh";
 
       nsh = "nix-shell";
+      nsp = "nix-shell -p";
     };
   };
 
