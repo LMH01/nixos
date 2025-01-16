@@ -141,11 +141,6 @@
           echo "Shutting down Home Assistant to perform backup"
           ${pkgs.docker}/bin/docker stop homeassistant
         '';
-        # as homeassistant should also be backuped to another location,
-        # and it is already down we are staring the other backup now
-        backupCleanupCommand = ''
-          systemctl start restic-backups-home_assistant-lb
-        '';
         pruneOpts = pruneOpts;
         # on check phase dont lock repo, to make check not fail if other backup is currenlty running
         # and that backup to other location is executed
@@ -164,7 +159,6 @@
         backupCleanupCommand = ''
           echo "Starting Home Assistant"
           ${pkgs.docker}/bin/docker start homeassistant
-          systemctl start restic-backups-services-lb
         '';
         pruneOpts = pruneOpts;
         # disable auto start because this backup is only started when home_assistant-sn is done
@@ -173,15 +167,23 @@
         initialize = true;
       };
       
-      # services are first backed up to lb and then to sn
+      services-sn = {
+        paths = serviceBackupPathsSn;
+        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        backupPrepareCommand = serviceBackupPrepareCommand;
+        pruneOpts = pruneOpts;
+        # disable auto start because this backup is only started when services-lb is done
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
       services-lb = {
         paths = serviceBackupPathsLb;
         repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
         passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-        backupPrepareCommand = serviceBackupPrepareCommand;
-        backupCleanupCommand = ''
-          systemctl start restic-backups-services-sn
-        '';
+        backupCleanupCommand = serviceBackupCleanupCommand;
         pruneOpts = pruneOpts;
         # on check phase dont lock repo, to make check not fail if other backup is currenlty running
         # and that backup to other location is executed
@@ -189,18 +191,6 @@
           "--no-lock"
         ];
         # disable auto start because this backup is only started when home_assistant-lb is done
-        timerConfig = null;
-        extraBackupArgs = extraBackupArgs;
-        initialize = true;
-      };
-      services-sn = {
-        paths = serviceBackupPathsSn;
-        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
-        backupCleanupCommand = serviceBackupCleanupCommand;
-        pruneOpts = pruneOpts;
-        # disable auto start because this backup is only started when services-lb is done
         timerConfig = null;
         extraBackupArgs = extraBackupArgs;
         initialize = true;
@@ -247,6 +237,20 @@
       #};
 
     };
+
+  # ensure that backups start one after another in the correct order
+  systemd.services.restic-backups-home_assistant-lb = {
+    wants = [ "restic-backups-home_assistant-sn.service" ];
+    before = [ "restic-backups-home_assistant-sn.service" ];
+  };
+  systemd.services.restic-backups-services-sn = {
+    wants = [ "restic-backups-home_assistant-lb.service" ];
+    before = [ "restic-backups-home_assistant-lb.service" ];
+  };
+  systemd.services.restic-backups-services-lb = {
+    wants = [ "restic-backups-services-sn.service" ];
+    before = [ "restic-backups-services-sn.service" ];
+  };
 
   # Home Manager configuration
   home-manager = {
