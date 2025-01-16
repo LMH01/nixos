@@ -38,6 +38,8 @@ in
     ];
 
     shellAliases = {
+      sudo = "sudo ";
+
       # always copy with progress
       cp = "${pkgs.rsync}/bin/rsync --info=progress2";
       c = "cp";
