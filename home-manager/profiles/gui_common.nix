@@ -35,6 +35,7 @@ with lib;
       openvpn
       postman
       pympress
+      screen-message
       signal-desktop
       thunderbird
       vial
