@@ -56,132 +56,134 @@ in
       '';
       default = { };
       type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
-        backup-timer = mkOption {
-          type = types.attrs;
-          default = {
-            OnCalendar = "01:00";
-            Persistent = true;
-            RandomizedDelaySec = "6h";
+        options = {
+          backup-timer = mkOption {
+            type = types.attrs;
+            default = {
+              OnCalendar = "01:00";
+              Persistent = true;
+              RandomizedDelaySec = "6h";
+            };
+            example = {
+              OnCalendar = "01:00";
+              Persistent = true;
+              RandomizedDelaySec = "6h";
+            };
+            description = ''
+              When to perform the backup of this service.
+            '';
           };
-          example = {
-            OnCalendar = "01:00";
-            Persistent = true;
-            RandomizedDelaySec = "6h";
+
+          paths = lib.mkOption {
+            type = types.listOf types.str;
+            default = [ ];
+            example = [ "/var/lib/gitea" ];
+            description = "Paths to backup.";
           };
-          description = lib.mdDoc ''
-            When to perform the backup of this service.
-          '';
-        };
 
-        paths = lib.mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          example = [ "/var/lib/gitea" ];
-          description = "Paths to backup.";
-        };
+          paths-exclude = lib.mkOption {
+            type = types.listOf types.str;
+            default = [ ];
+            example = [ "/home/user/.cache" ];
+            description = "Paths to exclude from backup.";
+          };
 
-        paths-exclude = lib.mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          example = [ "/home/user/.cache" ];
-          description = "Paths to exclude from backup.";
-        };
+          extraBackupArgs = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+            description = ''
+              Extra arguments passed to restic backup.
+            '';
+            example = [
+              "--exclude-file=/etc/nixos/restic-ignore"
+            ];
+          };
 
-        extraBackupArgs = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [ ];
-          description = ''
-            Extra arguments passed to restic backup.
-          '';
-          example = [
-            "--exclude-file=/etc/nixos/restic-ignore"
-          ];
-        };
+          initialize = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = ''
+              Create the repository if it doesn't exist.
+            '';
+          };
 
-        initialize = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
-          description = ''
-            Create the repository if it doesn't exist.
-          '';
-        };
+          pruneOpts = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+            description = ''
+              A list of options (--keep-\* et al.) for 'restic forget
+              --prune', to automatically prune old snapshots.  The
+              'forget' command is run *after* the 'backup' command, so
+              keep that in mind when constructing the --keep-\* options.
+            '';
+            example = [
+              "--keep-daily 7"
+              "--keep-weekly 5"
+              "--keep-monthly 12"
+              "--keep-yearly 75"
+            ];
+          };
 
-        pruneOpts = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [ ];
-          description = ''
-            A list of options (--keep-\* et al.) for 'restic forget
-            --prune', to automatically prune old snapshots.  The
-            'forget' command is run *after* the 'backup' command, so
-            keep that in mind when constructing the --keep-\* options.
-          '';
-          example = [
-            "--keep-daily 7"
-            "--keep-weekly 5"
-            "--keep-monthly 12"
-            "--keep-yearly 75"
-          ];
-        };
+          checkOpts = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+            description = ''
+              A list of options for 'restic check'.
+            '';
+            example = [
+              "--with-cache"
+            ];
+          };
 
-        checkOpts = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [ ];
-          description = ''
-            A list of options for 'restic check'.
-          '';
-          example = [
-            "--with-cache"
-          ];
-        };
+          backupPrepareCommand = lib.mkOption {
+            type = with lib.types; nullOr str;
+            default = null;
+            description = ''
+              A script that must run before starting the backup process.
+              Is run before backups to the locations are started.
+            '';
+          };
 
-        backupPrepareCommand = lib.mkOption {
-          type = with lib.types; nullOr str;
-          default = null;
-          description = ''
-            A script that must run before starting the backup process.
-            Is run before backups to the locations are started.
-          '';
-        };
+          backupCleanupCommand = lib.mkOption {
+            type = with lib.types; nullOr str;
+            default = null;
+            description = ''
+              A script that must run after finishing the backup process.
+              Is run after backups to the locations are completed.
+            '';
+          };
 
-        backupCleanupCommand = lib.mkOption {
-          type = with lib.types; nullOr str;
-          default = null;
-          description = ''
-            A script that must run after finishing the backup process.
-            Is run after backups to the locations are completed.
-          '';
-        };
+          targets = lib.mkOption {
+            description = ''
+              To what locations the service should be backed up to.
+            '';
+            type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
+              repositoryFile = lib.mkOption {
+                type = with lib.types; nullOr path;
+                default = null;
+                description = ''
+                  Path to the file containing the repository location to backup to.
+                '';
+              };
 
-        targets = lib.mkOption {
-          description = ''
-            To what locations the service should be backed up to.
-          '';
-          type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
-            repositoryFile = lib.mkOption {
-              type = with lib.types; nullOr path;
-              default = null;
-              description = ''
-                Path to the file containing the repository location to backup to.
-              '';
-            };
+              passwordFile = lib.mkOption {
+                type = lib.types.str;
+                description = ''
+                  Read the repository password from a file.
+                '';
+                example = "/etc/nixos/restic-password";
+              };
 
-            passwordFile = lib.mkOption {
-              type = lib.types.str;
-              description = ''
-                Read the repository password from a file.
-              '';
-              example = "/etc/nixos/restic-password";
-            };
-
-            environmentFile = lib.mkOption {
-              type = with lib.types; nullOr str;
-              default = null;
-              description = ''
-                file containing the credentials to access the repository, in the
-                format of an EnvironmentFile as described by systemd.exec(5)
-              '';
-            };
-          }));
+              environmentFile = lib.mkOption {
+                type = with lib.types; nullOr str;
+                default = null;
+                description = ''
+                  file containing the credentials to access the repository, in the
+                  format of an EnvironmentFile as described by systemd.exec(5)
+                '';
+              };
+            }));
+          };
         };
       }));
     };
@@ -198,11 +200,18 @@ in
           text = builtins.concatStringsSep "\n" cfg.backup-paths-exclude;
         };
         service-backups =
+          let
+          in
           lib.mapAttrs'
-            (name: backup:
+            (service_name: backup:
               let
               in
-              lib.nameValuePair "test" ({ }))
+              lib.mapAttrs'
+                (target_name: target:
+                  lib.nameValuePair "backup-service-${service_name}-${target_name}" ({ })
+                )
+                cfg.service-backups.${service_name}.targets
+            )
             cfg.service-backups;
       in
       lib.attrsets.mergeAttrsList [
