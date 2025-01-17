@@ -201,39 +201,34 @@ in
           text = builtins.concatStringsSep "\n" cfg.backup-paths-exclude;
         };
         service-backups =
-          let
-          in
           lib.mapAttrs'
             (service_name: backup:
-              let
-              in
               lib.mapAttrs'
                 (target_name: target:
                   lib.nameValuePair "backup-service-${service_name}-${target_name}" ({
                     # untested if this is all correct
 
-                    # TODO make that if target.path is not null that value should be used
-                    # otherwise backup.path should be used
-                    paths = paths;
+                    # use paths from target if they are set, otherwise use paths defined under the service backup
+                    paths = if target.path != null then target.paths else backup.paths;
 
-                    repositoryFile = repositoryFile;
-                    passwordFile = passwordFile;
-                    environmentFile = environmentFile;
+                    repositoryFile = target.repositoryFile;
+                    passwordFile = target.passwordFile;
+                    environmentFile = target.environmentFile;
 
-                    timerConfig = backup-timer;
+                    timerConfig = backup.backup-timer;
 
-                    extraBackupArgs = extraBackupArgs;
+                    extraBackupArgs = backup.extraBackupArgs;
 
-                    initialize = initialize;
+                    initialize = backup.initialize;
 
-                    pruneOpts = pruneOpts;
-                    checkOpts = checkOpts;
+                    pruneOpts = backup.pruneOpts;
+                    checkOpts = backup.checkOpts;
 
                     # TODO this needs to be changed so that the commands are not applied to each target:
                     # this should only be applied to the first backup (= target with name first in alphabet)
-                    backupPrepareCommand = backupPrepareCommand;
+                    backupPrepareCommand = backup.backupPrepareCommand;
                     # this should only be applied to the last backup (= target with name last in alphabet)
-                    backupCleanupCommand = backupCleanupCommand;
+                    backupCleanupCommand = backup.backupCleanupCommand;
                   })
                 )
                 cfg.service-backups.${service_name}.targets
