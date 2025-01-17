@@ -147,7 +147,8 @@
         checkOpts = [
           "--no-lock"
         ];
-        timerConfig = backupTimer;
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
+        timerConfig = null;
         extraBackupArgs = extraBackupArgs;
         initialize = true;
       };
@@ -161,7 +162,7 @@
           ${pkgs.docker}/bin/docker start homeassistant
         '';
         pruneOpts = pruneOpts;
-        # disable auto start because this backup is only started when home_assistant-sn is done
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
         timerConfig = null;
         extraBackupArgs = extraBackupArgs;
         initialize = true;
@@ -174,7 +175,7 @@
         environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
         backupPrepareCommand = serviceBackupPrepareCommand;
         pruneOpts = pruneOpts;
-        # disable auto start because this backup is only started when services-lb is done
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
         timerConfig = null;
         extraBackupArgs = extraBackupArgs;
         initialize = true;
@@ -190,8 +191,9 @@
         checkOpts = [
           "--no-lock"
         ];
-        # disable auto start because this backup is only started when home_assistant-lb is done
-        timerConfig = null;
+        # The current way the systemd services are configured requires that this last backup is triggered.
+        # The service configuration below is responsible for triggering all other backups before this one.
+        timerConfig = backupTimer;
         extraBackupArgs = extraBackupArgs;
         initialize = true;
       };
@@ -241,15 +243,15 @@
   # ensure that backups start one after another in the correct order
   systemd.services.restic-backups-home_assistant-lb = {
     wants = [ "restic-backups-home_assistant-sn.service" ];
-    before = [ "restic-backups-home_assistant-sn.service" ];
+    after = [ "restic-backups-home_assistant-sn.service" ];
   };
   systemd.services.restic-backups-services-sn = {
     wants = [ "restic-backups-home_assistant-lb.service" ];
-    before = [ "restic-backups-home_assistant-lb.service" ];
+    after = [ "restic-backups-home_assistant-lb.service" ];
   };
   systemd.services.restic-backups-services-lb = {
     wants = [ "restic-backups-services-sn.service" ];
-    before = [ "restic-backups-services-sn.service" ];
+    after = [ "restic-backups-services-sn.service" ];
   };
 
   # Home Manager configuration
