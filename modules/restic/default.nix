@@ -81,13 +81,6 @@ in
             description = "Paths to backup.";
           };
 
-          paths-exclude = lib.mkOption {
-            type = types.listOf types.str;
-            default = [ ];
-            example = [ "/home/user/.cache" ];
-            description = "Paths to exclude from backup.";
-          };
-
           extraBackupArgs = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             default = [ ];
@@ -109,7 +102,12 @@ in
 
           pruneOpts = lib.mkOption {
             type = lib.types.listOf lib.types.str;
-            default = [ ];
+            default = [ 
+              "--keep-daily 7"
+              "--keep-weekly 5"
+              "--keep-monthly 12"
+              "--keep-yearly 75"
+            ];
             description = ''
               A list of options (--keep-\* et al.) for 'restic forget
               --prune', to automatically prune old snapshots.  The
@@ -208,7 +206,26 @@ in
               in
               lib.mapAttrs'
                 (target_name: target:
-                  lib.nameValuePair "backup-service-${service_name}-${target_name}" ({ })
+                  lib.nameValuePair "backup-service-${service_name}-${target_name}" ({
+                    # untested if this is all correct
+                    paths = paths;
+
+                    repositoryFile = repositoryFile;
+                    passwordFile = passwordFile;
+                    environmentFile = environmentFile;
+
+                    timerConfig = backup-timer;
+
+                    extraBackupArgs = extraBackupArgs;
+
+                    initialize = initialize;
+
+                    pruneOpts = pruneOpts;
+                    checkOpts = checkOpts;
+
+                    backupPrepareCommand = backupPrepareCommand;
+                    backupCleanupCommand = backupCleanupCommand;
+                  })
                 )
                 cfg.service-backups.${service_name}.targets
             )
