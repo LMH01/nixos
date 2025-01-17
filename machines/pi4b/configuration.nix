@@ -59,6 +59,108 @@
         "/home/louis/Obsidian"
         "/mnt/nas_multimedia/Imagedata/Digital/OwnPics" # will only be backed up, when the drive is mounted manually
       ];
+      # these service backups are not tested (and not yet working!)
+      # TODO when these are enabled: Update systemd units to create backup chain (like below for the current way)
+      # In this case a start backup needs to be set, where the timerConfig is not null.
+      #service-backups =
+      #  let
+      #    sn_repo_file = "${config.lmh01.secrets}/restic/sn/repository";
+      #    sn_password_file = "${config.lmh01.secrets}/restic/sn/password";
+      #    sn_env_file = "${config.lmh01.secrets}/restic/sn/environment";
+      #    lb_repo_file = "${config.lmh01.secrets}/restic/lb/repository";
+      #    lb_password_file = "${config.lmh01.secrets}/restic/lb/password";
+      #    sn = {
+      #      repositoryFile = sn_repo_file;
+      #      passwordFile = sn_password_file;
+      #      environmentFile = sn_env_file;
+      #    };
+      #    lb = {
+      #      repositoryFile = lb_repo_file;
+      #      passwordFile = lb_password_file;
+      #    };
+      #    targets = {
+      #      sn = sn;
+      #      lb = lb;
+      #    };
+      #  in
+      #  {
+      #    audiobookshelf = {
+      #      backupPrepareCommand = ''
+      #        ${pkgs.docker}/bin/docker stop audiobookshelf
+      #      '';
+      #      backupCleanupCommand = ''
+      #        ${pkgs.docker}/bin/docker start audiobookshelf
+      #      '';
+      #      targets = {
+      #        sn = {
+      #          paths = [
+      #            "/home/louis/Documents/audiobookshelf"
+      #          ];
+      #          repositoryFile = sn_repo_file;
+      #          passwordFile = sn_password_file;
+      #          environmentFile = sn_env_file;
+      #        };
+      #        lb = {
+      #          paths = [
+      #            "/home/louis/Documents/immich"
+      #            "/home/louis/Documents/audiobookshelf/config"
+      #          ];
+      #          repositoryFile = lb_repo_file;
+      #          passwordFile = lb_password_file;
+      #        };
+      #      };
+      #    };
+      #    gitea = {
+      #      paths = [ "/var/lib/storage/gitea" ];
+      #      backupPrepareCommand = ''
+      #        echo "Stopping gitea"
+      #        systemctl stop gitea
+      #      '';
+      #      backupCleanupCommand = ''
+      #        echo "Starting gitea"
+      #        systemctl start gitea
+      #      '';
+      #      targets = targets;
+      #    };
+      #    home-assistant = {
+      #      paths = [ "/home/louis/HomeAssistant" ];
+      #      backupPrepareCommand = ''
+      #        ${pkgs.docker}/bin/docker stop homeassistant
+      #      '';
+      #      backupCleanupCommand = ''
+      #        ${pkgs.docker}/bin/docker start homeassistant
+      #      '';
+      #      targets = targets;
+      #    };
+      #    immich = {
+      #      paths = [ "/home/louis/Documents/immich" ];
+      #      backupPrepareCommand = ''
+      #        ${pkgs.docker}/bin/docker stop immich_server
+      #        ${pkgs.docker}/bin/docker stop immich_machine_learning
+      #        ${pkgs.docker}/bin/docker stop immich_redis
+      #        ${pkgs.docker}/bin/docker stop immich_postgres
+      #      '';
+      #      backupCleanupCommand = ''
+      #        ${pkgs.docker}/bin/docker start immich_server
+      #        ${pkgs.docker}/bin/docker start immich_machine_learning
+      #        ${pkgs.docker}/bin/docker start immich_redis
+      #        ${pkgs.docker}/bin/docker start immich_postgres
+      #      '';
+      #      targets = targets;
+      #    };
+      #    webdav = {
+      #      paths = [ "/var/lib/webdav" ];
+      #      backupPrepareCommand = ''
+      #        echo "Stopping webdav"
+      #        systemctl stop webdav
+      #      '';
+      #      backupCleanupCommand = ''
+      #        echo "Starting webdav"
+      #        systemctl start webdav
+      #      '';
+      #      targets = targets;
+      #    };
+      #  };
     };
     webdav.enable = true;
     wireguard.enable = true;
@@ -167,7 +269,7 @@
         extraBackupArgs = extraBackupArgs;
         initialize = true;
       };
-      
+
       services-sn = {
         paths = serviceBackupPathsSn;
         repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
