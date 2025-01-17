@@ -98,7 +98,7 @@ in
 
           pruneOpts = lib.mkOption {
             type = lib.types.listOf lib.types.str;
-            default = [ 
+            default = [
               "--keep-daily 7"
               "--keep-weekly 5"
               "--keep-monthly 12"
@@ -152,6 +152,13 @@ in
               To what locations the service should be backed up to.
             '';
             type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
+              paths = lib.mkOption {
+                type = types.listOf types.str;
+                default = [ ];
+                example = [ "/var/lib/gitea" ];
+                description = "Paths to backup. If this option is set, this overrides service-backups.<NAME>.paths and its value will have no effect";
+              };
+
               repositoryFile = lib.mkOption {
                 type = with lib.types; nullOr path;
                 default = null;
@@ -204,6 +211,9 @@ in
                 (target_name: target:
                   lib.nameValuePair "backup-service-${service_name}-${target_name}" ({
                     # untested if this is all correct
+
+                    # TODO make that if target.path is not null that value should be used
+                    # otherwise backup.path should be used
                     paths = paths;
 
                     repositoryFile = repositoryFile;
