@@ -54,6 +54,7 @@ in
       description = ''
         Backups for services.
       '';
+      default = { };
       type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
         backup-timer = mkOption {
           type = types.attrs;
@@ -267,9 +268,18 @@ in
 
         })
         # service backups
-        (lib.optionalAttrs true {
-          # Continue here
-        })
+        # Continue here
+        (
+          lib.mapAttrs'
+            (name: backup:
+              let
+              in { 
+                "backup-service-${name}" = {
+
+                };
+              })
+            cfg.service-backups
+        )
       ]);
   };
 }
