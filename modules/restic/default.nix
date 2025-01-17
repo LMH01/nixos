@@ -59,11 +59,7 @@ in
         options = {
           backup-timer = mkOption {
             type = types.attrs;
-            default = {
-              OnCalendar = "01:00";
-              Persistent = true;
-              RandomizedDelaySec = "6h";
-            };
+            default = null;
             example = {
               OnCalendar = "01:00";
               Persistent = true;
@@ -223,7 +219,10 @@ in
                     pruneOpts = pruneOpts;
                     checkOpts = checkOpts;
 
+                    # TODO this needs to be changed so that the commands are not applied to each target:
+                    # this should only be applied to the first backup (= target with name first in alphabet)
                     backupPrepareCommand = backupPrepareCommand;
+                    # this should only be applied to the last backup (= target with name last in alphabet)
                     backupCleanupCommand = backupCleanupCommand;
                   })
                 )
