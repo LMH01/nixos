@@ -197,10 +197,17 @@ in
           name = "restic-ignore-file";
           text = builtins.concatStringsSep "\n" cfg.backup-paths-exclude;
         };
+        service-backups =
+          lib.mapAttrs'
+            (name: backup:
+              let
+              in
+              lib.nameValuePair "test" ({ }))
+            cfg.service-backups;
       in
-      (lib.attrsets.mergeAttrsList [
-        # base backups
-        (lib.optionalAttrs true {
+      lib.attrsets.mergeAttrsList [
+        service-backups
+        {
           #sn = {
           #  paths = cfg.backup-paths-sn;
           #  repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
@@ -235,12 +242,6 @@ in
               "--keep-yearly 75"
             ];
             timerConfig = cfg.backup-timer;
-            extraBackupArgs = [
-              "--exclude-file=${restic-ignore-file}"
-              "--one-file-system"
-              "--retry-lock 1h" # try to periodically relock the repository for 1 hour
-              "-v"
-            ];
             initialize = true;
           };
           # only works when nas home is manually mounted to /mnt/nas_home
@@ -266,20 +267,7 @@ in
             initialize = true;
           };
 
-        })
-        # service backups
-        # Continue here
-        (
-          lib.mapAttrs'
-            (name: backup:
-              let
-              in { 
-                "backup-service-${name}" = {
-
-                };
-              })
-            cfg.service-backups
-        )
-      ]);
+        }
+      ];
   };
 }
