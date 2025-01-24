@@ -201,11 +201,11 @@ in
           text = builtins.concatStringsSep "\n" cfg.backup-paths-exclude;
         };
         service-backups =
-          lib.mapAttrs'
+          lib.mapAttrs
             (service_name: backup:
               lib.mapAttrs'
                 (target_name: target:
-                  lib.nameValuePair "backup-service-${service_name}-${target_name}" ({
+                  lib.nameValuePair "backup-service-${service_name}-${target_name}" {
                     # untested if this is all correct
 
                     # use paths from target if they are set, otherwise use paths defined under the service backup
@@ -229,9 +229,9 @@ in
                     backupPrepareCommand = backup.backupPrepareCommand;
                     # this should only be applied to the last backup (= target with name last in alphabet)
                     backupCleanupCommand = backup.backupCleanupCommand;
-                  })
+                  }
                 )
-                cfg.service-backups.${service_name}.targets
+                backup.targets
             )
             cfg.service-backups;
       in
