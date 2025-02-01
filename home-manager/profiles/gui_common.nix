@@ -35,6 +35,7 @@ with lib;
       openvpn
       postman
       pympress
+      qmk
       screen-message
       signal-desktop
       thunderbird
