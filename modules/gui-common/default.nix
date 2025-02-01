@@ -30,4 +30,6 @@ in
   fonts.packages = with pkgs; [
     fira-sans
   ];
+
+  hardware.keyboard.qmk.enable = true;
 }
