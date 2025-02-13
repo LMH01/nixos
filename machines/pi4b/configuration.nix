@@ -148,6 +148,18 @@
       #      '';
       #      targets = targets;
       #    };
+      #    paplerless-ngx = {
+      #      paths = [ "/home/louis/Documents/paperless-ngx" ];
+      #      backupPrepareCommand = ''
+      #        echo "Stopping webdav"
+      #        systemctl stop webdav
+      #      '';
+      #      backupCleanupCommand = ''
+      #        echo "Starting webdav"
+      #        systemctl start webdav
+      #      '';
+      #      targets = targets;
+      #    };
       #    webdav = {
       #      paths = [ "/var/lib/webdav" ];
       #      backupPrepareCommand = ''
@@ -194,12 +206,14 @@
         "/home/louis/Documents/immich"
         "/home/louis/Documents/audiobookshelf/config"
         "/home/louis/Documents/audiobookshelf/metadata"
+        "/home/louis/Documents/paperless-ngx"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
       serviceBackupPathsSn = [
         "/home/louis/Documents/immich"
         "/home/louis/Documents/audiobookshelf"
+        "/home/louis/Documents/paperless-ngx"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -210,10 +224,9 @@
         ${pkgs.docker}/bin/docker stop immich_redis
         ${pkgs.docker}/bin/docker stop immich_postgres
         ${pkgs.docker}/bin/docker stop audiobookshelf
-        echo "Stopping gitea"
-        systemctl stop gitea
-        echo "Stopping webdav"
-        systemctl stop webdav
+        ${pkgs.docker}/bin/docker stop paperless-ngx-webserver-1
+        ${pkgs.docker}/bin/docker stop paperless-ngx-db-1
+        ${pkgs.docker}/bin/docker stop paperless-ngx-broker-1
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -222,10 +235,9 @@
         ${pkgs.docker}/bin/docker start immich_redis
         ${pkgs.docker}/bin/docker start immich_postgres
         ${pkgs.docker}/bin/docker start audiobookshelf
-        echo "Starting gitea"
-        systemctl start gitea
-        echo "Starting webdav"
-        systemctl start webdav
+        ${pkgs.docker}/bin/docker start paperless-ngx-webserver-1
+        ${pkgs.docker}/bin/docker start paperless-ngx-db-1
+        ${pkgs.docker}/bin/docker start paperless-ngx-broker-1
       '';
     in
     {
@@ -379,6 +391,7 @@
   networking.firewall.allowedTCPPorts = [
     53 # used by pihole
     2283 # used by immich
+    2287 # used by paperless-ngx
     8076 # used by webdav
     8123 # used by home assistant
     11500 # pihole admin interface
@@ -397,4 +410,4 @@
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
   system.stateVersion = "23.05";
-}
+}# nix run .\#lollypops -- pi4b
