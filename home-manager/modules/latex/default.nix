@@ -11,7 +11,7 @@ in {
     ];
 
     # enable vscode extension
-    programs.vscode.extensions = with pkgs.vscode-extensions; [ james-yu.latex-workshop ];
+    programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [ james-yu.latex-workshop ];
   };
 
 }
