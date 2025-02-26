@@ -6,8 +6,8 @@
     # being able to build the sd-image
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
 
-    # https://github.com/NixOS/nixos-hardware/tree/master/raspberry-pi/4
-    nixos-hardware.nixosModules.raspberry-pi-4
+    # https://github.com/NixOS/nixos-hardware/tree/master/raspberry-pi/5
+    nixos-hardware.nixosModules.raspberry-pi-5
 
     home-manager.nixosModules.home-manager
 
@@ -42,7 +42,7 @@
   lmh01 = {
     gitea = {
       enable = true;
-      domain = "pi4b-louis.fritz.box";
+      domain = "pi5-louis.fritz.box";
     };
     jellyfin.enable = true;
     options.type = "server";
@@ -383,8 +383,7 @@
     users.louis = flake-self.homeConfigurations.server;
   };
 
-  hardware.raspberry-pi."4".poe-hat.enable = true;
-  networking.hostName = "pi4b-louis";
+  networking.hostName = "pi5-louis";
 
   networking.networkmanager.enable = true;
 
