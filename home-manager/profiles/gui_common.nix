@@ -28,8 +28,8 @@ with lib;
       firefox
       font-awesome
       gimp
-      kate
-      kleopatra
+      kdePackages.kate
+      kdePackages.kleopatra
       mongodb-compass
       obsidian
       openvpn
