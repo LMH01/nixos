@@ -23,7 +23,7 @@ in
       feh
       flameshot
       i3lock
-      konsole
+      kdePackages.konsole
       playerctl # musik controlls for pipewire/pulse
       suspend-pc
     ]
@@ -55,7 +55,7 @@ in
 
         menu = "${pkgs.rofi}/bin/rofi -show combi";
 
-        terminal = "${pkgs.konsole}/bin/konsole";
+        terminal = "${pkgs.kdePackages.konsole}/bin/konsole";
 
         defaultWorkspace = "workspace number 1";
 
