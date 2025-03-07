@@ -103,7 +103,6 @@
               candy-icon-theme
               alpha_tui;
 
-            # Merged code begins here
           } // builtins.listToAttrs
             (
               map
@@ -120,7 +119,7 @@
                     '';
                   };
                 })
-                (builtins.attrNames self.nixosConfigurations)
+                (builtins.filter (x: x == "pi4b" || x == "pi5") (builtins.attrNames self.nixosConfigurations))
             )
         );
 
@@ -143,27 +142,36 @@
       # Each subdirectory in ./machines is a host. Add them all to
       # nixosConfiguratons. Host configurations need a file called
       # configuration.nix that will be read first
-      nixosConfigurations = builtins.listToAttrs (map
-        (x: {
-          name = x;
-          value = nixpkgs.lib.nixosSystem {
+      nixosConfigurations = builtins.listToAttrs (
+        map
+          (
+            x:
+            let
+              name = (builtins.replaceStrings [ ".nix" ] [ "" ] x);
+            in
+            {
+              inherit name;
+              value = nixpkgs.lib.nixosSystem {
 
-            # Make inputs and the flake itself accessible as module parameters.
-            # Technically, adding the inputs is redundant as they can be also
-            # accessed with flake-self.inputs.X, but adding them individually
-            # allows to only pass what is needed to each module.
-            specialArgs = { flake-self = self; } // inputs;
+                # Make inputs and the flake itself accessible as module parameters.
+                # Technically, adding the inputs is redundant as they can be also
+                # accessed with flake-self.inputs.X, but adding them individually
+                # allows to only pass what is needed to each module.
+                specialArgs = { flake-self = self; } // inputs;
 
-            modules = [
-              lollypops.nixosModules.lollypops
-              disko.nixosModules.disko
-              (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
-              self.nixosModules.options
-            ];
+                modules = [
+                  lollypops.nixosModules.lollypops
+                  disko.nixosModules.disko
+                  (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
+                  self.nixosModules.options
+                  #raspberry-pi-nix.nixosModules.raspberry-pi
+                  #raspberry-pi-nix.nixosModules.sd-image
+                ];
 
-          };
-        })
-        (builtins.attrNames (builtins.readDir ./machines)));
+              };
+            }
+          )
+          (builtins.attrNames (builtins.readDir ./machines)));
 
       homeConfigurations = {
         portable = { pkgs, lib, ... }: {

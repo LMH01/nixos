@@ -26,7 +26,7 @@
   # add boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; to your x86 system
   # to build ARM stuff through qemu
   sdImage.compressImage = false;
-  sdImage.imageBaseName = "raspi-image";
+  sdImage.imageBaseName = "pi5-image";
 
   # this workaround is currently needed to build the sd-image
   # basically: there currently is an issue that prevents the sd-image to be built successfully
@@ -409,4 +409,4 @@
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
   system.stateVersion = "23.05";
-}# nix run .\#lollypops -- pi4b
+}# nix run .\#lollypops -- pi5b
