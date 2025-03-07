@@ -56,19 +56,20 @@
       "image": "bash",
       "name": "Push Dell22_LMH to Attic"
     },
-    {
-      "commands": [
-        "nix build '.#nixosConfigurations.nixos_portable.config.system.build.toplevel' -o 'result-nixos_portable'"
-      ],
-      "image": "bash",
-      "name": "Build nixos_portable"
-    },
-    {
-      "commands": [
-        "attic push lounge-rocks:nix-cache 'result-nixos_portable'"
-      ],
-      "image": "bash",
-      "name": "Push nixos_portable to Attic"
-    }
+    # for now commented out, as this device is no longer needed actively
+    #{
+    #  "commands": [
+    #    "nix build '.#nixosConfigurations.nixos_portable.config.system.build.toplevel' -o 'result-nixos_portable'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Build nixos_portable"
+    #},
+    #{
+    #  "commands": [
+    #    "attic push lounge-rocks:nix-cache 'result-nixos_portable'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Push nixos_portable to Attic"
+    #}
   ]
 }

@@ -21,19 +21,34 @@
         "attic_key"
       ]
     },
+    # for now commented out, as this device is no longer needed actively
+    #{
+    #  "commands": [
+    #    "nix build '.#nixosConfigurations.pi4b.config.system.build.toplevel' -o 'result-pi4b'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Build pi4b"
+    #},
+    #{
+    #  "commands": [
+    #    "attic push lounge-rocks:nix-cache 'result-pi4b'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Push pi4b to Attic"
+    #}
     {
       "commands": [
-        "nix build '.#nixosConfigurations.pi4b.config.system.build.toplevel' -o 'result-pi4b'"
+        "nix build '.#nixosConfigurations.pi5.config.system.build.toplevel' -o 'result-pi5'"
       ],
       "image": "bash",
-      "name": "Build pi4b"
+      "name": "Build pi5"
     },
     {
       "commands": [
-        "attic push lounge-rocks:nix-cache 'result-pi4b'"
+        "attic push lounge-rocks:nix-cache 'result-pi5'"
       ],
       "image": "bash",
-      "name": "Push pi4b to Attic"
+      "name": "Push pi5 to Attic"
     }
   ]
 }
