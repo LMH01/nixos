@@ -103,7 +103,9 @@
               candy-icon-theme
               alpha_tui;
 
-          } // builtins.listToAttrs
+          }
+          //
+          builtins.listToAttrs
             (
               map
                 (x: {
@@ -118,6 +120,16 @@
                       ${pkgs.zip}/bin/zip $out/$name.zip $src/sd-image/$name
                     '';
                   };
+                })
+                (builtins.filter (x: x == "pi4b" || x == "pi5") (builtins.attrNames self.nixosConfigurations))
+            )
+          //
+          builtins.listToAttrs
+            (
+              map
+                (x: {
+                  name = "${x}-image";
+                  value = self.nixosConfigurations.${x}.config.system.build.sdImage;
                 })
                 (builtins.filter (x: x == "pi4b" || x == "pi5") (builtins.attrNames self.nixosConfigurations))
             )
