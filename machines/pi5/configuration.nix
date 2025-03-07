@@ -1,13 +1,8 @@
 # nix run .\#lollypops -- pi4b
 { self, ... }:
-{ pkgs, lib, config, modulesPath, flake-self, home-manager, nixos-hardware, nixpkgs, ... }: {
+{ pkgs, lib, config, modulesPath, flake-self, home-manager, nixos-hardware, nixpkgs, raspberry-pi-nix, ... }: {
 
   imports = [
-    # being able to build the sd-image
-    "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
-
-    # https://github.com/NixOS/nixos-hardware/tree/master/raspberry-pi/5
-    nixos-hardware.nixosModules.raspberry-pi-5
 
     home-manager.nixosModules.home-manager
 
@@ -18,9 +13,12 @@
     self.nixosModules.webdav
     self.nixosModules.wireguard
     self.nixosModules.woodpecker
+
+    raspberry-pi-nix.nixosModules.raspberry-pi
+    raspberry-pi-nix.nixosModules.sd-image
   ];
 
-  ### build sd-image
+  raspberry-pi-nix.board = "bcm2712";
 
   # nix build .\#nixosConfigurations.pi4b.config.system.build.sdImage
   # add boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; to your x86 system
