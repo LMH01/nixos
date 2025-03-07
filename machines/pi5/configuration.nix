@@ -42,7 +42,7 @@
       enable = true;
       domain = "pi5-louis.fritz.box";
     };
-    jellyfin.enable = true;
+    #jellyfin.enable = true;
     options.type = "server";
     restic-client = {
       enable = true;
@@ -384,6 +384,7 @@
   networking.hostName = "pi5-louis";
 
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = lib.mkForce [];
 
   networking.firewall.allowedTCPPorts = [
     53 # used by pihole
