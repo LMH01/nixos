@@ -65,6 +65,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix";
   };
 
   outputs = { self, ... }@inputs:
@@ -82,22 +84,65 @@
       overlays.default = final: prev:
         (import ./pkgs inputs) final prev;
 
-      packages = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system}; in {
-          woodpecker-pipeline = pkgs.callPackage ./pkgs/woodpecker-pipeline {
-            flake-self = self;
-            inputs = inputs;
-          };
-          build_outputs =
-            pkgs.callPackage mayniklas.packages.${system}.build_outputs.override {
-              inherit self;
-              output_path = "~/.keep-nix-outputs-LMH01";
+      #packages = forAllSystems (system:
+      #  let 
+      #    pkgs = nixpkgsFor.${system};
+      #  in {
+      #    woodpecker-pipeline = pkgs.callPackage ./pkgs/woodpecker-pipeline {
+      #      flake-self = self;
+      #      inputs = inputs;
+      #    };
+      #    build_outputs =
+      #      pkgs.callPackage mayniklas.packages.${system}.build_outputs.override {
+      #        inherit self;
+      #        output_path = "~/.keep-nix-outputs-LMH01";
+      #      };
+      #    inherit (nixpkgsFor.${system}.lmh01)
+      #      candy-icon-theme
+      #      alpha_tui
+      #      ;
+      #    }
+      #  );
+      packages = forAllSystems
+        (system:
+          let
+            pkgs = nixpkgsFor.${system};
+          in
+          {
+            woodpecker-pipeline = pkgs.callPackage ./pkgs/woodpecker-pipeline {
+              flake-self = self;
+              inputs = inputs;
             };
-          inherit (nixpkgsFor.${system}.lmh01)
-            candy-icon-theme
-            alpha_tui
-            ;
-        });
+            build_outputs =
+              pkgs.callPackage mayniklas.packages.${system}.build_outputs.override {
+                inherit self;
+                output_path = "~/.keep-nix-outputs-LMH01";
+              };
+            inherit (nixpkgsFor.${system}.lmh01)
+              candy-icon-theme
+              alpha_tui;
+
+            # Merged code begins here
+          } // builtins.listToAttrs
+            (
+              map
+                (x: {
+                  name = "${x}-image-zip";
+                  value = pkgs.stdenv.mkDerivation {
+                    name = "${x}-image-zip";
+                    src = self.nixosConfigurations.${x}.config.system.build.sdImage;
+                    buildCommand = ''
+                      name=$(basename $src/sd-image/*)
+                      mkdir -p $out
+                      ln -s $src/sd-image/$name $out/
+                      ${pkgs.zip}/bin/zip $out/$name.zip $src/sd-image/$name
+                    '';
+                  };
+                })
+                (builtins.attrNames self.nixosConfigurations)
+            )
+        );
+
 
       apps = forAllSystems (system: {
         lollypops = lollypops.apps.${system}.default {
