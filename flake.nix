@@ -84,25 +84,6 @@
       overlays.default = final: prev:
         (import ./pkgs inputs) final prev;
 
-      #packages = forAllSystems (system:
-      #  let 
-      #    pkgs = nixpkgsFor.${system};
-      #  in {
-      #    woodpecker-pipeline = pkgs.callPackage ./pkgs/woodpecker-pipeline {
-      #      flake-self = self;
-      #      inputs = inputs;
-      #    };
-      #    build_outputs =
-      #      pkgs.callPackage mayniklas.packages.${system}.build_outputs.override {
-      #        inherit self;
-      #        output_path = "~/.keep-nix-outputs-LMH01";
-      #      };
-      #    inherit (nixpkgsFor.${system}.lmh01)
-      #      candy-icon-theme
-      #      alpha_tui
-      #      ;
-      #    }
-      #  );
       packages = forAllSystems
         (system:
           let
