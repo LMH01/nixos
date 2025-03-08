@@ -144,6 +144,16 @@
       #      '';
       #      targets = targets;
       #    };
+      #    jellyfin = {
+      #      paths = [ "/home/louis/Documents/jellyfin" ];
+      #      backupPrepareCommand = ''
+      #        ${pkgs.docker}/bin/docker stop jellyfin
+      #      '';
+      #      backupCleanupCommand = ''
+      #        ${pkgs.docker}/bin/docker start jellyfin
+      #      '';
+      #      targets = targets;
+      #    };
       #    paplerless-ngx = {
       #      paths = [ "/home/louis/Documents/paperless-ngx" ];
       #      backupPrepareCommand = ''
@@ -200,6 +210,7 @@
       ];
       serviceBackupPathsLb = [
         "/home/louis/Documents/immich"
+        "/home/louis/Documents/jellyfin"
         "/home/louis/Documents/audiobookshelf/config"
         "/home/louis/Documents/audiobookshelf/metadata"
         "/home/louis/Documents/paperless-ngx"
@@ -208,6 +219,7 @@
       ];
       serviceBackupPathsSn = [
         "/home/louis/Documents/immich"
+        "/home/louis/Documents/jellyfin"
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/var/lib/storage/gitea"
@@ -219,6 +231,7 @@
         ${pkgs.docker}/bin/docker stop immich_machine_learning
         ${pkgs.docker}/bin/docker stop immich_redis
         ${pkgs.docker}/bin/docker stop immich_postgres
+        ${pkgs.docker}/bin/docker stop jellyfin
         ${pkgs.docker}/bin/docker stop audiobookshelf
         ${pkgs.docker}/bin/docker stop paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker stop paperless-ngx-db-1
@@ -230,6 +243,7 @@
         ${pkgs.docker}/bin/docker start immich_machine_learning
         ${pkgs.docker}/bin/docker start immich_redis
         ${pkgs.docker}/bin/docker start immich_postgres
+        ${pkgs.docker}/bin/docker start jellyfin
         ${pkgs.docker}/bin/docker start audiobookshelf
         ${pkgs.docker}/bin/docker start paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker start paperless-ngx-db-1
