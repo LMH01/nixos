@@ -28,34 +28,34 @@
         "attic_key"
       ]
     },
-    {
-      "commands": [
-        "nix build '.#nixosConfigurations.CBPC-0123_LMH.config.system.build.toplevel' -o 'result-CBPC-0123_LMH'"
-      ],
-      "image": "bash",
-      "name": "Build CBPC-0123_LMH"
-    },
-    {
-      "commands": [
-        "attic push lounge-rocks:nix-cache 'result-CBPC-0123_LMH'"
-      ],
-      "image": "bash",
-      "name": "Push CBPC-0123_LMH to Attic"
-    },
-    {
-      "commands": [
-        "nix build '.#nixosConfigurations.Dell22_LMH.config.system.build.toplevel' -o 'result-Dell22_LMH'"
-      ],
-      "image": "bash",
-      "name": "Build Dell22_LMH"
-    },
-    {
-      "commands": [
-        "attic push lounge-rocks:nix-cache 'result-Dell22_LMH'"
-      ],
-      "image": "bash",
-      "name": "Push Dell22_LMH to Attic"
-    },
+    #{
+    #  "commands": [
+    #    "nix build '.#nixosConfigurations.CBPC-0123_LMH.config.system.build.toplevel' -o 'result-CBPC-0123_LMH'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Build CBPC-0123_LMH"
+    #},
+    #{
+    #  "commands": [
+    #    "attic push lounge-rocks:nix-cache 'result-CBPC-0123_LMH'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Push CBPC-0123_LMH to Attic"
+    #},
+    #{
+    #  "commands": [
+    #    "nix build '.#nixosConfigurations.Dell22_LMH.config.system.build.toplevel' -o 'result-Dell22_LMH'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Build Dell22_LMH"
+    #},
+    #{
+    #  "commands": [
+    #    "attic push lounge-rocks:nix-cache 'result-Dell22_LMH'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Push Dell22_LMH to Attic"
+    #},
     # for now commented out, as this device is no longer needed actively
     #{
     #  "commands": [
