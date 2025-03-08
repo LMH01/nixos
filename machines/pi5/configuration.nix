@@ -8,7 +8,6 @@
 
     self.nixosModules.gitea
     self.nixosModules.server
-    self.nixosModules.jellyfin
     self.nixosModules.restic
     self.nixosModules.webdav
     self.nixosModules.wireguard
@@ -42,7 +41,6 @@
       enable = true;
       domain = "pi5-louis.fritz.box";
     };
-    #jellyfin.enable = true;
     options.type = "server";
     restic-client = {
       enable = true;
