@@ -389,6 +389,8 @@
     2283 # used by immich
     2287 # used by paperless-ngx
     8076 # used by webdav
+    8096 # used by jellyfin
+    8920 # used by jellyfin
     8123 # used by home assistant
     11500 # pihole admin interface
   ];
