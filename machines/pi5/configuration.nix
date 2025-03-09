@@ -204,9 +204,9 @@
   services.restic.backups =
     let
       backupTimer = {
-        OnCalendar = "01:00";
+        OnCalendar = "02:00";
         Persistent = true;
-        RandomizedDelaySec = "4h";
+        RandomizedDelaySec = "1h";
       };
       pruneOpts = [
         "--keep-daily 7"
@@ -221,7 +221,6 @@
       serviceBackupPathsLb = [
         "/home/louis/Documents/homepage"
         "/home/louis/Documents/immich"
-        "/home/louis/Documents/jellyfin"
         "/home/louis/Documents/audiobookshelf/config"
         "/home/louis/Documents/audiobookshelf/metadata"
         "/home/louis/Documents/paperless-ngx"
@@ -231,7 +230,6 @@
       serviceBackupPathsSn = [
         "/home/louis/Documents/homepage"
         "/home/louis/Documents/immich"
-        "/home/louis/Documents/jellyfin"
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/var/lib/storage/gitea"
@@ -257,7 +255,6 @@
         ${pkgs.docker}/bin/docker start immich_machine_learning
         ${pkgs.docker}/bin/docker start immich_redis
         ${pkgs.docker}/bin/docker start immich_postgres
-        ${pkgs.docker}/bin/docker start jellyfin
         ${pkgs.docker}/bin/docker start audiobookshelf
         ${pkgs.docker}/bin/docker start paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker start paperless-ngx-db-1
@@ -336,6 +333,45 @@
         initialize = true;
       };
 
+      # jellyfin backup (not included in main backup run)
+      jellyfin-sn = {
+        paths = [ "/home/louis/Documents/jellyfin" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        # stop home assistant before backup
+        backupPrepareCommand = ''
+          ${pkgs.docker}/bin/docker stop jellyfin
+        '';
+        pruneOpts = pruneOpts;
+        # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+        # and that backup to other location is executed
+        checkOpts = [
+          "--no-lock"
+        ];
+        # disable auto start because this backup is automatically started by systemd when trigger for jellyfin-lb is run
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+      jellyfin-lb = {
+        paths = [ "/home/louis/Documents/jellyfin" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        # start home assistant after backup is complete
+        backupCleanupCommand = ''
+          ${pkgs.docker}/bin/docker start jellyfin
+        '';
+        pruneOpts = pruneOpts;
+        timerConfig = {
+          OnCalendar = "Mon *-*-* 04:00";
+          Persistent = true;
+          RandomizedDelaySec = "1h";
+        };
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+
       # commented out for now as sn is available again
       # these backups only backup to lb and are not dependent on backups to sn
       #home_assistant-lb-single = {
@@ -391,6 +427,11 @@
     wants = [ "restic-backups-services-sn.service" ];
     after = [ "restic-backups-services-sn.service" ];
   };
+  
+  systemd.services.restic-backups-jellyfin-lb = {
+    wants = [ "restic-backups-jellyfin-sn.service" ];
+    after = [ "restic-backups-jellyfin-sn.service" ];
+  };
 
   # Home Manager configuration
   home-manager = {
@@ -410,7 +451,7 @@
   networking.hostName = "pi5-louis";
 
   networking.networkmanager.enable = true;
-  networking.networkmanager.plugins = lib.mkForce [];
+  networking.networkmanager.plugins = lib.mkForce [ ];
 
   networking.firewall.allowedTCPPorts = [
     53 # used by pihole
