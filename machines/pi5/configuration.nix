@@ -242,7 +242,6 @@
         ${pkgs.docker}/bin/docker stop immich_machine_learning
         ${pkgs.docker}/bin/docker stop immich_redis
         ${pkgs.docker}/bin/docker stop immich_postgres
-        ${pkgs.docker}/bin/docker stop jellyfin
         ${pkgs.docker}/bin/docker stop audiobookshelf
         ${pkgs.docker}/bin/docker stop paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker stop paperless-ngx-db-1
