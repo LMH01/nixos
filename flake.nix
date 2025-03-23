@@ -35,6 +35,12 @@
       inputs = { nixpkgs.follows = "nixpkgs"; };
     };
 
+    # used to check if programs have updates available
+    simple-update-checker = {
+      url = "github:lmh01/simple_update_checker";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
+    };
+
     ### Tools for managing NixOS
 
     # lollypops deployment tool
@@ -67,6 +73,8 @@
     };
 
     raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix";
+
+
   };
 
   outputs = { self, ... }@inputs:
