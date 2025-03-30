@@ -33,6 +33,7 @@ with lib;
       gdb
       gitui
       glances
+      gping
       httpie
       lldb
       man-pages
