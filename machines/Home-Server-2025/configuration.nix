@@ -16,12 +16,6 @@
     self.nixosModules.woodpecker
   ];
 
-  # nix build .\#nixosConfigurations.home-server-2025-image.config.system.build.sdImage
-  # add boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; to your x86 system
-  # to build ARM stuff through qemu
-  sdImage.compressImage = false;
-  sdImage.imageBaseName = "home-server-2025-image";
-
   # this workaround is currently needed to build the sd-image
   # basically: there currently is an issue that prevents the sd-image to be built successfully
   # remove this once the issue is fixed!
@@ -330,8 +324,6 @@
     local-evaluation = true;
     # ssh = { user = "root"; host = "<IP>"; };
   };
-
-  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
   system.stateVersion = "23.05";
 }# nix run .\#lollypops -- pi5b
