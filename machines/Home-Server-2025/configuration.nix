@@ -305,9 +305,9 @@
   networking.networkmanager.plugins = lib.mkForce [ ];
 
   # set static network address so that it does not change
-  networking.interfaces.ens18.ipv4.address = [{
+  networking.interfaces.ens18.ipv4.addresses = [{
     address = "10.0.10.2";
-    prefixLenth = 8;
+    prefixLength = 24;
   }];
 
   networking.firewall.allowedTCPPorts = [
