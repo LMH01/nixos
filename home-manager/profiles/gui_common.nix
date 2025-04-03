@@ -20,7 +20,6 @@ with lib;
       alacritty
       anki
       beauty-line-icon-theme
-      beekeeper-studio
       bonn-mensa
       discord
       dracula-theme
