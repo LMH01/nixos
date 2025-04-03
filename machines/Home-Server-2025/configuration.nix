@@ -304,12 +304,6 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.plugins = lib.mkForce [ ];
 
-  # set static network address so that it does not change
-  networking.interfaces.ens18.ipv4.addresses = [{
-    address = "10.0.10.2";
-    prefixLength = 24;
-  }];
-
   networking.firewall.allowedTCPPorts = [
     53 # used by pihole
     2283 # used by immich
