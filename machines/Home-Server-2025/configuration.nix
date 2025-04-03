@@ -293,7 +293,7 @@
     extraSpecialArgs = {
       inherit flake-self;
       # Pass system configuration (top-level "config") to home-manager modules,
-      # so we can access it's values for conditional statements
+      # so we can access it's values for conditional statement
       system-config = config;
     };
     users.louis = flake-self.homeConfigurations.server;
