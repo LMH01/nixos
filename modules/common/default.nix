@@ -22,6 +22,7 @@ with lib;
       louis.enable = true;
       root.enable = true;
     };
-    tailscale.enable = true;
+    # disabled for now as it is no longer needed
+    #tailscale.enable = true;
   };
 }
