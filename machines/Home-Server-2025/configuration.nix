@@ -51,238 +51,193 @@
     wireguard.enable = true;
   };
 
-  # to be commented in again, when server is up and running properly with services
   # additional restic backups, used just on this system
-  #services.restic.backups =
-  #  let
-  #    backupTimer = {
-  #      OnCalendar = "02:00";
-  #      Persistent = true;
-  #      RandomizedDelaySec = "1h";
-  #    };
-  #    pruneOpts = [
-  #      "--keep-daily 7"
-  #      "--keep-weekly 5"
-  #      "--keep-monthly 12"
-  #      "--keep-yearly 75"
-  #    ];
-  #    extraBackupArgs = [
-  #      "--one-file-system"
-  #      "-v"
-  #    ];
-  #    serviceBackupPathsLb = [
-  #      "/home/louis/Documents/homepage"
-  #      "/home/louis/Documents/immich"
-  #      "/home/louis/Documents/audiobookshelf/config"
-  #      "/home/louis/Documents/audiobookshelf/metadata"
-  #      "/home/louis/Documents/paperless-ngx"
-  #      "/var/lib/storage/gitea"
-  #      "/var/lib/webdav"
-  #    ];
-  #    serviceBackupPathsSn = [
-  #      "/home/louis/Documents/homepage"
-  #      "/home/louis/Documents/immich"
-  #      "/home/louis/Documents/audiobookshelf"
-  #      "/home/louis/Documents/paperless-ngx"
-  #      "/var/lib/storage/gitea"
-  #      "/var/lib/webdav"
-  #    ];
-  #    # commands to run when serice backups are started
-  #    serviceBackupPrepareCommand = ''
-  #      ${pkgs.docker}/bin/docker stop homepage
-  #      ${pkgs.docker}/bin/docker stop immich_server
-  #      ${pkgs.docker}/bin/docker stop immich_machine_learning
-  #      ${pkgs.docker}/bin/docker stop immich_redis
-  #      ${pkgs.docker}/bin/docker stop immich_postgres
-  #      ${pkgs.docker}/bin/docker stop audiobookshelf
-  #      ${pkgs.docker}/bin/docker stop paperless-ngx-webserver-1
-  #      ${pkgs.docker}/bin/docker stop paperless-ngx-db-1
-  #      ${pkgs.docker}/bin/docker stop paperless-ngx-broker-1
-  #    '';
-  #    # commands to run when service backups are complete
-  #    serviceBackupCleanupCommand = ''
-  #      ${pkgs.docker}/bin/docker start homepage
-  #      ${pkgs.docker}/bin/docker start immich_server
-  #      ${pkgs.docker}/bin/docker start immich_machine_learning
-  #      ${pkgs.docker}/bin/docker start immich_redis
-  #      ${pkgs.docker}/bin/docker start immich_postgres
-  #      ${pkgs.docker}/bin/docker start audiobookshelf
-  #      ${pkgs.docker}/bin/docker start paperless-ngx-webserver-1
-  #      ${pkgs.docker}/bin/docker start paperless-ngx-db-1
-  #      ${pkgs.docker}/bin/docker start paperless-ngx-broker-1
-  #    '';
-  #  in
-  #  {
-  #    # All Services are backed up to two locations.
-  #    # The backup flow is as follows:
-  #    # Home Assistant shutdown -> Home Assistant backup to sn -> Home Assistant backup to lb -> Home Assistant start
-  #    # -> Shutdown all other services -> backup all other services to sn -> backup all other services to lb -> start all other services
-  #    home_assistant-sn = {
-  #      paths = [ "/home/louis/HomeAssistant" ];
-  #      repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-  #      passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-  #      environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
-  #      # stop home assistant before backup
-  #      backupPrepareCommand = ''
-  #        echo "Shutting down Home Assistant to perform backup"
-  #        ${pkgs.docker}/bin/docker stop homeassistant
-  #      '';
-  #      pruneOpts = pruneOpts;
-  #      # on check phase dont lock repo, to make check not fail if other backup is currenlty running
-  #      # and that backup to other location is executed
-  #      checkOpts = [
-  #        "--no-lock"
-  #      ];
-  #      # disable auto start because this backup is automatically started by systemd when backup chain starts
-  #      timerConfig = null;
-  #      extraBackupArgs = extraBackupArgs;
-  #      initialize = true;
-  #    };
-  #    home_assistant-lb = {
-  #      paths = [ "/home/louis/HomeAssistant" ];
-  #      repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-  #      passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-  #      # start home assistant after backup is complete
-  #      backupCleanupCommand = ''
-  #        echo "Starting Home Assistant"
-  #        ${pkgs.docker}/bin/docker start homeassistant
-  #      '';
-  #      pruneOpts = pruneOpts;
-  #      # disable auto start because this backup is automatically started by systemd when backup chain starts
-  #      timerConfig = null;
-  #      extraBackupArgs = extraBackupArgs;
-  #      initialize = true;
-  #    };
+  services.restic.backups =
+    let
+      backupTimer = {
+        OnCalendar = "02:00";
+        Persistent = true;
+        RandomizedDelaySec = "1h";
+      };
+      pruneOpts = [
+        "--keep-daily 7"
+        "--keep-weekly 5"
+        "--keep-monthly 12"
+        "--keep-yearly 75"
+      ];
+      extraBackupArgs = [
+        "--one-file-system"
+        "-v"
+      ];
+      serviceBackupPathsLb = [
+        "/home/louis/Documents/homepage"
+        "/home/louis/Documents/immich"
+        "/home/louis/Documents/audiobookshelf/config"
+        "/home/louis/Documents/audiobookshelf/metadata"
+        "/home/louis/Documents/paperless-ngx"
+        "/var/lib/storage/gitea"
+        "/var/lib/webdav"
+      ];
+      serviceBackupPathsSn = [
+        "/home/louis/Documents/homepage"
+        "/home/louis/Documents/immich"
+        "/home/louis/Documents/audiobookshelf"
+        "/home/louis/Documents/paperless-ngx"
+        "/var/lib/storage/gitea"
+        "/var/lib/webdav"
+      ];
+      # commands to run when serice backups are started
+      serviceBackupPrepareCommand = ''
+        ${pkgs.docker}/bin/docker stop homepage
+        ${pkgs.docker}/bin/docker stop immich_server
+        ${pkgs.docker}/bin/docker stop immich_machine_learning
+        ${pkgs.docker}/bin/docker stop immich_redis
+        ${pkgs.docker}/bin/docker stop immich_postgres
+        ${pkgs.docker}/bin/docker stop audiobookshelf
+        ${pkgs.docker}/bin/docker stop paperless-ngx-webserver-1
+        ${pkgs.docker}/bin/docker stop paperless-ngx-db-1
+        ${pkgs.docker}/bin/docker stop paperless-ngx-broker-1
+      '';
+      # commands to run when service backups are complete
+      serviceBackupCleanupCommand = ''
+        ${pkgs.docker}/bin/docker start homepage
+        ${pkgs.docker}/bin/docker start immich_server
+        ${pkgs.docker}/bin/docker start immich_machine_learning
+        ${pkgs.docker}/bin/docker start immich_redis
+        ${pkgs.docker}/bin/docker start immich_postgres
+        ${pkgs.docker}/bin/docker start audiobookshelf
+        ${pkgs.docker}/bin/docker start paperless-ngx-webserver-1
+        ${pkgs.docker}/bin/docker start paperless-ngx-db-1
+        ${pkgs.docker}/bin/docker start paperless-ngx-broker-1
+      '';
+    in
+    {
+      # All Services are backed up to two locations.
+      # The backup flow is as follows:
+      # Home Assistant shutdown -> Home Assistant backup to sn -> Home Assistant backup to lb -> Home Assistant start
+      # -> Shutdown all other services -> backup all other services to sn -> backup all other services to lb -> start all other services
+      home_assistant-sn = {
+        paths = [ "/home/louis/HomeAssistant" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        # stop home assistant before backup
+        backupPrepareCommand = ''
+          echo "Shutting down Home Assistant to perform backup"
+          ${pkgs.docker}/bin/docker stop homeassistant
+        '';
+        pruneOpts = pruneOpts;
+        # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+        # and that backup to other location is executed
+        checkOpts = [
+          "--no-lock"
+        ];
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+      home_assistant-lb = {
+        paths = [ "/home/louis/HomeAssistant" ];
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        # start home assistant after backup is complete
+        backupCleanupCommand = ''
+          echo "Starting Home Assistant"
+          ${pkgs.docker}/bin/docker start homeassistant
+        '';
+        pruneOpts = pruneOpts;
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
 
-  #    services-sn = {
-  #      paths = serviceBackupPathsSn;
-  #      repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-  #      passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-  #      environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
-  #      backupPrepareCommand = serviceBackupPrepareCommand;
-  #      pruneOpts = pruneOpts;
-  #      # disable auto start because this backup is automatically started by systemd when backup chain starts
-  #      timerConfig = null;
-  #      extraBackupArgs = extraBackupArgs;
-  #      initialize = true;
-  #    };
-  #    services-lb = {
-  #      paths = serviceBackupPathsLb;
-  #      repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-  #      passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-  #      backupCleanupCommand = serviceBackupCleanupCommand;
-  #      pruneOpts = pruneOpts;
-  #      # on check phase dont lock repo, to make check not fail if other backup is currenlty running
-  #      # and that backup to other location is executed
-  #      checkOpts = [
-  #        "--no-lock"
-  #      ];
-  #      # The current way the systemd services are configured requires that this last backup is triggered.
-  #      # The service configuration below is responsible for triggering all other backups before this one.
-  #      timerConfig = backupTimer;
-  #      extraBackupArgs = extraBackupArgs;
-  #      initialize = true;
-  #    };
+      services-sn = {
+        paths = serviceBackupPathsSn;
+        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
+        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        backupPrepareCommand = serviceBackupPrepareCommand;
+        pruneOpts = pruneOpts;
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+      services-lb = {
+        paths = serviceBackupPathsLb;
+        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        backupCleanupCommand = serviceBackupCleanupCommand;
+        pruneOpts = pruneOpts;
+        # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+        # and that backup to other location is executed
+        checkOpts = [
+          "--no-lock"
+        ];
+        # The current way the systemd services are configured requires that this last backup is triggered.
+        # The service configuration below is responsible for triggering all other backups before this one.
+        timerConfig = backupTimer;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
 
-  #    # jellyfin backup (not included in main backup run)
-  #    jellyfin-sn = {
-  #      paths = [ "/home/louis/Documents/jellyfin" ];
-  #      repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-  #      passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-  #      environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
-  #      # stop home assistant before backup
-  #      backupPrepareCommand = ''
-  #        ${pkgs.docker}/bin/docker stop jellyfin
-  #      '';
-  #      pruneOpts = pruneOpts;
-  #      # on check phase dont lock repo, to make check not fail if other backup is currenlty running
-  #      # and that backup to other location is executed
-  #      checkOpts = [
-  #        "--no-lock"
-  #      ];
-  #      # disable auto start because this backup is automatically started by systemd when trigger for jellyfin-lb is run
-  #      timerConfig = null;
-  #      extraBackupArgs = extraBackupArgs;
-  #      initialize = true;
-  #    };
-  #    jellyfin-lb = {
-  #      paths = [ "/home/louis/Documents/jellyfin" ];
-  #      repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-  #      passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-  #      # start home assistant after backup is complete
-  #      backupCleanupCommand = ''
-  #        ${pkgs.docker}/bin/docker start jellyfin
-  #      '';
-  #      pruneOpts = pruneOpts;
-  #      timerConfig = {
-  #        OnCalendar = "Mon *-*-* 04:00";
-  #        Persistent = true;
-  #        RandomizedDelaySec = "1h";
-  #      };
-  #      extraBackupArgs = extraBackupArgs;
-  #      initialize = true;
-  #    };
+      # commented out for now as sn is available again
+      # these backups only backup to lb and are not dependent on backups to sn
+      #home_assistant-lb-single = {
+      #  paths = [ "/home/louis/HomeAssistant" ];
+      #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+      #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+      #  backupPrepareCommand = ''
+      #    echo "Shutting down Home Assistant to perform backup"
+      #    ${pkgs.docker}/bin/docker stop homeassistant
+      #  '';
+      #  # start home assistant after backup is complete
+      #  backupCleanupCommand = ''
+      #    echo "Starting Home Assistant"
+      #    ${pkgs.docker}/bin/docker start homeassistant
+      #  '';
+      #  pruneOpts = pruneOpts;
+      #  # disable auto start because this backup is only started when home_assistant-sn is done
+      #  timerConfig = backupTimer;
+      #  extraBackupArgs = extraBackupArgs;
+      #  initialize = true;
+      #};
 
-  #    # commented out for now as sn is available again
-  #    # these backups only backup to lb and are not dependent on backups to sn
-  #    #home_assistant-lb-single = {
-  #    #  paths = [ "/home/louis/HomeAssistant" ];
-  #    #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-  #    #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-  #    #  backupPrepareCommand = ''
-  #    #    echo "Shutting down Home Assistant to perform backup"
-  #    #    ${pkgs.docker}/bin/docker stop homeassistant
-  #    #  '';
-  #    #  # start home assistant after backup is complete
-  #    #  backupCleanupCommand = ''
-  #    #    echo "Starting Home Assistant"
-  #    #    ${pkgs.docker}/bin/docker start homeassistant
-  #    #  '';
-  #    #  pruneOpts = pruneOpts;
-  #    #  # disable auto start because this backup is only started when home_assistant-sn is done
-  #    #  timerConfig = backupTimer;
-  #    #  extraBackupArgs = extraBackupArgs;
-  #    #  initialize = true;
-  #    #};
+      ## services are first backed up to lb and then to sn
+      #services-lb-single = {
+      #  paths = serviceBackupPathsLb;
+      #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
+      #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+      #  backupPrepareCommand = serviceBackupPrepareCommand;
+      #  backupCleanupCommand = serviceBackupCleanupCommand;
+      #  pruneOpts = pruneOpts;
+      #  # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+      #  # and that backup to other location is executed
+      #  checkOpts = [
+      #    "--no-lock"
+      #  ];
+      #  timerConfig = backupTimer;
+      #  extraBackupArgs = extraBackupArgs;
+      #  initialize = true;
+      #};
 
-  #    ## services are first backed up to lb and then to sn
-  #    #services-lb-single = {
-  #    #  paths = serviceBackupPathsLb;
-  #    #  repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-  #    #  passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-  #    #  backupPrepareCommand = serviceBackupPrepareCommand;
-  #    #  backupCleanupCommand = serviceBackupCleanupCommand;
-  #    #  pruneOpts = pruneOpts;
-  #    #  # on check phase dont lock repo, to make check not fail if other backup is currenlty running
-  #    #  # and that backup to other location is executed
-  #    #  checkOpts = [
-  #    #    "--no-lock"
-  #    #  ];
-  #    #  timerConfig = backupTimer;
-  #    #  extraBackupArgs = extraBackupArgs;
-  #    #  initialize = true;
-  #    #};
+    };
 
-  #  };
-
-  ## ensure that backups start one after another in the correct order
-  #systemd.services.restic-backups-home_assistant-lb = {
-  #  wants = [ "restic-backups-home_assistant-sn.service" ];
-  #  after = [ "restic-backups-home_assistant-sn.service" ];
-  #};
-  #systemd.services.restic-backups-services-sn = {
-  #  wants = [ "restic-backups-home_assistant-lb.service" ];
-  #  after = [ "restic-backups-home_assistant-lb.service" ];
-  #};
-  #systemd.services.restic-backups-services-lb = {
-  #  wants = [ "restic-backups-services-sn.service" ];
-  #  after = [ "restic-backups-services-sn.service" ];
-  #};
-  
-  #systemd.services.restic-backups-jellyfin-lb = {
-  #  wants = [ "restic-backups-jellyfin-sn.service" ];
-  #  after = [ "restic-backups-jellyfin-sn.service" ];
-  #};
+  # ensure that backups start one after another in the correct order
+  systemd.services.restic-backups-home_assistant-lb = {
+    wants = [ "restic-backups-home_assistant-sn.service" ];
+    after = [ "restic-backups-home_assistant-sn.service" ];
+  };
+  systemd.services.restic-backups-services-sn = {
+    wants = [ "restic-backups-home_assistant-lb.service" ];
+    after = [ "restic-backups-home_assistant-lb.service" ];
+  };
+  systemd.services.restic-backups-services-lb = {
+    wants = [ "restic-backups-services-sn.service" ];
+    after = [ "restic-backups-services-sn.service" ];
+  };
 
   # Home Manager configuration
   home-manager = {
