@@ -56,6 +56,20 @@
       "image": "bash",
       "name": "Push Dell22_LMH to Attic"
     },
+    {
+      "commands": [
+        "nix build '.#nixosConfigurations.Home-Server-2025.config.system.build.toplevel' -o 'result-Home-Server-2025'"
+      ],
+      "image": "bash",
+      "name": "Build Home-Server-2025"
+    },
+    {
+      "commands": [
+        "attic push lounge-rocks:nix-cache 'result-Home-Server-2025'"
+      ],
+      "image": "bash",
+      "name": "Push Home-Server-2025 to Attic"
+    },
     # for now commented out, as this device is no longer needed actively
     #{
     #  "commands": [
