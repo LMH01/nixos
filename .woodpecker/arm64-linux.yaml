@@ -36,19 +36,19 @@
     #  "image": "bash",
     #  "name": "Push pi4b to Attic"
     #}
-    {
-      "commands": [
-        "nix build '.#nixosConfigurations.pi5.config.system.build.toplevel' -o 'result-pi5'"
-      ],
-      "image": "bash",
-      "name": "Build pi5"
-    },
-    {
-      "commands": [
-        "attic push lounge-rocks:nix-cache 'result-pi5'"
-      ],
-      "image": "bash",
-      "name": "Push pi5 to Attic"
-    }
+    #{
+    #  "commands": [
+    #    "nix build '.#nixosConfigurations.pi5.config.system.build.toplevel' -o 'result-pi5'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Build pi5"
+    #},
+    #{
+    #  "commands": [
+    #    "attic push lounge-rocks:nix-cache 'result-pi5'"
+    #  ],
+    #  "image": "bash",
+    #  "name": "Push pi5 to Attic"
+    #}
   ]
 }
