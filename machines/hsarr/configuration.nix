@@ -41,6 +41,11 @@
     users.louis = flake-self.homeConfigurations.server;
   };
 
+  # Additional packages
+  environment.systemPackages = with pkgs; [
+    wireguard-tools
+  ];
+
   networking.hostName = "hsarr";
 
   networking.networkmanager.enable = true;
@@ -49,6 +54,10 @@
   networking.firewall.allowedTCPPorts = [ ];
 
   networking.firewall.allowedUDPPorts = [ ];
+
+  sops.secrets."vpn/wireguard" = { owner = "root"; };
+
+  networking.wg-quick.interfaces.vpn.configFile = config.sops.secrets."vpn/wireguard".path;
 
   system.stateVersion = "23.05";
 }
