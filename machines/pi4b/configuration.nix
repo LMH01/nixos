@@ -184,6 +184,25 @@
     #};
   };
 
+  # secrets
+  sops.secrets = {
+    "restic/lb/repository" = {
+      owner = "louis";
+    };
+    "restic/lb/password" = {
+      owner = "louis";
+    };
+    "restic/sn/repository" = {
+      owner = "louis";
+    };
+    "restic/sn/password" = {
+      owner = "louis";
+    };
+    "restic/sn/environment" = {
+      owner = "louis";
+    };
+  };
+
   # additional restic backups, used just on this system
   services.restic.backups =
     let
@@ -247,9 +266,9 @@
       # -> Shutdown all other services -> backup all other services to sn -> backup all other services to lb -> start all other services
       home_assistant-sn = {
         paths = [ "/home/louis/HomeAssistant" ];
-        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        repositoryFile = config.sops.secrets."restic/sn/repository".path;
+        passwordFile = config.sops.secrets."restic/sn/password".path;
+        environmentFile = config.sops.secrets."restic/sn/environment".path;
         # stop home assistant before backup
         backupPrepareCommand = ''
           echo "Shutting down Home Assistant to perform backup"
@@ -268,8 +287,8 @@
       };
       home_assistant-lb = {
         paths = [ "/home/louis/HomeAssistant" ];
-        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        repositoryFile = config.sops.secrets."restic/lb/repository".path;
+        passwordFile = config.sops.secrets."restic/lb/password".path;
         # start home assistant after backup is complete
         backupCleanupCommand = ''
           echo "Starting Home Assistant"
@@ -284,9 +303,9 @@
 
       services-sn = {
         paths = serviceBackupPathsSn;
-        repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-        passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-        environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+        repositoryFile = config.sops.secrets."restic/sn/repository".path;
+        passwordFile = config.sops.secrets."restic/sn/password".path;
+        environmentFile = config.sops.secrets."restic/sn/environment".path;
         backupPrepareCommand = serviceBackupPrepareCommand;
         pruneOpts = pruneOpts;
         # disable auto start because this backup is automatically started by systemd when backup chain starts
@@ -296,8 +315,8 @@
       };
       services-lb = {
         paths = serviceBackupPathsLb;
-        repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-        passwordFile = "${config.lmh01.secrets}/restic/lb/password";
+        repositoryFile = config.sops.secrets."restic/lb/repository".path;
+        passwordFile = config.sops.secrets."restic/lb/password".path;
         backupCleanupCommand = serviceBackupCleanupCommand;
         pruneOpts = pruneOpts;
         # on check phase dont lock repo, to make check not fail if other backup is currenlty running
