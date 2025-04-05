@@ -273,6 +273,11 @@
     users.louis = flake-self.homeConfigurations.server;
   };
 
+  # Additional packages
+  environment.systemPackages = [
+    flake-self.inputs.simple-update-checker.packages.x86_64-linux.default
+  ];
+
   networking.hostName = "Home-Server-2025-NixOS";
 
   networking.networkmanager.enable = true;
@@ -294,10 +299,11 @@
     11500 # pihole admin interface
   ];
 
-  lollypops.deployment = {
-    local-evaluation = true;
-    # ssh = { user = "root"; host = "<IP>"; };
-  };
+  lollypops.deployment =
+    {
+      local-evaluation = true;
+      # ssh = { user = "root"; host = "<IP>"; };
+    };
 
   system.stateVersion = "23.05";
 }# nix run .\#lollypops -- pi5b
