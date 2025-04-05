@@ -194,6 +194,32 @@ in
   # IMPORTANT
   # Services are executed as root so make sure that the root user has access to the sftp server!
   config = mkIf cfg.enable {
+
+    # secrets
+    sops.secrets = {
+      "restic/home_nas/repository" = {
+        owner = "louis";
+      };
+      "restic/home_nas/password" = {
+        owner = "louis";
+      };
+      "restic/lb/repository" = {
+        owner = "louis";
+      };
+      "restic/lb/password" = {
+        owner = "louis";
+      };
+      "restic/sn/repository" = {
+        owner = "louis";
+      };
+      "restic/sn/password" = {
+        owner = "louis";
+      };
+      "restic/sn/environment" = {
+        owner = "louis";
+      };
+    };
+
     services.restic.backups =
       let
         restic-ignore-file = pkgs.writeTextFile {
@@ -240,9 +266,9 @@ in
         {
           sn = {
             paths = cfg.backup-paths-sn;
-            repositoryFile = "${config.lmh01.secrets}/restic/sn/repository";
-            passwordFile = "${config.lmh01.secrets}/restic/sn/password";
-            environmentFile = "${config.lmh01.secrets}/restic/sn/environment";
+            repositoryFile = config.sops.secrets."restic/sn/repository".path;
+            passwordFile = config.sops.secrets."restic/sn/password".path;
+            environmentFile = config.sops.secrets."restic/sn/environment".path;
 
             pruneOpts = [
               "--keep-daily 7"
@@ -261,9 +287,8 @@ in
           };
           lb = {
             paths = cfg.backup-paths-lb;
-            repositoryFile = "${config.lmh01.secrets}/restic/lb/repository";
-            passwordFile = "${config.lmh01.secrets}/restic/lb/password";
-            #environmentFile = "${config.lmh01.secrets}/restic/lb/environment";
+            repositoryFile = config.sops.secrets."restic/lb/repository".path;
+            passwordFile = config.sops.secrets."restic/lb/password".path;
 
             pruneOpts = [
               "--keep-daily 7"
@@ -278,8 +303,8 @@ in
           # (this is a restriction of the nas I have a home)
           home_nas = {
             paths = cfg.backup-paths-home_nas;
-            repositoryFile = "${config.lmh01.secrets}/restic/home_nas/repository";
-            passwordFile = "${config.lmh01.secrets}/restic/home_nas/password";
+            repositoryFile = config.sops.secrets."restic/home_nas/repository".path;
+            passwordFile = config.sops.secrets."restic/home_nas/password".path;
 
             pruneOpts = [
               "--keep-daily 7"
