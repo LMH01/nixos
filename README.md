@@ -2,6 +2,8 @@
 
 This repository reflects my try at learning NixOS, it contains my current configurations.
 
+This repository uses [sops-nix](https://github.com/Mic92/sops-nix), so don't be alarmed to see the file [secrets/secrets.yaml](secrets/secrets.yaml). This file is included in this repository by design.
+
 ## Usage
 
 To update your NixOS system to one of my configurations, you can use the following command:
