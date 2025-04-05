@@ -10,9 +10,15 @@ in
 
   config = mkIf cfg.enable {
 
+    sops.secrets."webdav/config.yaml" = {
+      owner = "louis";
+      mode = "0400";
+    };
+
+
     services.webdav = {
       enable = true;
-      configFile = "${config.lmh01.secrets}/webdav/config.yaml";
+      configFile = config.sops.secrets."webdav/config.yaml".path;
       user = "louis";
     };
 

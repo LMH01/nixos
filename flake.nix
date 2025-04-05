@@ -19,6 +19,11 @@
     #  };
     #};
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # used for `nix run .#build-outputs`
     mayniklas = {
       url = "github:MayNiklas/nixos";
@@ -74,10 +79,9 @@
 
     raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix";
 
-
   };
 
-  outputs = { self, ... }@inputs:
+  outputs = { self, sops-nix, ... }@inputs:
     with inputs;
     let
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
@@ -184,6 +188,7 @@
                   disko.nixosModules.disko
                   (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
                   self.nixosModules.options
+                  sops-nix.nixosModules.sops
                   #raspberry-pi-nix.nixosModules.raspberry-pi
                   #raspberry-pi-nix.nixosModules.sd-image
                 ];

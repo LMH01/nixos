@@ -14,6 +14,13 @@ with lib;
     self.nixosModules.users
   ];
 
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    age.sshKeyPaths = [ "/home/louis/.ssh/id_ed25519" ];
+    secrets = { };
+    templates = { };
+  };
+
   lmh01 = {
     docker.enable = true;
     openssh.enable = true;
