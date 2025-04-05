@@ -26,6 +26,8 @@
       device = "/dev/disk/by-uuid/39af1c8b-9bcc-41c0-bfb0-2987444d1696";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" ];
+      # required for sops-nix to find the decryption key
+      neededForBoot = true;
     };
 
   fileSystems."/nix" =
@@ -43,8 +45,9 @@
     };
 
   fileSystems."/userdata" =
-    { device = "/dev/disk/by-uuid/608C11EE8C11BF88";
-      fsType = "ntfs-3g"; 
+    {
+      device = "/dev/disk/by-uuid/608C11EE8C11BF88";
+      fsType = "ntfs-3g";
       options = [ "rw" ];
     };
 

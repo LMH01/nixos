@@ -24,6 +24,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # required for sops-nix to find the decryption key
   fileSystems."/home".neededForBoot = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
