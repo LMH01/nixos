@@ -6,6 +6,7 @@
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
 
+    self.nixosModules.arr
     # this machine is a server
     self.nixosModules.server
 
@@ -24,6 +25,7 @@
 
   lmh01 = {
     options.type = "server";
+    arr.enable = true;
   };
 
   # Home Manager configuration
