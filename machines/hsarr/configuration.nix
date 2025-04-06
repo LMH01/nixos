@@ -25,7 +25,6 @@
 
   lmh01 = {
     options.type = "server";
-    arr.enable = true;
   };
 
   # Home Manager configuration
