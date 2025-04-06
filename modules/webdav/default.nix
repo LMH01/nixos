@@ -10,7 +10,7 @@ in
 
   config = mkIf cfg.enable {
 
-    sops.secrets."webdav/config.yaml" = {};
+    sops.secrets."webdav/config.yaml" = { owner = "louis"; };
 
 
     services.webdav = {
