@@ -16,6 +16,8 @@ in
         enable = true;
         dates = "weekly";
       };
+      # enabled for now as otherwise shutdown hangs while waiting for s6-svscan
+      liveRestore = false;
     };
 
     virtualisation.oci-containers = {
