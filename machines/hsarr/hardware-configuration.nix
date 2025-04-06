@@ -29,14 +29,20 @@
 
   sops.secrets."truenas/password" = { };
 
-  fileSystems."/truenas/movies" = {
+  fileSystems."/mnt/truenas/movies" = {
     device = "//10.0.10.4/videodata/movies";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
 
-  fileSystems."/truenas/series" = {
+  fileSystems."/mnt/truenas/series" = {
     device = "//10.0.10.4/videodata/series";
+    fsType = "cifs";
+    options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
+  };
+
+  fileSystems."/mnt/truenas/downloads" = {
+    device = "//10.0.10.4/videodata/downloads";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
