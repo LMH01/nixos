@@ -2,7 +2,7 @@ keys:
   - &CBPC-0123LMH age1r8yka6c2znyhxvcy72etkwe9fpvd3fppt0lpps24kesta2ytup5svteznn
   - &Home-Server-2025-NixOS age163w9at8f2j75nnp9khy3zu792064yjxcn9eepwz6sqxphp6qccnsaryu0n
   - &Dell22_LMH age19ely98xsayrtqxkyd2xuyyw9edvp2um5fmq8xdy9cnd9j5fryp4szqum8c
-  - &hsarr age1ewez5hnxldnr6qn4q3av3mq73ex4ytdfsm2mtaks8pyzm2fvpqaq43ef39
+  - &hsarr age1mzn23pzysumkyks49mefqyfxds3ukac8glchpxkmvefu33trq4jqkcs5df
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
