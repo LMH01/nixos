@@ -27,6 +27,20 @@
   # required for sops-nix to find the decryption key
   fileSystems."/home".neededForBoot = true;
 
+  sops.secrets."truenas/password" = { };
+
+  fileSystems."/truenas/movies" = {
+    device = "//10.0.10.4/videodata/movies";
+    fsType = "cifs";
+    options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
+  };
+
+  fileSystems."/truenas/series" = {
+    device = "//10.0.10.4/videodata/series";
+    fsType = "cifs";
+    options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
+  };
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
