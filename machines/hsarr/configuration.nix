@@ -55,7 +55,7 @@
 
   networking.firewall.allowedUDPPorts = [ ];
 
-  sops.secrets."vpn/wireguard" = { owner = "root"; };
+  sops.secrets."vpn/wireguard" = { };
 
   networking.wg-quick.interfaces.vpn.configFile = config.sops.secrets."vpn/wireguard".path;
 
