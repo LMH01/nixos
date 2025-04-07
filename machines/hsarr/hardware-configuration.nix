@@ -41,11 +41,12 @@
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
 
-  fileSystems."/mnt/truenas/downloads" = {
-    device = "//10.0.10.4/videodata/downloads";
-    fsType = "cifs";
-    options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
-  };
+  fileSystems."/downloads" =
+    {
+      device = "/dev/disk/by-uuid/50fb017e-6aee-4713-9b52-bf333326a087";
+      fsType = "btrfs";
+      options = [ "subvol=@" "compress=zstd" "users" "nofail" ];
+    };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
