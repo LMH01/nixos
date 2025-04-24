@@ -33,7 +33,8 @@ with lib;
       obsidian
       openvpn
       postman
-      pympress
+      # commented out for now as build is currently broken
+      #pympress
       qmk
       screen-message
       signal-desktop
