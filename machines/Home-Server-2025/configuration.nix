@@ -94,6 +94,7 @@
         "/home/louis/Documents/audiobookshelf/config"
         "/home/louis/Documents/audiobookshelf/metadata"
         "/home/louis/Documents/paperless-ngx"
+        "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -102,6 +103,7 @@
         "/home/louis/Documents/immich"
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
+        "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
