@@ -18,7 +18,7 @@ in {
       openssh.authorizedKeys.keyFiles = [
         (pkgs.fetchurl {
           url = "https://github.com/LMH01.keys";
-          hash = "sha256-me6Ehq5nbG/tz66YMWcI9o+7CVt8P37b9AMQuosE6eA=";
+          hash = "sha256-C1VBgq/lmBLawMfXRLnxzSotuQeW30142ww19XbrWfY=";
         })
       ];
     };
