@@ -16,9 +16,10 @@ in
         enable = true;
         dates = "weekly";
       };
-      # enabled for now as otherwise shutdown hangs while waiting for s6-svscan
+      # disabled for now as otherwise shutdown hangs while waiting for s6-svscan
       liveRestore = false;
-      package = pkgs.docker_28;
+      # pinned to docker_26 for now as docker 27.x and 28.x in NixOS include a bug that causes random 'unexpected EOF's when pulling docker images, which then leads to the docker daemon crashing (and stopping all containers).
+      package = pkgs.docker_26;
     };
 
     virtualisation.oci-containers = {
