@@ -8,12 +8,6 @@ in
 
   config = mkIf cfg.enable {
 
-    nixpkgs.overlays = [
-      # currently required because docker version that is in nixpkgs is built using go 1.24.2 which contains a bug
-      # that causes the entire docker daemon to crash after unexpected EOF is encountered when pulling images
-      (import ../../overlays/docker-go-override.nix)
-    ];
-
     environment.systemPackages = with pkgs; [ docker-compose ];
 
     virtualisation.docker = {
