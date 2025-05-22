@@ -8,6 +8,12 @@ in
 
   config = mkIf cfg.enable {
 
+    nixpkgs.overlays = [
+      # currently required because docker version that is in nixpkgs is built using go 1.24.2 which contains a bug
+      # that causes the entire docker daemon to crash after unexpected EOF is encountered when pulling images
+      (import ../../overlays/docker-go-override.nix)
+    ];
+
     environment.systemPackages = with pkgs; [ docker-compose ];
 
     virtualisation.docker = {
@@ -18,8 +24,7 @@ in
       };
       # disabled for now as otherwise shutdown hangs while waiting for s6-svscan
       liveRestore = false;
-      # pinned to docker_26 for now as docker 27.x and 28.x in NixOS include a bug that causes random 'unexpected EOF's when pulling docker images, which then leads to the docker daemon crashing (and stopping all containers).
-      package = pkgs.docker_26;
+      package = pkgs.docker_28;
     };
 
     virtualisation.oci-containers = {
