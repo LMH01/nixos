@@ -31,7 +31,7 @@
 
   lmh01 = {
     services = {
-      nginx.enable = true;
+      #nginx.enable = true;
     };
     gitea = {
       enable = true;
@@ -76,18 +76,18 @@
   };
 
   # nginx reverse proxy settings
-  services.nginx = {
-    virtualHosts = {
-      "test.home.arpa" = {
-        forceSSL = true;
-        sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
-        sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:2285";
-        };
-      };
-    };    
-  };
+  #services.nginx = {
+  #  virtualHosts = {
+  #    "test.home.arpa" = {
+  #      forceSSL = true;
+  #      sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
+  #      sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
+  #      locations."/" = {
+  #        proxyPass = "http://127.0.0.1:2285";
+  #      };
+  #    };
+  #  };    
+  #};
 
   # additional restic backups, used just on this system
   services.restic.backups =
