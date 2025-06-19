@@ -10,7 +10,6 @@
     self.nixosModules.server
 
     self.nixosModules.gitea
-    self.nixosModules.nextcloud
     self.nixosModules.restic
     self.nixosModules.webdav
     self.nixosModules.wireguard
@@ -33,7 +32,6 @@
       enable = true;
       domain = "Home-Server-2025-NixOS.fritz.box";
     };
-    nextcloud.enable = true;
     options.type = "server";
     restic-client = {
       enable = true;
