@@ -13,6 +13,7 @@ in {
       enable = true;
       package = pkgs.nextcloud31;
       hostName = "localhost";
+      phpExtraExtensions = all: [ all.smbclient ];
       config = { 
         adminpassFile = config.sops.secrets."nextcloud/password".path;
         dbtype = "sqlite";
