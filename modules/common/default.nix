@@ -9,7 +9,7 @@ with lib;
     self.nixosModules.locale
     self.nixosModules.nix-common
     self.nixosModules.openssh
-    self.nixosModules.syncthing
+    self.nixosModules.services
     self.nixosModules.tailscale
     self.nixosModules.users
   ];
@@ -22,9 +22,11 @@ with lib;
   };
 
   lmh01 = {
+    services = {
+      syncthing.enable = true;
+    };
     docker.enable = true;
     openssh.enable = true;
-    syncthing.enable = true;
     users = {
       louis.enable = true;
       root.enable = true;

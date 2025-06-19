@@ -1,10 +1,10 @@
 { lib, pkgs, config, ... }:
 with lib;
-let cfg = config.lmh01.syncthing;
+let cfg = config.lmh01.services.syncthing;
 in
 {
 
-  options.lmh01.syncthing = {
+  options.lmh01.services.syncthing = {
     enable = mkEnableOption "activate syncthing";
   };
 
