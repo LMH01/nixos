@@ -9,6 +9,8 @@
     # this machine is a server
     self.nixosModules.server
 
+    self.nixosModules.services
+
     self.nixosModules.gitea
     self.nixosModules.restic
     self.nixosModules.webdav
@@ -28,6 +30,9 @@
   ###
 
   lmh01 = {
+    services = {
+      nginx.enable = true;
+    };
     gitea = {
       enable = true;
       domain = "Home-Server-2025-NixOS.fritz.box";
@@ -68,6 +73,20 @@
     "restic/sn/environment" = {
       owner = "louis";
     };
+  };
+
+  # nginx reverse proxy settings
+  services.nginx = {
+    virtualHosts = {
+      "test.home.arpa" = {
+        forceSSL = true;
+        sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
+        sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:2285";
+        };
+      };
+    };    
   };
 
   # additional restic backups, used just on this system
