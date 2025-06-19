@@ -32,4 +32,7 @@ with lib;
     # disabled for now as it is no longer needed
     #tailscale.enable = true;
   };
+
+  # enable vscode server on all system
+  programs.nix-ld.enable = true;
 }
