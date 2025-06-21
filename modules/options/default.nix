@@ -18,6 +18,12 @@ in
       default = "desktop";
       example = "server";
     };
+    
+    domain = mkOption {
+      type = types.str;
+      default = "example.com";
+      description = "domain name for use with services and nginx";
+    };
 
   };
 

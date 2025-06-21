@@ -37,7 +37,10 @@
       enable = true;
       domain = "Home-Server-2025-NixOS.fritz.box";
     };
-    options.type = "server";
+    options = {
+      type = "server";
+      #domain = "home.skl2.de";
+    };
     restic-client = {
       enable = true;
       backup-paths-lb = [
@@ -78,10 +81,11 @@
   # nginx reverse proxy settings
   #services.nginx = {
   #  virtualHosts = {
-  #    "test.home.arpa" = {
+  #    "test.home.skl2.de" = {
   #      forceSSL = true;
-  #      sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
-  #      sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
+  #      enableACME = true;
+  #      #sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
+  #      #sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
   #      locations."/" = {
   #        proxyPass = "http://127.0.0.1:2285";
   #      };

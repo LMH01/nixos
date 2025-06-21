@@ -21,6 +21,7 @@ in
       "nginx/sslCertificateKey" = {
         owner = "nginx";
       };
+      "hetzner-api" = { };
     };
 
     services.nginx = {
@@ -29,6 +30,20 @@ in
         recommendedProxySettings = true;
         recommendedTlsSettings = true;
         sslDhparam = config.sops.secrets."nginx/dhparam".path;
+    };
+
+
+    # currently untested if it works as intended
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "lmh01+acme@skl2.de";
+      certs."${config.lmh01.domain}" = {
+        domain = config.lmh01.domain;
+        extraDomainNames = [ "*.${config.lmh01.domain}" ];
+        dnsProvider = "hetzner";
+        environmentFile = config.sops.secrets."hetzner-api".path;
+        webroot = null;
+      };
     };
 
     # Open syncthing ports
