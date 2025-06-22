@@ -1,30 +1,28 @@
 { lib, pkgs, config, ... }:
 with lib;
-let cfg = config.lmh01.options;
-in
 {
+  options.lmh01 = {
+    options = {
+      CISkip = mkOption {
+        type = types.bool;
+        default = false;
+        example = true;
+        description = "Wheter this host should be skipped by the CI pipeline";
+      };
 
-  options.lmh01.options = {
+      type = mkOption {
+        type = types.enum [ "desktop" "laptop" "server" ];
+        default = "desktop";
+        example = "server";
+      };
 
-    CISkip = mkOption {
-      type = types.bool;
-      default = false;
-      example = true;
-      description = "Wheter this host should be skipped by the CI pipeline";
     };
 
-    type = mkOption {
-      type = types.enum [ "desktop" "laptop" "server" ];
-      default = "desktop";
-      example = "server";
-    };
-    
     domain = mkOption {
-      type = types.str;
-      default = "example.com";
-      description = "domain name for use with services and nginx";
+        type = types.str;
+        default = "example.com";
+        description = "domain name for use with services and nginx";
     };
-
   };
 
 }

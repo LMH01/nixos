@@ -6,22 +6,17 @@ in
 
   options.lmh01.services.nginx = {
     enable = mkEnableOption "activate nginx";
+    enable_acme = mkEnableOption "enable acme";
   };
 
   config = mkIf cfg.enable {
     
     # setup sops
     sops.secrets = {
+      "hetzner-api" = { };
       "nginx/dhparam" = {
         owner = "nginx";
       };
-      "nginx/sslCertificate" = {
-        owner = "nginx";
-      };
-      "nginx/sslCertificateKey" = {
-        owner = "nginx";
-      };
-      "hetzner-api" = { };
     };
 
     services.nginx = {
@@ -32,9 +27,7 @@ in
         sslDhparam = config.sops.secrets."nginx/dhparam".path;
     };
 
-
-    # currently untested if it works as intended
-    security.acme = {
+    security.acme = mkIf cfg.enable_acme {
       acceptTerms = true;
       defaults.email = "lmh01+acme@skl2.de";
       certs."${config.lmh01.domain}" = {
@@ -46,7 +39,7 @@ in
       };
     };
 
-    # Open syncthing ports
+    # Open ports
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     networking.firewall.allowedUDPPorts = [ 80 443 ];
 

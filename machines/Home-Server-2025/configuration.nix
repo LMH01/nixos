@@ -31,15 +31,16 @@
 
   lmh01 = {
     services = {
-      #nginx.enable = true;
+      nginx.enable = true;
+      nginx.enable_acme = true;
     };
     gitea = {
       enable = true;
       domain = "Home-Server-2025-NixOS.fritz.box";
     };
+    domain = "home.skl2.de";
     options = {
       type = "server";
-      #domain = "home.skl2.de";
     };
     restic-client = {
       enable = true;
@@ -79,19 +80,19 @@
   };
 
   # nginx reverse proxy settings
-  #services.nginx = {
-  #  virtualHosts = {
-  #    "test.home.skl2.de" = {
-  #      forceSSL = true;
-  #      enableACME = true;
-  #      #sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
-  #      #sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
-  #      locations."/" = {
-  #        proxyPass = "http://127.0.0.1:2285";
-  #      };
-  #    };
-  #  };    
-  #};
+  services.nginx = {
+    virtualHosts = {
+      "test.${config.lmh01.domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        #sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
+        #sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:2285";
+        };
+      };
+    };    
+  };
 
   # additional restic backups, used just on this system
   services.restic.backups =
