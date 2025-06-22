@@ -157,6 +157,10 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://10.0.10.4:80";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
         };
       };
       "opnsense.${config.lmh01.domain}" = {
