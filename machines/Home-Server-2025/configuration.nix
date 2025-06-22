@@ -92,11 +92,25 @@
           proxyPass = "http://127.0.0.1:2285";
         };
       };
+      "${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8800";
+        };
+      };
       "immich.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:2283";
+        };
+      };
+      "jellyfin.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "https://10.0.10.3:8920";
         };
       };
       "jellyseer.${config.lmh01.domain}" = {
