@@ -82,6 +82,20 @@
   # nginx reverse proxy settings
   services.nginx = {
     virtualHosts = {
+      "audiobookshelf.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:2285";
+        };
+      };
+      "immich.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:2283";
+        };
+      };
       "pihole.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
