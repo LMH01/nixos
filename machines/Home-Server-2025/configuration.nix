@@ -140,6 +140,14 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:2287";
+          extraConfig = ''
+            # These configuration options are required for WebSockets to work.
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+
+            proxy_redirect off;
+          '';
         };
       };
       "pihole.${config.lmh01.domain}" = {
