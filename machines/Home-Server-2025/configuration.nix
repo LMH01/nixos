@@ -82,11 +82,11 @@
   # nginx reverse proxy settings
   services.nginx = {
     virtualHosts = {
-      "test.${config.lmh01.domain}" = {
+      "pihole.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:2285";
+          proxyPass = "http://127.0.0.1:11500";
         };
       };
     };    
