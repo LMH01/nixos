@@ -11,7 +11,8 @@
 
     home-manager.nixosModules.home-manager
 
-    self.nixosModules.gitea
+    self.nixosModules.services
+
     self.nixosModules.server
     self.nixosModules.jellyfin
     self.nixosModules.restic
@@ -42,7 +43,6 @@
   lmh01 = {
     gitea = {
       enable = true;
-      domain = "pi4b-louis.fritz.box";
     };
     jellyfin.enable = true;
     options.type = "server";

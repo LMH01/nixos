@@ -6,7 +6,8 @@
 
     home-manager.nixosModules.home-manager
 
-    self.nixosModules.gitea
+    self.nixosModules.services
+
     self.nixosModules.server
     self.nixosModules.restic
     self.nixosModules.webdav
@@ -39,7 +40,6 @@
   lmh01 = {
     gitea = {
       enable = true;
-      domain = "pi5-louis.fritz.box";
     };
     options.type = "server";
     restic-client = {
