@@ -127,6 +127,17 @@
           proxyPass = "http://127.0.0.1:11500";
         };
       };
+      "hs.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8123";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
+        };
+      };
     };
   };
 
@@ -347,10 +358,12 @@
 
   networking.firewall.allowedTCPPorts = [
     53 # used by pihole
+    8123 # home assistant
   ];
 
   networking.firewall.allowedUDPPorts = [
     53 # used by pihole
+    8123 # home assistant
   ];
 
   lollypops.deployment =
