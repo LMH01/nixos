@@ -152,6 +152,20 @@
           '';
         };
       };
+      "truenas.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.4:80";
+        };
+      };
+      "opnsense.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.1:8080";
+        };
+      };
     };
   };
 
