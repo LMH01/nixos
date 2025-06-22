@@ -84,9 +84,7 @@
     virtualHosts = {
       "test.${config.lmh01.domain}" = {
         forceSSL = true;
-        enableACME = true;
-        #sslCertificate = config.sops.secrets."nginx/sslCertificate".path;
-        #sslCertificateKey = config.sops.secrets."nginx/sslCertificateKey".path;
+        useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:2285";
         };
