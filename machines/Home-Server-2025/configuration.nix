@@ -56,7 +56,10 @@
         "/mnt/nas_multimedia/Imagedata/Digital/OwnPics" # will only be backed up, when the drive is mounted manually
       ];
     };
-    webdav.enable = true;
+    webdav = {
+      enable = true;
+      enable_nginx = true;
+    };
     wireguard.enable = true;
   };
 
@@ -124,7 +127,7 @@
           proxyPass = "http://127.0.0.1:11500";
         };
       };
-    };    
+    };
   };
 
   # additional restic backups, used just on this system
@@ -344,18 +347,10 @@
 
   networking.firewall.allowedTCPPorts = [
     53 # used by pihole
-    2283 # used by immich
-    2287 # used by paperless-ngx
-    8076 # used by webdav
-    8096 # used by jellyfin
-    8920 # used by jellyfin
-    8123 # used by home assistant
-    11500 # pihole admin interface
   ];
 
   networking.firewall.allowedUDPPorts = [
     53 # used by pihole
-    11500 # pihole admin interface
   ];
 
   lollypops.deployment =
