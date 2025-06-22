@@ -9,26 +9,18 @@ in {
       default = 3000;
       description = "port to run the application on";
     };
-    domain = mkOption {
-      type = with types; nullOr str;
-      default = null;
-      description = "the default url";
-    };
+    enable_nginx = mkEnableOption "enable nginx";
   };
-
 
   config = mkIf cfg.enable {
     services.gitea = {
       enable = true;
       stateDir = "${config.lmh01.storage}/gitea";
       settings.server = {
-        ROOT_URL = "https://${cfg.domain}:3000";
-        DOMAIN = cfg.domain;
+        ROOT_URL = "https://git.${config.lmh01.domain}:${toString cfg.port}";
+        DOMAIN = config.lmh01.domain;
         COOKIE_SECURE = true;
         HTTP_PORT = cfg.port;
-        PROTOCOL = "https";
-        CERT_FILE = "${config.lmh01.storage}/gitea/ssl/cert.pem";
-        KEY_FILE = "${config.lmh01.storage}/gitea/ssl/key.pem";
       };
       settings.service = {
         DISABLE_REGISTRATION = true;
@@ -37,8 +29,12 @@ in {
         ALLOWED_HOST_LIST = "external,loopback";
       };
     };
-    networking.firewall.allowedTCPPorts = [
-      cfg.port # used by home assistant
-    ];
+    services.nginx.virtualHosts."git.${config.lmh01.domain}" = mkIf cfg.enable_nginx {
+      forceSSL = true;
+      useACMEHost = "${config.lmh01.domain}";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString cfg.port}";
+      };
+    };
   };
 }

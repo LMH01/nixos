@@ -11,7 +11,6 @@
 
     self.nixosModules.services
 
-    self.nixosModules.gitea
     self.nixosModules.restic
     self.nixosModules.webdav
     self.nixosModules.wireguard
@@ -36,7 +35,8 @@
     };
     gitea = {
       enable = true;
-      domain = "Home-Server-2025-NixOS.fritz.box";
+      enable_nginx = true;
+      port = 2281;
     };
     domain = "home.skl2.de";
     options = {
@@ -94,6 +94,27 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:2283";
+        };
+      };
+      "jellyseer.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:5055";
+        };
+      };
+      "jellystat.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8099";
+        };
+      };
+      "paperless.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:2287";
         };
       };
       "pihole.${config.lmh01.domain}" = {
