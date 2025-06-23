@@ -157,7 +157,7 @@
           proxyPass = "http://127.0.0.1:11500";
         };
       };
-      "hs.${config.lmh01.domain}" = {
+      "has.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
