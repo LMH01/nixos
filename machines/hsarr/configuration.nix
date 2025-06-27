@@ -51,7 +51,7 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.plugins = lib.mkForce [ ];
 
-  networking.firewall.allowedTCPPorts = [ 19898 ];
+  networking.firewall.allowedTCPPorts = [ 19898 19787 ];
 
   networking.firewall.allowedUDPPorts = [ ];
 
