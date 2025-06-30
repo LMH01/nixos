@@ -72,6 +72,9 @@
   # Enable unbound local dns when unbound is enabled
   networking.networkmanager.insertNameservers = lib.mkIf config.lmh01.unbound.enable [ "127.0.0.1" ];
 
+  # enable resolved to make dns configuration in wireguard profiles work
+  services.resolved.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
