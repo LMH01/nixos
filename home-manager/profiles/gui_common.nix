@@ -30,9 +30,11 @@ with lib;
       kdePackages.kate
       kdePackages.kleopatra
       mongodb-compass
+      monero-gui
       obsidian
       openvpn
       postman
+      protonvpn-gui
       # commented out for now as build is currently broken
       #pympress
       qmk
