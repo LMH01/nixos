@@ -30,6 +30,7 @@ with lib;
       kdePackages.kate
       kdePackages.kleopatra
       mongodb-compass
+      monero-gui
       obsidian
       openvpn
       postman

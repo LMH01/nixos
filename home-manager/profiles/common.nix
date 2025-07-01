@@ -53,6 +53,7 @@ with lib;
       sysz
       tokei
       unzip
+      wireguard-tools
 
       mayniklas.gen-module # create a new module with a template
       mayniklas.mtu-check # MTU of a network
