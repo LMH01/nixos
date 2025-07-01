@@ -135,6 +135,13 @@
           proxyPass = "http://127.0.0.1:8099";
         };
       };
+      "music.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:4533";
+        };
+      };
       "paperless.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
