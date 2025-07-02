@@ -40,12 +40,6 @@
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
-  
-  fileSystems."/mnt/truenas/music" = {
-    device = "//10.0.10.4/multimedia/audiodata/01 Musik/0101 - Alben und Interpreten";
-    fsType = "cifs";
-    options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
-  };
 
   fileSystems."/downloads" =
     {
