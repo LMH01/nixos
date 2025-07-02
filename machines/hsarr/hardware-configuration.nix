@@ -43,7 +43,7 @@
 
   fileSystems."/downloads" =
     {
-      device = "/dev/disk/by-uuid/50fb017e-6aee-4713-9b52-bf333326a087";
+      device = "/dev/disk/by-uuid/b1061c99-000f-4d19-9eff-bc021a6fd38c";
       fsType = "btrfs";
       options = [ "subvol=@" "compress=zstd" "users" "nofail" ];
     };
