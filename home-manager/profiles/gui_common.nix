@@ -34,7 +34,6 @@ with lib;
       obsidian
       openvpn
       postman
-      protonvpn-gui
       # commented out for now as build is currently broken
       #pympress
       qmk
