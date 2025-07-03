@@ -94,6 +94,13 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  sops.secrets."vpn/wireguard_cbpc-0123" = { };
+
+  networking.wg-quick.interfaces.protonvpn = {
+    configFile = config.sops.secrets."vpn/wireguard_cbpc-0123".path;
+    autostart = false;
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
