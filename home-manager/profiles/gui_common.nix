@@ -21,6 +21,7 @@ with lib;
       anki
       beauty-line-icon-theme
       bonn-mensa
+      bruno
       discord
       dracula-theme
       fira-code
@@ -33,7 +34,6 @@ with lib;
       monero-gui
       obsidian
       openvpn
-      postman
       # commented out for now as build is currently broken
       #pympress
       qmk
