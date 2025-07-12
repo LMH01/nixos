@@ -56,6 +56,9 @@
   }];
   networking.defaultGateway = "10.0.10.1";
   networking.nameservers = [ "192.168.188.226" "192.168.188.1" ];
+  networking.extraHosts = ''
+    10.0.10.2 music.home.skl2.de
+  '';
 
 
   networking.firewall.allowedTCPPorts = [ 19898 19787 ];
