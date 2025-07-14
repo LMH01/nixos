@@ -10,7 +10,7 @@ with lib;
     self.nixosModules.nix-common
     self.nixosModules.openssh
     self.nixosModules.services
-    self.nixosModules.tailscale
+    #self.nixosModules.tailscale
     self.nixosModules.users
   ];
 

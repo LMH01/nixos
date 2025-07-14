@@ -12,6 +12,8 @@
     # this machine is a desktop,
     # import type specific modules
     self.nixosModules.desktop
+    
+    self.nixosModules.services
 
     # my own modules, specific for this machine
     self.nixosModules.nvidia
@@ -21,6 +23,9 @@
 
   lmh01 = {
     #wayland.enable = true;
+    services = {
+      protonvpn.enable = true;
+    };
     nvidia.enable = true;
     openrgb.enable = true;
     restic-client = {
@@ -172,6 +177,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall.checkReversePath = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

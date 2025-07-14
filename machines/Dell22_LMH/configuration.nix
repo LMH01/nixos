@@ -13,6 +13,8 @@
     # import type specific modules
     self.nixosModules.laptop
 
+    self.nixosModules.services
+
     # my own modules, specific for this machine
     self.nixosModules.amdgpu
     self.nixosModules.bluetooth
@@ -22,6 +24,9 @@
   ];
 
   lmh01 = {
+    services = {
+      protonvpn.enable = true;
+    };
     amdgpu.enable = true;
     bluetooth.enable = true;
     steam.enable = true;

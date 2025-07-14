@@ -40,10 +40,15 @@
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
+  fileSystems."/mnt/truenas/downloaded_music" = {
+    device = "//10.0.10.4/multimedia/audiodata/01 Musik/0999 - Downloaded";
+    fsType = "cifs";
+    options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
+  };
 
   fileSystems."/downloads" =
     {
-      device = "/dev/disk/by-uuid/50fb017e-6aee-4713-9b52-bf333326a087";
+      device = "/dev/disk/by-uuid/b1061c99-000f-4d19-9eff-bc021a6fd38c";
       fsType = "btrfs";
       options = [ "subvol=@" "compress=zstd" "users" "nofail" ];
     };

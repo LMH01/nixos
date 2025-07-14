@@ -50,6 +50,12 @@
 
   networking.networkmanager.enable = true;
   networking.networkmanager.plugins = lib.mkForce [ ];
+  networking.interfaces.ens18.ipv4.addresses = [{
+    address = "10.0.10.8";
+    prefixLength = 24;
+  }];
+  networking.defaultGateway = "10.0.10.1";
+  networking.nameservers = [ "192.168.188.226" "192.168.188.1" ];
 
   networking.firewall.allowedTCPPorts = [ 19898 19787 ];
 
