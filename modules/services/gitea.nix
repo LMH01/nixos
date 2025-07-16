@@ -17,7 +17,9 @@ in {
       enable = true;
       stateDir = "${config.lmh01.storage}/gitea";
       settings.server = {
-        ROOT_URL = "https://git.${config.lmh01.domain}:${toString cfg.port}";
+        # use this when not using reverse proxy
+	#ROOT_URL = "https://git.${config.lmh01.domain}:${toString cfg.port}";
+        ROOT_URL = "https://git.${config.lmh01.domain}";
         DOMAIN = config.lmh01.domain;
         COOKIE_SECURE = true;
         HTTP_PORT = cfg.port;
@@ -27,6 +29,10 @@ in {
       };
       settings.webhook = {
         ALLOWED_HOST_LIST = "external,loopback";
+      };
+      settings.mailer = {
+      	ENABLED = false;
+	SENDMAIL_PATH = "${pkgs.system-sendmail}/bin/sendmail";
       };
     };
     services.nginx.virtualHosts."git.${config.lmh01.domain}" = mkIf cfg.enable_nginx {
