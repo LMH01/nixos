@@ -38,6 +38,7 @@
       enable_nginx = true;
       port = 2281;
     };
+    renovate.enable = true;
     domain = "home.skl2.de";
     options = {
       type = "server";
