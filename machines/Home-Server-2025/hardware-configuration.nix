@@ -29,6 +29,7 @@
 
   sops.secrets."home_nas/password" = { };
   sops.secrets."truenas/password_multimedia_ro" = { };
+  sops.secrets."truenas/password_immich" = { };
 
   fileSystems."/mnt/nas_multimedia" = {
     device = "//192.168.188.20/multimedia";
@@ -39,6 +40,11 @@
     device = "//10.0.10.4/multimedia";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password_multimedia_ro".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" "ro" ];
+  };
+  fileSystems."/mnt/truenas_immich" = {
+    device = "//10.0.10.4/multimedia/imagedata/immich";
+    fsType = "cifs";
+    options = [ "credentials=${config.sops.secrets."truenas/password_immich".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" "rw" ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
