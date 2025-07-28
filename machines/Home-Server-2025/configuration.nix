@@ -81,6 +81,12 @@
     "restic/sn/environment" = {
       owner = "louis";
     };
+    "restic/truenas/repository" = {
+      owner = "louis";
+    };
+    "restic/truenas/password" = {
+      owner = "louis";
+    };
   };
 
   # nginx reverse proxy settings
@@ -248,6 +254,15 @@
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
+      serviceBackupPathsTruenas = [
+        "/home/louis/Documents/homepage"
+        "/home/louis/Documents/immich"
+        "/home/louis/Documents/audiobookshelf"
+        "/home/louis/Documents/paperless-ngx"
+        "/home/louis/Documents/jellystat/jellystat-backup-data"
+        "/var/lib/storage/gitea"
+        "/var/lib/webdav"
+      ];
       # commands to run when serice backups are started
       serviceBackupPrepareCommand = ''
         ${pkgs.docker}/bin/docker stop homepage
@@ -274,10 +289,10 @@
       '';
     in
     {
-      # All Services are backed up to two locations.
+      # All Services are backed up to three locations.
       # The backup flow is as follows:
-      # Home Assistant shutdown -> Home Assistant backup to sn -> Home Assistant backup to lb -> Home Assistant start
-      # -> Shutdown all other services -> backup all other services to sn -> backup all other services to lb -> start all other services
+      # Home Assistant shutdown -> Home Assistant backup to sn -> Home Assistant backup to lb -> Home Assistant backup to truenas -> Home Assistant start
+      # -> Shutdown all other services -> backup all other services to sn -> backup all other services to lb -> backup all other services to truenas -> start all other services
       home_assistant-sn = {
         paths = [ "/home/louis/HomeAssistant" ];
         repositoryFile = config.sops.secrets."restic/sn/repository".path;
@@ -303,6 +318,21 @@
         paths = [ "/home/louis/HomeAssistant" ];
         repositoryFile = config.sops.secrets."restic/lb/repository".path;
         passwordFile = config.sops.secrets."restic/lb/password".path;
+        pruneOpts = pruneOpts;
+        # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+        # and that backup to other location is executed
+        checkOpts = [
+          "--no-lock"
+        ];
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+      home_assistant-truenas = {
+        paths = [ "/home/louis/HomeAssistant" ];
+        repositoryFile = config.sops.secrets."restic/truenas/repository".path;
+        passwordFile = config.sops.secrets."restic/truenas/password".path;
         # start home assistant after backup is complete
         backupCleanupCommand = ''
           echo "Starting Home Assistant"
@@ -331,6 +361,21 @@
         paths = serviceBackupPathsLb;
         repositoryFile = config.sops.secrets."restic/lb/repository".path;
         passwordFile = config.sops.secrets."restic/lb/password".path;
+        pruneOpts = pruneOpts;
+        # on check phase dont lock repo, to make check not fail if other backup is currenlty running
+        # and that backup to other location is executed
+        checkOpts = [
+          "--no-lock"
+        ];
+        # disable auto start because this backup is automatically started by systemd when backup chain starts
+        timerConfig = null;
+        extraBackupArgs = extraBackupArgs;
+        initialize = true;
+      };
+      services-truenas = {
+        paths = serviceBackupPathsTruenas;
+        repositoryFile = config.sops.secrets."restic/truenas/repository".path;
+        passwordFile = config.sops.secrets."restic/truenas/password".path;
         backupCleanupCommand = serviceBackupCleanupCommand;
         pruneOpts = pruneOpts;
         # on check phase dont lock repo, to make check not fail if other backup is currenlty running
@@ -392,13 +437,21 @@
     wants = [ "restic-backups-home_assistant-sn.service" ];
     after = [ "restic-backups-home_assistant-sn.service" ];
   };
-  systemd.services.restic-backups-services-sn = {
+  systemd.services.restic-backups-home_assistant-truenas = {
     wants = [ "restic-backups-home_assistant-lb.service" ];
     after = [ "restic-backups-home_assistant-lb.service" ];
+  };
+  systemd.services.restic-backups-services-sn = {
+    wants = [ "restic-backups-home_assistant-truenas.service" ];
+    after = [ "restic-backups-home_assistant-truenas.service" ];
   };
   systemd.services.restic-backups-services-lb = {
     wants = [ "restic-backups-services-sn.service" ];
     after = [ "restic-backups-services-sn.service" ];
+  };
+  systemd.services.restic-backups-services-truenas = {
+    wants = [ "restic-backups-services-lb.service" ];
+    after = [ "restic-backups-services-lb.service" ];
   };
 
   # Home Manager configuration
