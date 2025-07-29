@@ -256,6 +256,7 @@
         "/home/louis/Documents/audiobookshelf/metadata"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
+        "/home/louis/Documents/tandoor"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -265,6 +266,7 @@
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
+        "/home/louis/Documents/tandoor"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -274,6 +276,7 @@
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
+        "/home/louis/Documents/tandoor"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -288,6 +291,9 @@
         ${pkgs.docker}/bin/docker stop paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker stop paperless-ngx-db-1
         ${pkgs.docker}/bin/docker stop paperless-ngx-broker-1
+        ${pkgs.docker}/bin/docker stop tandoor_db_recipes
+        ${pkgs.docker}/bin/docker stop tandoor_web_recipes
+        ${pkgs.docker}/bin/docker stop tandoor_nginx
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -300,6 +306,9 @@
         ${pkgs.docker}/bin/docker start paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker start paperless-ngx-db-1
         ${pkgs.docker}/bin/docker start paperless-ngx-broker-1
+        ${pkgs.docker}/bin/docker start tandoor_db_recipes
+        ${pkgs.docker}/bin/docker start tandoor_web_recipes
+        ${pkgs.docker}/bin/docker start tandoor_nginx
       '';
     in
     {
