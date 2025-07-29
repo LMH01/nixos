@@ -43,7 +43,7 @@
     options = [ "credentials=${config.sops.secrets."truenas/password_multimedia_ro".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" "ro" ];
   };
   fileSystems."/mnt/truenas_immich" = {
-    device = "//10.0.10.4/multimedia/imagedata/immich";
+    device = "//10.0.10.4/immich_data";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password_immich".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" "rw" ];
   };
