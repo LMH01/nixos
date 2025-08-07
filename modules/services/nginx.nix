@@ -21,6 +21,8 @@ in
 
     services.nginx = {
         enable = true;
+	# increase max body size to allow video upload to immich
+	clientMaxBodySize = "5000m";
         recommendedOptimisation = true;
         recommendedProxySettings = true;
         recommendedTlsSettings = true;
