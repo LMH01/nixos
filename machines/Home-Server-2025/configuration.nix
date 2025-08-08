@@ -87,6 +87,9 @@
     "restic/truenas/password" = {
       owner = "louis";
     };
+    "nginx/evcc_basic_auth_file" = {
+      owner = "nginx";
+    };
   };
 
   # nginx reverse proxy settings
@@ -237,6 +240,7 @@
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
           '';
+	  basicAuthFile = config.sops.secrets."nginx/evcc_basic_auth_file".path;
         };
       };
     };
