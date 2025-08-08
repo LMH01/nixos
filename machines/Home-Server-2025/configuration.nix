@@ -228,6 +228,13 @@
           proxyPass = "http://10.0.10.9:80";
         };
       };
+      "evcc.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.11:7070";
+        };
+      };
     };
   };
 
