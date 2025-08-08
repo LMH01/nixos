@@ -233,6 +233,10 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://10.0.10.11:7070";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
         };
       };
     };
