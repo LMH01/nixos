@@ -38,7 +38,8 @@
       enable_nginx = true;
       port = 2281;
     };
-    renovate.enable = true;
+    # disabled for now because the latest renovate version available here does not work
+    #renovate.enable = true;
     domain = "home.skl2.de";
     options = {
       type = "server";
@@ -490,6 +491,24 @@
   systemd.services.restic-backups-services-truenas = {
     wants = [ "restic-backups-services-lb.service" ];
     after = [ "restic-backups-services-lb.service" ];
+  };
+
+  # timer and service to start renovate bot automatically (I don't use services.renovate because that is outdated and does not work for my repo as of 15.08.2025)
+  # I use the docker container instead
+  systemd.services.run-renovate-docker = {
+    description = "Run the renovate docker container once";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.docker}/bin/docker compose -f /home/louis/Documents/renovate_bot/docker-compose.yml up";
+    };
+  };
+  systemd.timers.run-renovate-docker = {
+    description = "Timer to run the renovate docker container daily at 19:00 Uhr";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "19:00";
+      Persistant = true;
+    };
   };
 
   # Home Manager configuration
