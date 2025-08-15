@@ -53,6 +53,7 @@ with lib;
       sysz
       tokei
       unzip
+      wget
       wireguard-tools
 
       mayniklas.gen-module # create a new module with a template
