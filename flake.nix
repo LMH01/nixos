@@ -50,10 +50,10 @@
 
     # lollypops deployment tool
     # https://github.com/pinpox/lollypops
-    lollypops = {
-      url = "github:pinpox/lollypops";
-      inputs = { nixpkgs.follows = "nixpkgs"; };
-    };
+    #lollypops = {
+    #  url = "github:pinpox/lollypops";
+    #  inputs = { nixpkgs.follows = "nixpkgs"; };
+    #};
 
     # Adblocking lists for DNS servers
     # input here, so it will get updated by nix flake update
@@ -149,9 +149,9 @@
 
 
       apps = forAllSystems (system: {
-        lollypops = lollypops.apps.${system}.default {
-          configFlake = self;
-        };
+        #lollypops = lollypops.apps.${system}.default {
+        #  configFlake = self;
+        #};
       });
 
       # Output all modules in ./modules to flake. Modules should be in
@@ -184,7 +184,8 @@
                 specialArgs = { flake-self = self; } // inputs;
 
                 modules = [
-                  lollypops.nixosModules.lollypops
+                  # commented out for now at it is somehow missing currently
+                  #lollypops.nixosModules.lollypops
                   disko.nixosModules.disko
                   (import "${./.}/machines/${x}/configuration.nix" { inherit self; })
                   self.nixosModules.options

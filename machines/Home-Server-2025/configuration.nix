@@ -527,11 +527,11 @@
     8123 # home assistant
   ];
 
-  lollypops.deployment =
-    {
-      local-evaluation = true;
-      # ssh = { user = "root"; host = "<IP>"; };
-    };
+  #lollypops.deployment =
+  #  {
+  #    local-evaluation = true;
+  #    # ssh = { user = "root"; host = "<IP>"; };
+  #  };
 
   system.stateVersion = "23.05";
 }# nix run .\#lollypops -- pi5b

@@ -487,10 +487,10 @@
     11500 # pihole admin interface
   ];
 
-  lollypops.deployment = {
-    local-evaluation = true;
-    # ssh = { user = "root"; host = "<IP>"; };
-  };
+  #lollypops.deployment = {
+  #  local-evaluation = true;
+  #  # ssh = { user = "root"; host = "<IP>"; };
+  #};
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
