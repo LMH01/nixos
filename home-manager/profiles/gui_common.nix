@@ -60,7 +60,7 @@ with lib;
 
     lmh01.ctf-tools.enable = true;
     lmh01.programs = {
-      i3.enable = true;
+      #i3.enable = true; # for now using KDE instead because screenlock and sleep dont work properly
       latex.enable = true;
       rust.enable = true;
       #sway.enable = true; currently a WIP
