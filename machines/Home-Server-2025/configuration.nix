@@ -146,6 +146,13 @@
           proxyPass = "http://127.0.0.1:8099";
         };
       };
+      "links.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8042";
+        };
+      };
       "wikipedia.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
