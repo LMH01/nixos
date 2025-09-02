@@ -291,6 +291,7 @@
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/home/louis/Documents/tandoor"
+	"/home/louis/services/dawarich"
 	"/home/louis/services/linkwarden"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
@@ -302,6 +303,7 @@
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/home/louis/Documents/tandoor"
+	"/home/louis/services/dawarich"
 	"/home/louis/services/linkwarden"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
@@ -313,6 +315,7 @@
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/home/louis/Documents/tandoor"
+	"/home/louis/services/dawarich"
 	"/home/louis/services/linkwarden"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
@@ -334,6 +337,10 @@
         ${pkgs.docker}/bin/docker stop linkwarden-postgres
         ${pkgs.docker}/bin/docker stop linkwarden-server
         ${pkgs.docker}/bin/docker stop linkwarden-meilisearch
+        ${pkgs.docker}/bin/docker stop dawarich_sidekiq
+        ${pkgs.docker}/bin/docker stop dawarich_app
+        ${pkgs.docker}/bin/docker stop dawarich_db
+        ${pkgs.docker}/bin/docker stop dawarich_redis
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -352,6 +359,10 @@
         ${pkgs.docker}/bin/docker start linkwarden-postgres
         ${pkgs.docker}/bin/docker start linkwarden-server
         ${pkgs.docker}/bin/docker start linkwarden-meilisearch
+        ${pkgs.docker}/bin/docker start dawarich_sidekiq
+        ${pkgs.docker}/bin/docker start dawarich_app
+        ${pkgs.docker}/bin/docker start dawarich_db
+        ${pkgs.docker}/bin/docker start dawarich_redis
       '';
     in
     {
