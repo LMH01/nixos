@@ -36,7 +36,7 @@
     gitea = {
       enable = true;
       enable_nginx = true;
-      port = 2281;
+      port = 22807;
     };
     # disabled for now because the latest renovate version available here does not work
     #renovate.enable = true;
@@ -100,7 +100,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:2285";
+          proxyPass = "http://127.0.0.1:22801";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
@@ -111,14 +111,14 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8800";
+          proxyPass = "http://127.0.0.1:11800";
         };
       };
       "dawarich.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:2286";
+          proxyPass = "http://127.0.0.1:22802";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
@@ -129,7 +129,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:2283";
+          proxyPass = "http://127.0.0.1:22803";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
@@ -147,56 +147,49 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:5055";
+          proxyPass = "http://127.0.0.1:22804";
         };
       };
       "jellystat.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8099";
+          proxyPass = "http://127.0.0.1:22805";
         };
       };
       "links.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8042";
-        };
-      };
-      "wikipedia.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8045";
+          proxyPass = "http://127.0.0.1:22811";
         };
       };
       "music.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:9180";
+          proxyPass = "http://127.0.0.1:22810";
         };
       };
       "music-server.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:4533";
+          proxyPass = "http://127.0.0.1:22809";
         };
       };
       "meals.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:2282";
+          proxyPass = "http://127.0.0.1:22812";
         };
       };
       "paperless.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:2287";
+          proxyPass = "http://127.0.0.1:22806";
           extraConfig = ''
             # These configuration options are required for WebSockets to work.
             proxy_http_version 1.1;
@@ -211,7 +204,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:11500";
+          proxyPass = "http://127.0.0.1:22813";
         };
       };
       "has.${config.lmh01.domain}" = {

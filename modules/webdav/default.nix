@@ -24,7 +24,7 @@ in
       forceSSL = true;
       useACMEHost = "${config.lmh01.domain}";
       locations."/" = {
-        proxyPass = "http://127.0.0.1:8076";
+        proxyPass = "http://127.0.0.1:22808";
       };
     };
 
