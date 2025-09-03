@@ -32,6 +32,8 @@ in
     security.acme = mkIf cfg.enable_acme {
       acceptTerms = true;
       defaults.email = "lmh01+acme@skl2.de";
+      # required because otherwise local DNS Server interrupts challenge
+      defaults.dnsResolver = "8.8.8.8:53";
       certs."${config.lmh01.domain}" = {
         domain = config.lmh01.domain;
         extraDomainNames = [ "*.${config.lmh01.domain}" ];
