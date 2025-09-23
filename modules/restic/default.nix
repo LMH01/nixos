@@ -1,12 +1,14 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, utils, ... }:
 with lib;
-let cfg = config.lmh01.restic-client;
+let
+  cfg = config.lmh01.restic-client;
+  inherit (utils.systemdUtils.unitOptions) unitOption;
 in
 {
   options.lmh01.restic-client = {
     enable = mkEnableOption "restic backups";
     backup-timer = mkOption {
-      type = types.attrs;
+      type = lib.types.nullOr (lib.types.attrsOf unitOption);
       default = {
         OnCalendar = "01:00";
         Persistent = true;

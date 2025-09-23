@@ -9,6 +9,7 @@
     # this machine is a server
     self.nixosModules.server
 
+    self.nixosModules.restic
   ];
 
   # this workaround is currently needed to build the sd-image
@@ -24,6 +25,11 @@
 
   lmh01 = {
     options.type = "server";
+    restic-client = {
+      enable = true;
+      # don't perform automatic backups
+      backup-timer = null;
+    };
   };
 
   # Home Manager configuration
