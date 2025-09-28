@@ -48,7 +48,7 @@
     {
       device = "/dev/disk/by-uuid/608C11EE8C11BF88";
       fsType = "ntfs-3g";
-      options = [ "rw" ];
+      options = [ "rw" "uid=1000" "gid=1000" ];
     };
   
   fileSystems."/games" =
