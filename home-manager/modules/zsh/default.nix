@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   vars = import ../../vars.nix;
 in
@@ -9,7 +9,7 @@ in
     autosuggestion.enable = true;
     enableCompletion = true;
     # autocd = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.home.homeDirectory}/.config/zsh";
 
     # Commented out because it causes the error "The option `home-manager.users.louis.programs.zsh.promptInit' does not exist. "
     # enable starship
