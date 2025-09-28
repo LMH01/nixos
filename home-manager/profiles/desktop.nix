@@ -7,6 +7,7 @@ with lib;
 
     home.packages = with pkgs; [
       hashcat
+      mangohud
       prismlauncher # minecraft launcher
       steam
       obs-studio
