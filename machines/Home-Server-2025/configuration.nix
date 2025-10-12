@@ -211,7 +211,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8123";
+          proxyPass = "http://10.0.10.2:8123";
           extraConfig = ''
             # These configuration options are required for WebSockets to work.
             proxy_http_version 1.1;
