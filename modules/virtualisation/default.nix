@@ -19,7 +19,6 @@ in
       enable = true;
       # allowedBridges = [ "br0" ];
       qemu = {
-        ovmf.enable = true;
         runAsRoot = true;
       };
       onBoot = "ignore";
