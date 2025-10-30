@@ -18,18 +18,11 @@ in
     hardware.graphics.extraPackages = with pkgs; [
       clinfo
       rocmPackages.clr.icd
-      amdvlk 
     ];
 
     # vulkan
     hardware.graphics.enable = true;
     # For 32 bit applications
     hardware.graphics.enable32Bit = true;
-
-    # For 32 bit applications 
-    # Only available on unstable
-    hardware.graphics.extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
-    ];
   };
 }
