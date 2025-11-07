@@ -24,6 +24,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # used for `nix run .#build-outputs`
     mayniklas = {
       url = "github:MayNiklas/nixos";
@@ -234,7 +239,13 @@
           inherit name;
           value = import (./home-manager/modules + "/${name}");
         })
-        (builtins.attrNames (builtins.readDir ./home-manager/modules)));
+        (builtins.attrNames (builtins.readDir ./home-manager/modules))) // {
+          nix = {...}: {
+            imports = [
+              inputs.nvf.homeManagerModules.default
+            ];
+          };
+        };
 
     };
 }
