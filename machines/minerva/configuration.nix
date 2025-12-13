@@ -17,6 +17,7 @@
       nginx.enable = true;
       nginx.enable_acme = true;
       nginx.open_ports = false;
+      syncthing.enable = lib.mkForce false; # syncthing is not required on this machine
     };
     domain = "home.skl2.de";
     options = {
