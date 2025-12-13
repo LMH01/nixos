@@ -3,6 +3,7 @@ keys:
   - &Home-Server-2025-NixOS age163w9at8f2j75nnp9khy3zu792064yjxcn9eepwz6sqxphp6qccnsaryu0n
   - &Dell22_LMH age19ely98xsayrtqxkyd2xuyyw9edvp2um5fmq8xdy9cnd9j5fryp4szqum8c
   - &hsarr age1cn4jd8plyh90uefe92meaxrmaf5fnrdfj5l509yng90607gale9qspdr04
+  - &minerva age1mdfzafv5jmrl44hzs2lrqq4zd387l034lnwcw4rh60t9900psf3qn8sw5e
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
@@ -11,3 +12,4 @@ creation_rules:
       - *Home-Server-2025-NixOS
       - *Dell22_LMH
       - *hsarr
+      - *minerva
