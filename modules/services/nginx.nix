@@ -7,10 +7,16 @@ in
   options.lmh01.services.nginx = {
     enable = mkEnableOption "activate nginx";
     enable_acme = mkEnableOption "enable acme";
+    open_ports = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Open nginx ports in firewall";
+    };
+
   };
 
   config = mkIf cfg.enable {
-    
+
     # setup sops
     sops.secrets = {
       "hetzner-api" = { };
@@ -20,13 +26,13 @@ in
     };
 
     services.nginx = {
-        enable = true;
-	# increase max body size to allow video upload to immich
-	clientMaxBodySize = "5000m";
-        recommendedOptimisation = true;
-        recommendedProxySettings = true;
-        recommendedTlsSettings = true;
-        sslDhparam = config.sops.secrets."nginx/dhparam".path;
+      enable = true;
+      # increase max body size to allow video upload to immich
+      clientMaxBodySize = "5000m";
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+      sslDhparam = config.sops.secrets."nginx/dhparam".path;
     };
 
     security.acme = mkIf cfg.enable_acme {
@@ -47,8 +53,8 @@ in
     users.users.nginx.extraGroups = [ "acme" ];
 
     # Open ports
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
-    networking.firewall.allowedUDPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = mkIf cfg.open_ports [ 80 443 ];
+    networking.firewall.allowedUDPPorts = mkIf cfg.open_ports [ 80 443 ];
 
   };
 }
