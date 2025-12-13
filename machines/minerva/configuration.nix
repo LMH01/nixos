@@ -13,11 +13,12 @@
   ];
 
   lmh01 = {
-    #services = {
-    #  nginx.enable = true;
-    #  nginx.enable_acme = true;
-    #};
-    #domain = "home.skl2.de";
+    services = {
+      nginx.enable = true;
+      nginx.enable_acme = true;
+      nginx.open_ports = false;
+    };
+    domain = "home.skl2.de";
     options = {
       type = "server";
     };
@@ -27,63 +28,63 @@
   sops.secrets = { };
 
   # nginx reverse proxy settings
-  #services.nginx = {
-  #  virtualHosts = {
-  #    "${config.lmh01.domain}" = {
-  #      forceSSL = true;
-  #      useACMEHost = "${config.lmh01.domain}";
-  #      locations."/" = {
-  #        proxyPass = "http://127.0.0.1:11800";
-  #      };
-  #    };
-  #    "audiobookshelf.${config.lmh01.domain}" = {
-  #      forceSSL = true;
-  #      useACMEHost = "${config.lmh01.domain}";
-  #      locations."/" = {
-  #        proxyPass = "https://audiobookshelf.home.skl2.de";
-  #        extraConfig = ''
-  #          proxy_set_header    Upgrade     $http_upgrade;
-  #          proxy_set_header    Connection  "upgrade";
-  #        '';
-  #      };
-  #    };
-  #    "jellyfin.${config.lmh01.domain}" = {
-  #      forceSSL = true;
-  #      useACMEHost = "${config.lmh01.domain}";
-  #      locations."/" = {
-  #        proxyPass = "https://10.0.10.3:8920";
-  #      };
-  #    };
-  #    "jellyseer.${config.lmh01.domain}" = {
-  #      forceSSL = true;
-  #      useACMEHost = "${config.lmh01.domain}";
-  #      locations."/" = {
-  #        proxyPass = "https://jellyseer.home.skl2.de";
-  #      };
-  #    };
-  #    "music.${config.lmh01.domain}" = {
-  #      forceSSL = true;
-  #      useACMEHost = "${config.lmh01.domain}";
-  #      locations."/" = {
-  #        proxyPass = "https://music.home.skl2.de";
-  #      };
-  #    };
-  #    "music-server.${config.lmh01.domain}" = {
-  #      forceSSL = true;
-  #      useACMEHost = "${config.lmh01.domain}";
-  #      locations."/" = {
-  #        proxyPass = "https://music-server.home.skl2.de";
-  #      };
-  #    };
-  #    "status.${config.lmh01.domain}" = {
-  #      forceSSL = true;
-  #      useACMEHost = "${config.lmh01.domain}";
-  #      locations."/" = {
-  #        proxyPass = "http://10.0.10.9:80";
-  #      };
-  #    };
-  #  };
-  #};
+  services.nginx = {
+    virtualHosts = {
+      "${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:11800";
+        };
+      };
+      "audiobookshelf.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "https://audiobookshelf.home.skl2.de";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
+        };
+      };
+      "jellyfin.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "https://10.0.10.3:8920";
+        };
+      };
+      "jellyseer.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "https://jellyseer.home.skl2.de";
+        };
+      };
+      "music.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "https://music.home.skl2.de";
+        };
+      };
+      "music-server.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "https://music-server.home.skl2.de";
+        };
+      };
+      "status.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.9:80";
+        };
+      };
+    };
+  };
 
   # Home Manager configuration
   home-manager = {
