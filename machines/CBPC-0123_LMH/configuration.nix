@@ -12,7 +12,7 @@
     # this machine is a desktop,
     # import type specific modules
     self.nixosModules.desktop
-    
+
     self.nixosModules.services
 
     # my own modules, specific for this machine
@@ -56,6 +56,11 @@
       #];
       # commented out because drive can't be mounted automatically, I might build a workaround later
     };
+  };
+
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
   };
 
   # Home Manager configuration
@@ -178,7 +183,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  networking.firewall.checkReversePath = false;
+  networking.firewall.checkReversePath = lib.mkForce false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
