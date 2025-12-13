@@ -27,6 +27,11 @@
   # secrets
   sops.secrets = { };
 
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "server";
+  };
+
   # nginx reverse proxy settings
   services.nginx = {
     virtualHosts = {
