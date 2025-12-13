@@ -259,6 +259,13 @@
 	  basicAuthFile = config.sops.secrets."nginx/evcc_basic_auth_file".path;
         };
       };
+      "minerva-dns.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.15:5380";
+        };
+      };
     };
   };
 
