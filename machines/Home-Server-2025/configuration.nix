@@ -205,6 +205,13 @@
           proxyPass = "http://10.0.10.15:5380";
         };
       };
+      "minerva-home.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.15:11800";
+        };
+      };
       "music.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
