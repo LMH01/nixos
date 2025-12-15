@@ -96,6 +96,13 @@
   # nginx reverse proxy settings
   services.nginx = {
     virtualHosts = {
+      "${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:11800";
+        };
+      };
       "audiobookshelf.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
@@ -107,13 +114,6 @@
           '';
         };
       };
-      "${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:11800";
-        };
-      };
       "dawarich.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
@@ -122,6 +122,33 @@
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
+          '';
+        };
+      };
+      "evcc.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.11:7070";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
+          basicAuthFile = config.sops.secrets."nginx/evcc_basic_auth_file".path;
+        };
+      };
+      "has.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.2:8123";
+          extraConfig = ''
+            # These configuration options are required for WebSockets to work.
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+
+            proxy_redirect off;
           '';
         };
       };
@@ -164,6 +191,20 @@
           proxyPass = "http://127.0.0.1:22811";
         };
       };
+      "meals.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:22812";
+        };
+      };
+      "minerva-dns.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.15:5380";
+        };
+      };
       "music.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
@@ -178,11 +219,11 @@
           proxyPass = "http://127.0.0.1:22809";
         };
       };
-      "meals.${config.lmh01.domain}" = {
+      "opnsense.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:22812";
+          proxyPass = "http://10.0.10.1:8080";
         };
       };
       "paperless.${config.lmh01.domain}" = {
@@ -207,19 +248,11 @@
           proxyPass = "http://127.0.0.1:22813";
         };
       };
-      "has.${config.lmh01.domain}" = {
+      "status.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://10.0.10.2:8123";
-          extraConfig = ''
-            # These configuration options are required for WebSockets to work.
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
-
-            proxy_redirect off;
-          '';
+          proxyPass = "http://10.0.10.9:80";
         };
       };
       "truenas.${config.lmh01.domain}" = {
@@ -231,39 +264,6 @@
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
           '';
-        };
-      };
-      "opnsense.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://10.0.10.1:8080";
-        };
-      };
-      "status.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://10.0.10.9:80";
-        };
-      };
-      "evcc.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://10.0.10.11:7070";
-          extraConfig = ''
-            proxy_set_header    Upgrade     $http_upgrade;
-            proxy_set_header    Connection  "upgrade";
-          '';
-	  basicAuthFile = config.sops.secrets."nginx/evcc_basic_auth_file".path;
-        };
-      };
-      "minerva-dns.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://10.0.10.15:5380";
         };
       };
     };
@@ -295,8 +295,8 @@
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/home/louis/Documents/tandoor"
-	"/home/louis/services/dawarich"
-	"/home/louis/services/linkwarden"
+        "/home/louis/services/dawarich"
+        "/home/louis/services/linkwarden"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -307,8 +307,8 @@
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/home/louis/Documents/tandoor"
-	"/home/louis/services/dawarich"
-	"/home/louis/services/linkwarden"
+        "/home/louis/services/dawarich"
+        "/home/louis/services/linkwarden"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -319,8 +319,8 @@
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/jellystat/jellystat-backup-data"
         "/home/louis/Documents/tandoor"
-	"/home/louis/services/dawarich"
-	"/home/louis/services/linkwarden"
+        "/home/louis/services/dawarich"
+        "/home/louis/services/linkwarden"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
