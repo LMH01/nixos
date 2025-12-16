@@ -315,6 +315,7 @@
         "/home/louis/Documents/tandoor"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
+        "/home/louis/services/tracearr"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -327,6 +328,7 @@
         "/home/louis/Documents/tandoor"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
+        "/home/louis/services/tracearr"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -339,6 +341,7 @@
         "/home/louis/Documents/tandoor"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
+        "/home/louis/services/tracearr"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -363,6 +366,7 @@
         ${pkgs.docker}/bin/docker stop dawarich_app
         ${pkgs.docker}/bin/docker stop dawarich_db
         ${pkgs.docker}/bin/docker stop dawarich_redis
+        ${pkgs.docker}/bin/docker stop tracearr
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -385,6 +389,7 @@
         ${pkgs.docker}/bin/docker start dawarich_app
         ${pkgs.docker}/bin/docker start dawarich_db
         ${pkgs.docker}/bin/docker start dawarich_redis
+        ${pkgs.docker}/bin/docker start tracearr
       '';
     in
     {
