@@ -262,6 +262,17 @@
           proxyPass = "http://10.0.10.9:80";
         };
       };
+      "tracearr.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.10.2:22814";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
+        };
+      };
       "truenas.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
