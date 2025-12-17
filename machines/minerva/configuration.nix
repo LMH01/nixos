@@ -58,7 +58,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "https://10.0.10.3:8920";
+          proxyPass = "https://jellyfin.home.skl2.de";
         };
       };
       "jellyseer.${config.lmh01.domain}" = {
