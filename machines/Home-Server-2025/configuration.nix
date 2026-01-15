@@ -91,6 +91,9 @@
     "nginx/evcc_basic_auth_file" = {
       owner = "nginx";
     };
+    "nginx/koito_basic_auth_file" = {
+      owner = "nginx";
+    };
   };
 
   # nginx reverse proxy settings
@@ -207,6 +210,7 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:22817";
+          basicAuthFile = config.sops.secrets."nginx/koito_basic_auth_file".path;
         };
       };
       "links.${config.lmh01.domain}" = {
