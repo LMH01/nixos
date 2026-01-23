@@ -361,6 +361,7 @@
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
         "/home/louis/services/koito"
+        "/home/louis/services/navidrome"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -375,6 +376,7 @@
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
         "/home/louis/services/koito"
+        "/home/louis/services/navidrome"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -402,6 +404,7 @@
         ${pkgs.docker}/bin/docker stop tracearr
         ${pkgs.docker}/bin/docker stop koito
         ${pkgs.docker}/bin/docker stop koito-psql
+        ${pkgs.docker}/bin/docker stop navidrome
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -427,6 +430,7 @@
         ${pkgs.docker}/bin/docker start tracearr
         ${pkgs.docker}/bin/docker start koito
         ${pkgs.docker}/bin/docker start koito-psql
+        ${pkgs.docker}/bin/docker start navidrome
       '';
     in
     {
