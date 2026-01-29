@@ -51,12 +51,12 @@
       options = [ "rw" "uid=1000" "gid=1000" ];
     };
   
-  fileSystems."/games" =
-    {
-      device = "/dev/disk/by-uuid/AA1A9B6B1A9B3375";
-      fsType = "ntfs-3g";
-      options = [ "rw" "uid=1000" "gid=1000" ];
-    };
+  #fileSystems."/games" =
+  #  {
+  #    device = "/dev/disk/by-uuid/AA1A9B6B1A9B3375";
+  #    fsType = "ntfs-3g";
+  #    options = [ "rw" "uid=1000" "gid=1000" ];
+  #  };
 
   fileSystems."/boot" =
     {
