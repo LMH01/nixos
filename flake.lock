@@ -53,11 +53,11 @@
     "adblockStevenBlack": {
       "flake": false,
       "locked": {
-        "lastModified": 1769718485,
-        "narHash": "sha256-y8eBCnhSwkw0Z8DPQWcFqCwKTU9Dm0Vw2Mbw6vhcMtE=",
+        "lastModified": 1769899106,
+        "narHash": "sha256-/SPSDbJsi6ag2dx2licMIm+6yjc7xP3LXQjqtPLi5mE=",
         "owner": "StevenBlack",
         "repo": "hosts",
-        "rev": "d0d12a5e3668834ddef221cb53dd9d40964553fd",
+        "rev": "a11c6962b2d10933f20eeb791956055bed63e9bd",
         "type": "github"
       },
       "original": {
@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758116125,
-        "narHash": "sha256-pdrym5cg+5byNhwilbUSHa3Idxyq3vkfJ2dgyDX5Uhg=",
+        "lastModified": 1769788564,
+        "narHash": "sha256-Acj0G04tn7HMlTabl5f2Rd3KWa24D9w7h8juwwz5uu4=",
         "owner": "alexanderwallau",
         "repo": "bonn-mensa",
-        "rev": "b4363525c711aa870e3d4a68a4d1a39d754ef2c7",
+        "rev": "71b3c47aed883fb04b6efc76c7678fbcfbc24c15",
         "type": "github"
       },
       "original": {
@@ -290,11 +290,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769721561,
-        "narHash": "sha256-6phPPX4lP+7RtiOtFGFRJSyNAaIgTcvl3Whgylebt4w=",
+        "lastModified": 1769872935,
+        "narHash": "sha256-07HMIGQ/WJeAQJooA7Kkg1SDKxhAiV6eodvOwTX6WKI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5786e425304ea2788a1cdc2533dd4c53583591bd",
+        "rev": "f4ad5068ee8e89e4a7c2e963e10dd35cd77b37b7",
         "type": "github"
       },
       "original": {
