@@ -239,6 +239,10 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:22810";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
         };
       };
       "music-server.${config.lmh01.domain}" = {
@@ -246,6 +250,10 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:22809";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
         };
       };
       "opnsense.${config.lmh01.domain}" = {
