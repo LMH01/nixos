@@ -24,6 +24,7 @@ with lib;
       bruno
       discord
       dracula-theme
+      feishin
       fira-code
       firefox
       font-awesome
