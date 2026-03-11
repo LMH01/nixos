@@ -359,6 +359,7 @@
         "/home/louis/Documents/audiobookshelf/metadata"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/tandoor"
+        "/home/louis/services/booklore"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
@@ -371,6 +372,7 @@
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/tandoor"
+        "/home/louis/services/booklore"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
@@ -385,6 +387,7 @@
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/tandoor"
+        "/home/louis/services/booklore"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
@@ -418,6 +421,8 @@
         ${pkgs.docker}/bin/docker stop koito
         ${pkgs.docker}/bin/docker stop koito-psql
         ${pkgs.docker}/bin/docker stop navidrome
+        ${pkgs.docker}/bin/docker stop booklore
+        ${pkgs.docker}/bin/docker stop booklore-mariadb
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -444,6 +449,8 @@
         ${pkgs.docker}/bin/docker start koito
         ${pkgs.docker}/bin/docker start koito-psql
         ${pkgs.docker}/bin/docker start navidrome
+        ${pkgs.docker}/bin/docker start booklore
+        ${pkgs.docker}/bin/docker start booklore-mariadb
       '';
     in
     {
