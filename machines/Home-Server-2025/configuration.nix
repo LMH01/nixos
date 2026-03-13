@@ -122,6 +122,10 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:22818";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
           #extraConfig = ''
           #  proxy_set_header    Host                $host;
           #  proxy_set_header    X-Real-Ip           $remove_addr;
