@@ -117,6 +117,7 @@
           '';
         };
       };
+      # keep this entry as duplicate for now because I am too lazy to change the configs in my ebook readers to use the new domain
       "booklore.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
@@ -145,6 +146,25 @@
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
           '';
+        };
+      };
+      "ebooks.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:22818";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
+          #extraConfig = ''
+          #  proxy_set_header    Host                $host;
+          #  proxy_set_header    X-Real-Ip           $remove_addr;
+          #  proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+          #  proxy_set_header    X-Forwarded-Host    $host;
+          #  proxy_set_header    X-Forwarded-Proto   $scheme;
+          #  proxy_set_header    X-Forwarded-Port    $server_port;
+          #'';
         };
       };
       "evcc.${config.lmh01.domain}" = {
@@ -363,7 +383,7 @@
         "/home/louis/Documents/audiobookshelf/metadata"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/tandoor"
-        "/home/louis/services/booklore"
+        "/home/louis/services/grimmory"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
@@ -376,7 +396,7 @@
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/tandoor"
-        "/home/louis/services/booklore"
+        "/home/louis/services/grimmory"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
@@ -391,7 +411,7 @@
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
         "/home/louis/Documents/tandoor"
-        "/home/louis/services/booklore"
+        "/home/louis/services/grimmory"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
@@ -425,8 +445,8 @@
         ${pkgs.docker}/bin/docker stop koito
         ${pkgs.docker}/bin/docker stop koito-psql
         ${pkgs.docker}/bin/docker stop navidrome
-        ${pkgs.docker}/bin/docker stop booklore
-        ${pkgs.docker}/bin/docker stop booklore-mariadb
+        ${pkgs.docker}/bin/docker stop grimmory
+        ${pkgs.docker}/bin/docker stop grimmory-mariadb
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -453,8 +473,8 @@
         ${pkgs.docker}/bin/docker start koito
         ${pkgs.docker}/bin/docker start koito-psql
         ${pkgs.docker}/bin/docker start navidrome
-        ${pkgs.docker}/bin/docker start booklore
-        ${pkgs.docker}/bin/docker start booklore-mariadb
+        ${pkgs.docker}/bin/docker start grimmory
+        ${pkgs.docker}/bin/docker start grimmory-mariadb
       '';
     in
     {
