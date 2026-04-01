@@ -58,7 +58,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:3000";
+          proxyPass = "https://git.home.skl2.de";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
