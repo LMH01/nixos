@@ -32,4 +32,10 @@ in
   ];
 
   hardware.keyboard.qmk.enable = true;
+
+  # enable oomd to prevent system hangs because of no available memory
+  systemd.oomd = {
+    enable = true;
+    enableUserSlices = true;
+  };
 }
