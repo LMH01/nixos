@@ -59,6 +59,7 @@
         "java.jdt.ls.java.home" = "${pkgs.openjdk21}/lib/openjdk";
         # set latex formatter
         "latex-workshop.formatting.latex" = "latexindent";
+        "cSpell.language" = "en,de-DE";
       };
 
     };
