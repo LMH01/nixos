@@ -422,7 +422,6 @@
       ];
       # commands to run when serice backups are started
       serviceBackupPrepareCommand = ''
-        ${pkgs.docker}/bin/docker stop homepage
         ${pkgs.docker}/bin/docker stop immich_server
         ${pkgs.docker}/bin/docker stop immich_machine_learning
         ${pkgs.docker}/bin/docker stop immich_redis
@@ -450,7 +449,6 @@
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
-        ${pkgs.docker}/bin/docker start homepage
         ${pkgs.docker}/bin/docker start immich_server
         ${pkgs.docker}/bin/docker start immich_machine_learning
         ${pkgs.docker}/bin/docker start immich_redis
