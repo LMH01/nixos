@@ -67,9 +67,18 @@
 
   networking.firewall.allowedUDPPorts = [ ];
 
-  sops.secrets."vpn/wireguard" = { };
+  # for now switched to openvpn to test something
+  #sops.secrets."vpn/wireguard" = { };
+  #networking.wg-quick.interfaces.vpn.configFile = config.sops.secrets."vpn/wireguard".path;
 
-  networking.wg-quick.interfaces.vpn.configFile = config.sops.secrets."vpn/wireguard".path;
+  sops.secrets."vpn/openvpn" = { };
+  sops.secrets."vpn/openvpn-credentials" = { };
+  services.openvpn.servers.vpn = {
+    config = ''config ${config.sops.secrets."vpn/openvpn".path}'';
+    authUserPass = ''${config.sops.secrets."vpn/openvpn-credentials".path}'';
+    autoStart = true;
+    updateResolvConf = true;
+  };
 
   system.stateVersion = "23.05";
 }
