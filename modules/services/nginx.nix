@@ -32,7 +32,6 @@ in
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      sslDhparam = config.sops.secrets."nginx/dhparam".path;
     };
 
     security.acme = mkIf cfg.enable_acme {
