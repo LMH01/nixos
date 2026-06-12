@@ -18,7 +18,7 @@ in
       };
       # disabled for now as otherwise shutdown hangs while waiting for s6-svscan
       liveRestore = false;
-      package = pkgs.docker_28;
+      #package = pkgs.docker_28;
     };
 
     virtualisation.oci-containers = {
