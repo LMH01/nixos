@@ -324,6 +324,13 @@
           proxyPass = "http://127.0.0.1:22813";
         };
       };
+      "pslb.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:22819";
+        };
+      };
       "status.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
