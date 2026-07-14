@@ -94,6 +94,9 @@
     "nginx/koito_basic_auth_file" = {
       owner = "nginx";
     };
+    "nginx/pslb_basic_auth_file" = {
+      owner = "nginx";
+    };
   };
 
   # nginx reverse proxy settings
@@ -329,6 +332,7 @@
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:22819";
+          basicAuthFile = config.sops.secrets."nginx/pslb_basic_auth_file".path;
         };
       };
       "status.${config.lmh01.domain}" = {
