@@ -426,6 +426,7 @@
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
+        "/home/louis/services/plane-spotter-logbook-bob"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -441,6 +442,7 @@
         "/home/louis/services/tracearr"
         "/home/louis/services/koito"
         "/home/louis/services/navidrome"
+        "/home/louis/services/plane-spotter-logbook-bob"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -456,6 +458,7 @@
         "/home/louis/services/tracearr"
         "/home/louis/services/koito"
         "/home/louis/services/navidrome"
+        "/home/louis/services/plane-spotter-logbook-bob"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -485,6 +488,7 @@
         ${pkgs.docker}/bin/docker stop navidrome
         ${pkgs.docker}/bin/docker stop grimmory
         ${pkgs.docker}/bin/docker stop grimmory-mariadb
+        ${pkgs.docker}/bin/docker stop plane-spotter
       '';
       # commands to run when service backups are complete
       serviceBackupCleanupCommand = ''
@@ -512,6 +516,7 @@
         ${pkgs.docker}/bin/docker start navidrome
         ${pkgs.docker}/bin/docker start grimmory
         ${pkgs.docker}/bin/docker start grimmory-mariadb
+        ${pkgs.docker}/bin/docker start plane-spotter
       '';
     in
     {
