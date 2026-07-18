@@ -30,6 +30,7 @@
   sops.secrets."truenas/password_multimedia_ro" = { };
   sops.secrets."truenas/password_immich" = { };
   sops.secrets."truenas/password_restic_home_server_backup" = { };
+  sops.secrets."truenas/password_louis" = { };
 
   fileSystems."/mnt/truenas_multimedia" = {
     device = "//10.0.10.4/multimedia";
@@ -45,6 +46,11 @@
     device = "//10.0.10.4/restic/home_server";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password_restic_home_server_backup".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" "rw" ];
+  };
+  fileSystems."/mnt/louis_ownpics" = {
+    device = "//10.0.10.4/home/Fotos/own_pics";
+    fsType = "cifs";
+    options = [ "credentials=${config.sops.secrets."truenas/password_louis".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" "ro" ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
