@@ -37,10 +37,12 @@ in
         enable32Bit = true;
       };
       nvidia = {
-        open = false; # with the open driver the screen will keep black after waking the pc from suspend
+        #open = false; # with the open driver the screen will keep black after waking the pc from suspend
+        open = true; # true for now to test if this works again
         modesetting.enable = true;
         powerManagement.enable = true;
         nvidiaSettings = true;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
     };
 
