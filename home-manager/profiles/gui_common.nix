@@ -23,7 +23,7 @@ with lib;
       bonn-mensa
       bruno
       discord
-      dracula-theme
+      #dracula-theme # TODO find replacement
       feishin
       fira-code
       firefox
