@@ -174,7 +174,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://10.0.10.11:7070";
+          proxyPass = "http://10.0.30.11:7070";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
@@ -197,7 +197,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://10.0.10.2:8123";
+          proxyPass = "http://10.0.30.20:8123";
           extraConfig = ''
             # These configuration options are required for WebSockets to work.
             proxy_http_version 1.1;
@@ -223,7 +223,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "https://10.0.10.3:8920";
+          proxyPass = "https://10.0.30.3:8920";
           extraConfig = ''
             proxy_set_header    Upgrade           $http_upgrade;
             proxy_set_header    Connection        "upgrade";
@@ -266,14 +266,14 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://192.168.188.157:5380";
+          proxyPass = "http://10.0.30.40:5380";
         };
       };
       "minerva-home.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://192.168.188.157:11800";
+          proxyPass = "http://10.0.30.40:11800";
         };
       };
       "music.${config.lmh01.domain}" = {
@@ -296,13 +296,6 @@
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
           '';
-        };
-      };
-      "opnsense.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://10.0.10.1:8080";
         };
       };
       "paperless.${config.lmh01.domain}" = {
@@ -339,35 +332,14 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://10.0.10.9:80";
-        };
-      };
-      "technitium-home.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://192.168.188.226:5380";
-        };
-      };
-      "technitium-iot.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://192.168.188.225:5380";
-        };
-      };
-      "technitium-server.${config.lmh01.domain}" = {
-        forceSSL = true;
-        useACMEHost = "${config.lmh01.domain}";
-        locations."/" = {
-          proxyPass = "http://10.0.10.5:5380";
+          proxyPass = "http://10.0.30.9:80";
         };
       };
       "tracearr.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://10.0.10.2:22814";
+          proxyPass = "http://10.0.30.20:22814";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
@@ -380,7 +352,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "http://10.0.10.4:80";
+          proxyPass = "http://10.0.30.4:80";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
@@ -391,7 +363,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "https://192.168.188.227:11443";
+          proxyPass = "https://192.168.1.1:80";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
