@@ -363,7 +363,7 @@
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
         locations."/" = {
-          proxyPass = "https://192.168.1.1:80";
+          proxyPass = "https://192.168.1.1";
           extraConfig = ''
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
