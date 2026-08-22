@@ -30,23 +30,23 @@
   sops.secrets."truenas/password" = { };
 
   fileSystems."/mnt/truenas/arr/movies" = {
-    device = "//10.0.10.4/multimedia/videodata/10 Filmsammlung";
+    device = "//10.0.30.4/multimedia/videodata/10 Filmsammlung";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
 
   fileSystems."/mnt/truenas/arr/series" = {
-    device = "//10.0.10.4/multimedia/videodata/20 Serien";
+    device = "//10.0.30.4/multimedia/videodata/20 Serien";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
   fileSystems."/mnt/truenas/downloaded_music" = {
-    device = "//10.0.10.4/multimedia/audiodata/01 Musik/0999 - Downloaded";
+    device = "//10.0.30.4/multimedia/audiodata/01 Musik/0999 - Downloaded";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
   fileSystems."/mnt/truenas/music" = {
-    device = "//10.0.10.4/multimedia/audiodata/01 Musik/";
+    device = "//10.0.30.4/multimedia/audiodata/01 Musik/";
     fsType = "cifs";
     options = [ "credentials=${config.sops.secrets."truenas/password".path}" "x-systemd.automount" "x-systemd.device-timeout=60" "uid=1000" "gid=1000" ];
   };
