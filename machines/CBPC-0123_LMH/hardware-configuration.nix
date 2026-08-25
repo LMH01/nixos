@@ -7,6 +7,7 @@
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
+      ./disk-config.nix
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
@@ -14,54 +15,15 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/39af1c8b-9bcc-41c0-bfb0-2987444d1696";
-      fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" ];
-    };
 
-  fileSystems."/home" =
-    {
-      device = "/dev/disk/by-uuid/39af1c8b-9bcc-41c0-bfb0-2987444d1696";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" ];
-      # required for sops-nix to find the decryption key
-      neededForBoot = true;
-    };
-
-  fileSystems."/nix" =
-    {
-      device = "/dev/disk/by-uuid/39af1c8b-9bcc-41c0-bfb0-2987444d1696";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/.snapshots" =
-    {
-      device = "/dev/disk/by-uuid/39af1c8b-9bcc-41c0-bfb0-2987444d1696";
-      fsType = "btrfs";
-      options = [ "subvol=.snapshots" "compress=zstd" ];
-    };
-
+  # required for sops-nix to find the decryption key
+  fileSystems."/home".neededForBoot = true;
+  
   fileSystems."/userdata" =
     {
       device = "/dev/disk/by-uuid/608C11EE8C11BF88";
       fsType = "ntfs-3g";
       options = [ "rw" "uid=1000" "gid=1000" ];
-    };
-  
-  #fileSystems."/games" =
-  #  {
-  #    device = "/dev/disk/by-uuid/AA1A9B6B1A9B3375";
-  #    fsType = "ntfs-3g";
-  #    options = [ "rw" "uid=1000" "gid=1000" ];
-  #  };
-
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/E6D2-1644";
-      fsType = "vfat";
     };
 
   swapDevices = [ ];
