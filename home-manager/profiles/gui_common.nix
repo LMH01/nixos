@@ -17,30 +17,23 @@ with lib;
     # Packages to install on all desktop systems
     home.packages = with pkgs; [
       _1password-gui
-      alacritty
-      anki
       beauty-line-icon-theme
-      bonn-mensa
       bruno
       discord
-      #dracula-theme # TODO find replacement
       feishin
       fira-code
       firefox
       font-awesome
       gimp
+      geeqie
       kdePackages.kate
       kdePackages.kleopatra
-      mongodb-compass
       monero-gui
       obsidian
-      openvpn
       # commented out for now as build is currently broken
       #pympress
-      qmk
       screen-message
       signal-desktop
-      thunderbird
       vial
       vlc
       xclip

@@ -26,15 +26,14 @@ with lib;
     home.packages = with pkgs; [
       bat
       bottom
+      btdu
       calc
       cifs-utils
       dnsutils
-      fastfetch # Commented out because it causes the build to fail (something is broken)
+      fastfetch
       gdb
       gitui
       glances
-      gping
-      httpie
       lldb
       man-pages
       man-pages-posix
@@ -47,16 +46,14 @@ with lib;
       tldr
       tree
       smartmontools
-      srm
       sshfs
-      s-tui
       sysz
+      tmux
       tokei
       unzip
       wget
       wireguard-tools
 
-      mayniklas.gen-module # create a new module with a template
       mayniklas.mtu-check # MTU of a network
       mayniklas.vs-fix # fix for vscode remote SSH (replaces the node binary with a symlink into the nix store)
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];

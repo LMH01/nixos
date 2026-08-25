@@ -7,9 +7,6 @@ with lib;
 
     home.packages = with pkgs; [
       hashcat
-      mangohud
-      prismlauncher # minecraft launcher
-      steam
       obs-studio
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
