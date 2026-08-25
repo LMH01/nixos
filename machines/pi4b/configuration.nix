@@ -27,7 +27,7 @@
   # add boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; to your x86 system
   # to build ARM stuff through qemu
   sdImage.compressImage = false;
-  sdImage.imageBaseName = "raspi-image";
+  image.baseName = "raspi-image";
 
   # this workaround is currently needed to build the sd-image
   # basically: there currently is an issue that prevents the sd-image to be built successfully

@@ -7,7 +7,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      texlive.combined.scheme-full
+      texliveFull
     ];
 
     # enable vscode extension

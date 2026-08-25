@@ -2,8 +2,11 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    extraConfig = { pull.rebase = false; };
-    userEmail = "lmh-01@netcologne.de";
-    userName = "LMH01";
+    settings = {
+      pull.rebase = false;
+      user.email = "lmh01@skl2.de";
+      user.name = "LMH01";
+      init.defaultBranch = "main";
+    };
   };
 }

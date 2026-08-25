@@ -66,10 +66,10 @@
 
   # Enable the KDE Plasma Desktop Environment. - does not work when booth amd and nvidia drivers are installed on stable branch
   #services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Enable the Gnome Desktop Environment - works with booth amd and nvidia drivers installed on stable branch
-  services.xserver.displayManager.gdm.enable = true; #is used instead of sddm because sddm is not displayed when nvidia and amd drivers are installed on an nvidia system
+  services.displayManager.gdm.enable = true; #is used instead of sddm because sddm is not displayed when nvidia and amd drivers are installed on an nvidia system
   #services.xserver.desktopManager.gnome.enable = true;
 
   # Enable CUPS to print documents.
