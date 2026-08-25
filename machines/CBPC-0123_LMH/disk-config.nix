@@ -3,7 +3,7 @@
     disk = {
       nvme0n1 = {
         type = "disk";
-        device = "/dev/disk/by-uuid/ata-Samsung_SSD_850_PRO_512GB_S2BENWAJ718676X";
+        device = "/dev/disk/by-id/ata-Samsung_SSD_850_PRO_512GB_S2BENWAJ718676X";
         content = {
           type = "gpt";
           partitions = {
