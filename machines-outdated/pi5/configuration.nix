@@ -1,4 +1,5 @@
 # nix run .\#lollypops -- pi4b
+# currently moved to here because build currently fails and I don' need to fix it now
 { self, ... }:
 { pkgs, lib, config, modulesPath, flake-self, home-manager, nixos-hardware, nixpkgs, raspberry-pi-nix, ... }: {
 
