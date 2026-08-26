@@ -6,6 +6,7 @@ with lib;
   config = {
 
     home.packages = with pkgs; [
+      claude-code
       hashcat
       obs-studio
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
