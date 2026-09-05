@@ -397,12 +397,12 @@
         "/home/louis/Documents/audiobookshelf/config"
         "/home/louis/Documents/audiobookshelf/metadata"
         "/home/louis/Documents/paperless-ngx"
-        "/home/louis/Documents/tandoor"
         "/home/louis/services/grimmory"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
         "/home/louis/services/plane-spotter-logbook-bob"
+        "/home/louis/services/mealie"
         "/var/lib/storage/gitea"
         "/var/lib/webdav"
       ];
@@ -411,12 +411,12 @@
         "/home/louis/Documents/immich"
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
-        "/home/louis/Documents/tandoor"
         "/home/louis/services/grimmory"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
         "/home/louis/services/koito"
+        "/home/louis/services/mealie"
         "/home/louis/services/navidrome"
         "/home/louis/services/plane-spotter-logbook-bob"
         "/var/lib/storage/gitea"
@@ -427,12 +427,12 @@
         "/home/louis/Documents/immich"
         "/home/louis/Documents/audiobookshelf"
         "/home/louis/Documents/paperless-ngx"
-        "/home/louis/Documents/tandoor"
         "/home/louis/services/grimmory"
         "/home/louis/services/dawarich"
         "/home/louis/services/linkwarden"
         "/home/louis/services/tracearr"
         "/home/louis/services/koito"
+        "/home/louis/services/mealie"
         "/home/louis/services/navidrome"
         "/home/louis/services/plane-spotter-logbook-bob"
         "/var/lib/storage/gitea"
@@ -448,9 +448,7 @@
         ${pkgs.docker}/bin/docker stop paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker stop paperless-ngx-db-1
         ${pkgs.docker}/bin/docker stop paperless-ngx-broker-1
-        ${pkgs.docker}/bin/docker stop tandoor_db_recipes
-        ${pkgs.docker}/bin/docker stop tandoor_web_recipes
-        ${pkgs.docker}/bin/docker stop tandoor_nginx
+        ${pkgs.docker}/bin/docker stop mealie
         ${pkgs.docker}/bin/docker stop linkwarden-postgres
         ${pkgs.docker}/bin/docker stop linkwarden-server
         ${pkgs.docker}/bin/docker stop linkwarden-meilisearch
@@ -476,9 +474,7 @@
         ${pkgs.docker}/bin/docker start paperless-ngx-webserver-1
         ${pkgs.docker}/bin/docker start paperless-ngx-db-1
         ${pkgs.docker}/bin/docker start paperless-ngx-broker-1
-        ${pkgs.docker}/bin/docker start tandoor_db_recipes
-        ${pkgs.docker}/bin/docker start tandoor_web_recipes
-        ${pkgs.docker}/bin/docker start tandoor_nginx
+        ${pkgs.docker}/bin/docker start mealie
         ${pkgs.docker}/bin/docker start linkwarden-postgres
         ${pkgs.docker}/bin/docker start linkwarden-server
         ${pkgs.docker}/bin/docker start linkwarden-meilisearch
