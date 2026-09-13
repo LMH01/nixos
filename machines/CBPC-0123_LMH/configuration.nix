@@ -129,6 +129,10 @@
     enable = true;
     package = pkgs.ollama-cuda;
   };
+  services.open-webui = {
+    enable = true;
+    port = 22789;
+  };
 
   # Enable teamviewer service (temporary)
   #services.teamviewer.enable = true;
