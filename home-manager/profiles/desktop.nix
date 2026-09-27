@@ -10,6 +10,7 @@ with lib;
       hashcat
       obs-studio
       lmstudio
+      opencode
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = { };
