@@ -125,10 +125,6 @@
     #media-session.enable = true;
   };
   
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-  };
   services.open-webui = {
     enable = true;
     port = 22789;
