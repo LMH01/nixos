@@ -11,6 +11,7 @@ with lib;
       obs-studio
       lmstudio
       opencode
+      mangohud
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = { };
