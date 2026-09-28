@@ -14,4 +14,8 @@ with lib;
     steam.enable = true;
     options.type = "desktop";
   };
+
+  services = {
+    lact.enable = true;
+  };
 }
