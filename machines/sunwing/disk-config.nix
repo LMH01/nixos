@@ -3,7 +3,7 @@
     disk = {
       nvme0n1 = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/disk/by-id/TODO_ADD_NVME_DISK_PATH";
         content = {
           type = "gpt";
           partitions = {
@@ -65,7 +65,7 @@
       };
       sda = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/disk/by-id/TODO_ADD_SATA_DISK_PATH";
         content = {
           type = "gpt";
           partitions = {
