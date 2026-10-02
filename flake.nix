@@ -219,6 +219,13 @@
             ./home-manager/profiles/desktop.nix
           ];
         };
+        sunwing = { pkgs, lib, ... }: {
+          imports = [
+            ./home-manager/profiles/common.nix
+            ./home-manager/profiles/gui_common.nix
+            ./home-manager/profiles/desktop.nix
+          ];
+        };
         Dell22_LMH = { pkgs, lib, ... }: {
           imports = [
             ./home-manager/profiles/common.nix
