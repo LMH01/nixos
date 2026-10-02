@@ -28,7 +28,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted";
+                name = "crypted-nvme0n1";
                 # disable settings.keyFile if you want to use interactive password entry
                 # passwordFile = "/tmp/luks.key"; # Interactive
                 settings = {
@@ -55,6 +55,35 @@
                     "/swap" = {
                       mountpoint = "/.swapvol";
                       swap.swapfile.size = "32G";
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+      sda = {
+        type = "disk";
+        device = "/dev/sda";
+        content = {
+          type = "gpt";
+          partitions = {
+            luks = {
+              size = "100%";
+              content = {
+                type = "luks";
+                name = "crypted-sda";
+                settings = {
+                  allowDiscards = true;
+                };
+                content = {
+                  type = "btrfs";
+                  extraArgs = [ "-f" ];
+                  subvolumes = {
+                    "/games" = {
+                      mountpoint = "/games";
+                      mountOptions = [ "compress=zstd" "noatime" ];
                     };
                   };
                 };
