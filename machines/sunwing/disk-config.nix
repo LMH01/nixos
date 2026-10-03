@@ -3,7 +3,7 @@
     disk = {
       nvme0n1 = {
         type = "disk";
-        device = "/dev/disk/by-id/TODO_ADD_NVME_DISK_PATH";
+        device = "/dev/disk/by-id/nvme-KBG50ZNS512G_NVMe_KIOXIA_512GB_22JPC7ZZQ2A5";
         content = {
           type = "gpt";
           partitions = {
@@ -65,7 +65,7 @@
       };
       sda = {
         type = "disk";
-        device = "/dev/disk/by-id/TODO_ADD_SATA_DISK_PATH";
+        device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RBNX0H467222F";
         content = {
           type = "gpt";
           partitions = {
