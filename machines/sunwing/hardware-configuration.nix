@@ -15,6 +15,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.initrd.systemd.enable = true;
 
   # required for sops-nix to find the decryption key
   fileSystems."/home".neededForBoot = true;
