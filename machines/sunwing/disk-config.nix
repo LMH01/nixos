@@ -28,7 +28,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted-nvme0n1";
+                name = "crypted-sda";
                 # disable settings.keyFile if you want to use interactive password entry
                 # passwordFile = "/tmp/luks.key"; # Interactive
                 settings = {
@@ -73,7 +73,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted-sda";
+                name = "crypted-nvme0n1";
                 settings = {
                   allowDiscards = true;
                 };
