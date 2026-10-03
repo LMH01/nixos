@@ -83,7 +83,7 @@
                   subvolumes = {
                     "/games" = {
                       mountpoint = "/games";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [ "compress=zstd" "noatime" "nofail"];
                     };
                   };
                 };
