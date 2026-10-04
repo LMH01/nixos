@@ -28,6 +28,7 @@ with lib;
       geeqie
       kdePackages.kate
       kdePackages.kleopatra
+      mission-center
       monero-gui
       obsidian
       # commented out for now as build is currently broken
