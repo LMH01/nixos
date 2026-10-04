@@ -63,35 +63,35 @@
           };
         };
       };
-      sda = {
-        type = "disk";
-        device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RBNX0H467222F";
-        content = {
-          type = "gpt";
-          partitions = {
-            luks = {
-              size = "100%";
-              content = {
-                type = "luks";
-                name = "crypted-sda";
-                settings = {
-                  allowDiscards = true;
-                };
-                content = {
-                  type = "btrfs";
-                  extraArgs = [ "-f" ];
-                  subvolumes = {
-                    "/games" = {
-                      mountpoint = "/games";
-                      mountOptions = [ "compress=zstd" "noatime" "nofail"];
-                    };
-                  };
-                };
-              };
-            };
-          };
-        };
-      };
+      #sda = {
+      #  type = "disk";
+      #  device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RBNX0H467222F";
+      #  content = {
+      #    type = "gpt";
+      #    partitions = {
+      #      luks = {
+      #        size = "100%";
+      #        content = {
+      #          type = "luks";
+      #          name = "crypted-sda";
+      #          settings = {
+      #            allowDiscards = true;
+      #          };
+      #          content = {
+      #            type = "btrfs";
+      #            extraArgs = [ "-f" ];
+      #            subvolumes = {
+      #              "/games" = {
+      #                mountpoint = "/games";
+      #                mountOptions = [ "compress=zstd" "noatime" "nofail"];
+      #              };
+      #            };
+      #          };
+      #        };
+      #      };
+      #    };
+      #  };
+      #};
     };
   };
 }
