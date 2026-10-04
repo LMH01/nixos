@@ -12,6 +12,7 @@ with lib;
       lmstudio
       opencode
       mangohud
+      heroic
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
 
     programs = { };
