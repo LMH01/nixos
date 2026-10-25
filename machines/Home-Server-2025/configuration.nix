@@ -328,6 +328,17 @@
           basicAuthFile = config.sops.secrets."nginx/pslb_basic_auth_file".path;
         };
       };
+      "qnapnas.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://10.0.30.146:8080";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
+        };
+      };
       "status.${config.lmh01.domain}" = {
         forceSSL = true;
         useACMEHost = "${config.lmh01.domain}";
