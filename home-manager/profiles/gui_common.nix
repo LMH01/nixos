@@ -20,6 +20,7 @@ with lib;
       beauty-line-icon-theme
       bruno
       discord
+      exiftool
       feishin
       fira-code
       firefox
