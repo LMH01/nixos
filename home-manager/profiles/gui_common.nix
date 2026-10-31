@@ -33,6 +33,7 @@ with lib;
       obsidian
       # commented out for now as build is currently broken
       #pympress
+      rapid-photo-downloader
       screen-message
       signal-desktop
       vial
