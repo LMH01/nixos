@@ -10,6 +10,7 @@ with lib;
       hashcat
       obs-studio
       lmstudio
+      (pkgs.llama-cpp.override { cudaSupport = true; })
       opencode
       mangohud
     ] ++ lib.optionals (system-config.nixpkgs.hostPlatform.system == "x86_64-linux") [ ];
