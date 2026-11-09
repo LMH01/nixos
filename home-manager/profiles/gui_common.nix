@@ -20,6 +20,7 @@ with lib;
       beauty-line-icon-theme
       bruno
       discord
+      exiftool
       feishin
       fira-code
       firefox
@@ -28,10 +29,12 @@ with lib;
       geeqie
       kdePackages.kate
       kdePackages.kleopatra
+      mission-center
       monero-gui
       obsidian
       # commented out for now as build is currently broken
       #pympress
+      rapid-photo-downloader
       screen-message
       signal-desktop
       vial

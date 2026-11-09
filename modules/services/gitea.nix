@@ -20,7 +20,6 @@ in {
         # use this when not using reverse proxy
 	#ROOT_URL = "https://git.${config.lmh01.domain}:${toString cfg.port}";
         ROOT_URL = "https://git.${config.lmh01.domain}";
-        DOMAIN = config.lmh01.domain;
         COOKIE_SECURE = true;
         HTTP_PORT = cfg.port;
       };

@@ -125,10 +125,11 @@
     #media-session.enable = true;
   };
   
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-  };
+  # temporarily disabled because of broken dependency
+  #services.open-webui = {
+  #  enable = true;
+  #  port = 22789;
+  #};
 
   # Enable teamviewer service (temporary)
   #services.teamviewer.enable = true;
