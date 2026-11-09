@@ -34,6 +34,7 @@ with lib;
       obsidian
       # commented out for now as build is currently broken
       #pympress
+      qwen-code
       rapid-photo-downloader
       screen-message
       signal-desktop
