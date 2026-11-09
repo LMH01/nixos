@@ -94,6 +94,9 @@
     "nginx/koito_basic_auth_file" = {
       owner = "nginx";
     };
+    "nginx/music_quiz_basic_auth_file" = {
+      owner = "nginx";
+    };
     "nginx/pslb_basic_auth_file" = {
       owner = "nginx";
     };
@@ -296,6 +299,18 @@
             proxy_set_header    Upgrade     $http_upgrade;
             proxy_set_header    Connection  "upgrade";
           '';
+        };
+      };
+      "music-quiz.${config.lmh01.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${config.lmh01.domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:22820";
+          extraConfig = ''
+            proxy_set_header    Upgrade     $http_upgrade;
+            proxy_set_header    Connection  "upgrade";
+          '';
+          basicAuthFile = config.sops.secrets."nginx/music_quiz_basic_auth_file".path;
         };
       };
       "paperless.${config.lmh01.domain}" = {
