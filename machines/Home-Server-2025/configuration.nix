@@ -36,6 +36,7 @@
     gitea = {
       enable = true;
       enable_nginx = true;
+      enable_runners = true;
       port = 22807;
     };
     # disabled for now because the latest renovate version available here does not work
