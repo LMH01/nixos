@@ -84,8 +84,6 @@
       inputs.nixpkgs.follows = "nixpkgs-pi";
     };
 
-    hermes-agent.url = "github:NousResearch/hermes-agent";
-
   };
 
   outputs = { self, sops-nix, ... }@inputs:
