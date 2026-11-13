@@ -1,9 +1,10 @@
 # this file contains the modules that
 # should be enabled on all my systems
-{ lib, self, ... }:
+{ lib, self, nix-index-database, ... }:
 with lib;
 {
   imports = [
+    nix-index-database.nixosModules.default
     self.nixosModules.docker
     self.nixosModules.lmh01
     self.nixosModules.locale
@@ -37,4 +38,6 @@ with lib;
 
   # enable vscode server on all system
   programs.nix-ld.enable = true;
+
+  programs.nix-index-database.comma.enable = true;
 }
