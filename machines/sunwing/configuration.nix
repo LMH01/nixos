@@ -19,6 +19,7 @@
     self.nixosModules.nvidia
     self.nixosModules.openrgb
     self.nixosModules.restic
+    self.nixosModules.hermes-agent
   ];
 
   lmh01 = {
@@ -28,6 +29,7 @@
     };
     nvidia.enable = true;
     openrgb.enable = true;
+    hermes-agent.enable = true;
   };
 
   # Home Manager configuration

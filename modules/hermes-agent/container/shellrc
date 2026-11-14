@@ -1,0 +1,10 @@
+# Load the user's login configuration, then keep the managed Hermes launcher first.
+for hermes_profile in "$HOME/.bash_profile" "$HOME/.bash_login" "$HOME/.profile"; do
+  if [[ -r "$hermes_profile" ]]; then
+    # shellcheck source=/dev/null
+    source "$hermes_profile"
+    break
+  fi
+done
+unset hermes_profile
+export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
